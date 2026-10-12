@@ -34,3 +34,21 @@ if st.button("Atualizar análise e executar ciclo virtual", type="primary"):
     except Exception as e:
         st.error(f"Falha na análise: {e}")
 st.caption("Protótipo educativo. O limiar 70% não está calibrado nem garante lucro. Dados e execução aproximados.")
+
+st.divider()
+st.header("🌍 Radar de 150 ativos")
+st.caption("50 criptomoedas, 80 ações e 20 ETFs. Dados diários, sujeitos a atrasos, horários de bolsa e disponibilidade da fonte.")
+st.warning("Os sinais abaixo são apenas tendências técnicas; NÃO são probabilidades calibradas de 70%, nem ordens de compra/venda.")
+if st.button("Analisar os 150 ativos (pode demorar)"):
+    try:
+        from scanner import scan
+        with st.spinner("A analisar dados públicos em lotes..."):
+            radar = scan()
+        if radar.empty:
+            st.error("Não foi possível obter dados suficientes. Tenta novamente mais tarde.")
+        else:
+            st.success(f"{len(radar)} ativos com dados válidos; os restantes foram ignorados.")
+            st.dataframe(radar, use_container_width=True, hide_index=True)
+            st.caption("COMPRAR = candidato técnico, VENDER = sinal de saída caso já detenhas o ativo, ESPERAR = sem sinal. Nenhuma ordem é executada.")
+    except Exception as exc:
+        st.error(f"Falha no radar: {exc}")
