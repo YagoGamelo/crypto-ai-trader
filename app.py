@@ -52,3 +52,20 @@ if st.button("Analisar os 150 ativos (pode demorar)"):
             st.caption("COMPRAR = candidato técnico, VENDER = sinal de saída caso já detenhas o ativo, ESPERAR = sem sinal. Nenhuma ordem é executada.")
     except Exception as exc:
         st.error(f"Falha no radar: {exc}")
+
+st.divider()
+st.header("🧠 IA: estudo de duração das operações")
+st.caption("Estudo exploratório com velas horárias de BTC/USD ou ETH/USD. Não executa operações binárias.")
+if st.button("Comparar durações com IA"):
+    try:
+        from horizon_research import compare_horizons
+        with st.spinner("A comparar horizontes de previsão..."):
+            horizon_data = candles(symbol)
+            comparisons = compare_horizons(horizon_data, threshold=threshold)
+        if comparisons:
+            st.dataframe(pd.DataFrame(comparisons), use_container_width=True, hide_index=True)
+            st.info("A duração corresponde a 1, 2, 4, 8, 12 ou 24 velas de 1 hora. Nenhum prazo está aprovado para operações: falta validação específica, calibração e teste após custos.")
+        else:
+            st.warning("Sem dados suficientes para comparar prazos.")
+    except Exception as exc:
+        st.error(f"Não foi possível comparar prazos: {exc}")
