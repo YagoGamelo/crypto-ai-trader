@@ -22,3 +22,18 @@ def test_backtest_next_open_and_costs():
 def test_insufficient_history_rejected():
     with pytest.raises(ValueError):
         backtest_one_asset(pd.DataFrame({"Open":[1]*40,"Close":[1]*40}))
+
+def test_forecaster_never_sees_price_on_its_execution_day(monkeypatch):
+    import walkforward
+    observed_sizes=[]
+    def fake_forecast(past_close,horizon):
+        observed_sizes.append(len(past_close))
+        return None  # intentionally no signal / no trades
+    monkeypatch.setattr(walkforward,"research_direction",fake_forecast)
+    frame=pd.DataFrame({"Open":[100.0]*355,"Close":[100.0]*355})
+    result=backtest_one_asset(frame,start_bars=320)
+    assert observed_sizes
+    assert observed_sizes[0]==320
+    assert max(observed_sizes)==354
+    assert result["return_pct"]==0
+    assert result["completed_trades"]==0
