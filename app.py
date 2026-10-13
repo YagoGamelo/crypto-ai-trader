@@ -175,7 +175,8 @@ with tab6:
             return value
         try:
             return str(st.secrets.get(name, "")).strip()
-        except (FileNotFoundError, KeyError, AttributeError):
+        except Exception:
+            # Streamlit raises different exceptions for missing secrets across versions.
             return ""
 
     key = _setting("T212_DEMO_API_KEY")
