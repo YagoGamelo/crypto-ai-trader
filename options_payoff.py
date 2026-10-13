@@ -66,7 +66,7 @@ class LongOption:
     def max_gain(self):
         if self.kind == "CALL":
             return None  # theoretical infinity, not guaranteed profit
-        return max(0.0, self.strike * self.units - self.debit)
+        return self.strike * self.units - self.debit
 
     def payout(self, underlying_expiry):
         """Net P/L, excluding FX and any exercise/assignment charges."""
