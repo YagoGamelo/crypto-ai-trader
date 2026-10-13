@@ -14,6 +14,10 @@ def test_roundtrip_foreign_currency_stock_examples():
     assert names["XTB"]==pytest.approx(.50)
     assert names["DEGIRO"]==pytest.approx(4.25)
     assert "Interactive Brokers" not in names
+    eur=dict(comparable_stock_costs(50,"EUR"))
+    assert eur["Trading 212 Invest"]==pytest.approx(0.0)
+    assert eur["XTB"]==pytest.approx(0.0)
+    assert eur["DEGIRO"]==pytest.approx(4.0)
 
 def test_crypto_not_compared_as_stock():
     for broker in PROVIDERS:
