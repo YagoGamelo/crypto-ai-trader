@@ -97,6 +97,9 @@ def build_model_rows(previous, now, *, scanner=None):
             "brier": round(brier, 4), "baseline_brier": round(baseline, 4),
             "out_of_sample_count": int(samples),
             "better_than_baseline": bool(brier < baseline),
+            "approved_for_paper": bool(record.get("Aprovado para virtual", False)),
+            "calibration_error_pct": _number(record.get("Erro calibração %")),
+            "high_confidence_test_samples": int(record.get("Sinais subida >=70 teste", 0) or 0),
             "daily_close_date": str(record.get("Data") or ""),
         }
     if not rows:
@@ -199,13 +202,16 @@ def build_report(previous, models, model_updated_at, quotes, now):
         up = _number(model.get("up_pct"))
         down = _number(model.get("down_pct"))
         validated = bool(model.get("better_than_baseline"))
+        approved = bool(model.get("approved_for_paper", False))
         universe.append({
             "symbol": symbol, "market": asset["category"],
             "prob_up_pct": up, "prob_down_pct": down,
             "better_than_baseline": validated,
+            "approved_for_paper": approved,
+            "calibration_error_pct": model.get("calibration_error_pct"),
             "forecast_asof_daily": model.get("daily_close_date"),
             "forecast_horizon": "5 velas diárias",
-            "signal": decision_label(up, down, validated),
+            "signal": decision_label(up, down, approved),
             "quote": quote,
         })
     available = [x for x in universe if x["prob_up_pct"] is not None]
@@ -233,7 +239,7 @@ def build_report(previous, models, model_updated_at, quotes, now):
         "notes": [
             "Cotações e modelo são atualizados em cadências diferentes.",
             "Sem ordens reais ou virtuais; análise de preços apenas.",
-            "Probabilidades não calibradas e podem falhar.",
+            "Estimativas calibradas num período histórico separado, mas ainda não fiáveis para lucro real; podem falhar.",
             "Ações e ETFs não negociam 24/7; cripto pode ter novas velas a qualquer hora.",
             "GitHub Actions não garante execução exata de 30 em 30 minutos.",
         ],
