@@ -171,3 +171,80 @@ Na aba **🤖 Auto-trading virtual**:
 - O botão de análise manual permite executar um ciclo virtual, mesmo com o modo automático desligado. O botão de reiniciar só aparece quando a automatização está desligada.
 
 Testes de estratégia em `tests/test_auto_paper.py`, sem rede ou corretoras. Para automatização persistente, será necessário um worker de produção, armazenamento duradouro, controlo de identidade e fontes de dados adequadas, além de revisão de segurança.
+
+
+## Monitor automático de mercado, a cada 30 minutos (aproximado)
+
+O NEXUS tem agora dois processos separados:
+
+1. **GitHub Actions** — `.github/workflows/market-monitor.yml` agenda uma
+   análise a cada meia hora, UTC, nas horas **:11 e :41**, mesmo com o
+   Streamlit, o Render e o iPad fechados. GitHub Actions usa agendamento
+   **best effort**, sem garantir a hora, podendo atrasar, falhar, ser
+   suspenso por limites do fornecedor, ou ser desativado após **60 dias
+   de inatividade** num repositório público.
+2. **Radar** — no Streamlit, seleciona **📡 Monitor 30 min → Abrir monitor**.
+   O painel carrega os últimos dados públicos de `market-data/data/latest.json`,
+   cujo conteúdo é mantido em ramo Git separado. Se estiveres a ver o site,
+   consulta o relatório aproximadamente a cada dois minutos.
+
+**Dados e precisão:**
+- Tenta obter uma **vela de 30 minutos já concluída** para cada um dos 170
+  ativos. Dados podem chegar com atraso; mercados de ações fecham à
+  noite e ao fim de semana. Uma mudança que atravessa o fecho de uma
+  bolsa **não** é rotulada como movimento de 30 minutos.
+- As percentagens do modelo representam a hipótese **não calibrada de
+  subida/descida nos próximos 5 períodos diários**, e são reestimadas
+  aproximadamente a cada 22 horas (com histórico de ~2 anos) para
+  controlar a utilização da fonte pública. NÃO são probabilidades
+  calculadas para os próximos 30 minutos.
+- O ficheiro `market-data/data/history.json` guarda até 96
+  amostras (cerca de 48 horas de ciclos bem-sucedidos).
+- O relatório é marcado como **atrasado** quando não é atualizado há
+  mais de 75 minutos; modelo e cotações têm carimbos temporais
+  independentes. Não há cotações inventadas em caso de falha.
+- Usa `yfinance` para investigação pessoal com limites de acesso, e
+  não um feed profissional com SLA. Para serviço público/comercial,
+  adquirir dados licenciados e infraestrutura fiável.
+
+### Ativação e verificação no GitHub
+
+1. Em **GitHub → YagoGamelo/crypto-ai-trader → Actions**, abre
+   **NEXUS market report every 30 minutes**.
+2. Se o GitHub pedir para ativar os workflows, ativa-os.
+3. Usa **Run workflow → Branch main → Run workflow** para solicitar
+   a primeira execução manual.
+4. Em **Settings → Actions → General → Workflow permissions**, caso o
+   histórico mostre erro de `git push`, confirma que as ações podem
+   obter `Read and write permissions` (com acesso limitado ao projeto).
+5. Abre o resultado público em:
+   `https://github.com/YagoGamelo/crypto-ai-trader/blob/market-data/data/latest.json`
+   e confirma `generated_at_utc` com uma hora recente.
+
+### Página estática disponível mesmo que o Render esteja adormecido
+
+O ramo `market-data` inclui um ficheiro `index.html` responsivo
+que pode ser publicado com o **GitHub Pages**. Faz uma única vez:
+
+**GitHub → Settings → Pages → Build and deployment → Source:
+Deploy from a branch → Branch `market-data` → `/(root)` → Save.**
+
+Depois de o GitHub Pages terminar a primeira publicação, a página será
+habitualmente `https://yagogamelo.github.io/crypto-ai-trader/`.
+O HTML carrega o JSON atualizado diretamente do ramo `market-data`
+de dois em dois minutos, pelo que **não depende de redeploys do Pages**
+para mostrar novos preços. Se o agendamento falhar, a página indica
+que o relatório ficou desatualizado. O site estático **não opera**
+nem comunica com a API Trading 212.
+
+### A função não é um sistema autónomo de execução de ordens
+
+**Monitorizar 24h ≠ executar ordens reais 24h.** O motor local de
+auto-trading continua virtual e limitado à sessão Streamlit aberta.
+Este workflow envia **apenas JSON público** para um ramo Git separado;
+não carrega API keys, carteira do utilizador nem coloca ordens.
+O GitHub Pages e o GitHub Actions podem indisponibilizar-se ou atrasar.
+
+Para comunicação proativa por email/push, seria necessário instalar
+um canal de notificações específico e configurar os respetivos
+limites e credenciais; ainda não existem notificações push.
