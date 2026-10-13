@@ -30,7 +30,8 @@ def _drawdown(values):
 
 
 def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
-                       retrain_every=5, start_bars=320):
+                       retrain_every=5, start_bars=320,
+                       fee_rate=FEE, slippage_rate=SLIPPAGE):
     """Simulate a complete out-of-sample phase on 2-5 years of OHLC.
 
     Price source must be a single asset in its account currency; USD assumed
@@ -48,6 +49,10 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
         raise ValueError("Invalid retrain interval")
     if not math.isfinite(initial_usd) or initial_usd<=0:
         raise ValueError("Invalid starting balance")
+    if any(isinstance(v,bool) or not isinstance(v,(int,float)) or
+           not math.isfinite(v) or not 0 <= v <= .05
+           for v in (fee_rate,slippage_rate)):
+        raise ValueError("Fee and slippage rates must be within 0..5%")
     data=data.loc[(data.Open>0)&(data.Close>0)]
     if len(data)<start_bars+30:
         raise ValueError("Too many invalid prices")
@@ -88,9 +93,9 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
                            or trailing_exit(entry_price,peak,close_before,position_atr_pct))
             exit_by_prob=(model is not None and model["up_pct"]<=SELL_THRESHOLD*100)
             if exit_by_price or exit_by_prob:
-                fill=opening*(1-SLIPPAGE)
+                fill=opening*(1-slippage_rate)
                 gross=units*fill
-                fee=gross*FEE
+                fee=gross*fee_rate
                 realized=gross-fee-cost
                 reserve=max(0,realized)*RESERVE_SHARE
                 cash+=gross-fee-reserve
@@ -111,9 +116,9 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
             investible=cash
             budget=budget_for_entry(cash,investible,current_atr_pct)
             if budget>0:
-                fill=opening*(1+SLIPPAGE)
-                units=budget/(fill*(1+FEE))
-                fee=fill*units*FEE
+                fill=opening*(1+slippage_rate)
+                units=budget/(fill*(1+fee_rate))
+                fee=fill*units*fee_rate
                 cash-=budget
                 cost=budget
                 entry_price=peak=fill
@@ -128,9 +133,9 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
                         "cash":round(cash,6),"reserved":round(reserved,6),
                         "p_up":model["up_pct"] if model else None})
     equity_final=history[-1]["equity"]
-    benchmark_entry=float(data.Open.iloc[start_bars])*(1+SLIPPAGE)
-    benchmark_final=float(data.Close.iloc[-1])*(1-SLIPPAGE)
-    benchmark=100*(benchmark_final*(1-FEE)/(benchmark_entry*(1+FEE))-1)
+    benchmark_entry=float(data.Open.iloc[start_bars])*(1+slippage_rate)
+    benchmark_final=float(data.Close.iloc[-1])*(1-slippage_rate)
+    benchmark=100*(benchmark_final*(1-fee_rate)/(benchmark_entry*(1+fee_rate))-1)
     days=len(history)
     total_pct=100*(equity_final/initial_usd-1)
     annualized=100*((equity_final/initial_usd)**(252/days)-1) if days>=126 and equity_final>0 else None
@@ -145,8 +150,10 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
         "completed_trades":wins+losses,
         "total_fees_usd":round(fees_total,4),
         "reserved_usd":round(reserved,4),
+        "fee_rate_pct":round(fee_rate*100,3),
+        "slippage_pct":round(slippage_rate*100,3),
         "bars_tested":days,
         "trades":trades,
         "equity_curve":history,
-        "notes":"Simulated next open, 0.2% fee/side and 0.1% slippage/side; long only; no dividends, taxes, FX or live quotes."
+        "notes":f"Simulated next open, {fee_rate*100:.2f}% fee/side and {slippage_rate*100:.2f}% slippage/side; long only; no dividends, taxes, FX or live quotes."
     }
