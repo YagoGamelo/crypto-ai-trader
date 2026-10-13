@@ -130,7 +130,7 @@ def render_monitor():
             st.bar_chart(mover_df.head(10).set_index("Ativo")[["Variação 30min %"]])
         else:
             st.caption("Sem velas recentes. As bolsas podem estar fechadas ou o fornecedor indisponível.")
-    with st.expander("Ver a tabela completa dos 170 ativos"):
+    with st.expander("Ver a tabela completa de todos os ativos"):
         rows=report.get("assets",[])
         if rows:
             st.dataframe(pd.DataFrame([{
