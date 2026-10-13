@@ -26,7 +26,7 @@ def test_insufficient_history_rejected():
 def test_forecaster_never_sees_price_on_its_execution_day(monkeypatch):
     import walkforward
     observed_sizes=[]
-    def fake_forecast(past_close,horizon):
+    def fake_forecast(past_close,horizon,round_trip_cost):
         observed_sizes.append(len(past_close))
         return None  # intentionally no signal / no trades
     monkeypatch.setattr(walkforward,"research_direction",fake_forecast)
@@ -41,8 +41,10 @@ def test_forecaster_never_sees_price_on_its_execution_day(monkeypatch):
 
 def test_stress_costs_reduce_flat_market_returns(monkeypatch):
     import walkforward
-    def deterministic_signal(past_close,horizon):
-        return {"approved_for_paper":True,"up_pct":75.0 if len(past_close)<322 else 45.0}
+    def deterministic_signal(past_close,horizon,round_trip_cost):
+        return {"approved_for_paper":True,
+                "conservative_net_pct":1.0,
+                "up_pct":75.0 if len(past_close)<322 else 45.0}
     monkeypatch.setattr(walkforward,"research_direction",deterministic_signal)
     prices=[100.0]*355
     frame=pd.DataFrame({"Open":prices,"Close":prices})
@@ -62,3 +64,26 @@ def test_invalid_cost_assumptions_rejected(fee,slip):
     frame=pd.DataFrame({"Open":[100.0]*355,"Close":[100.0]*355})
     with pytest.raises(ValueError):
         backtest_one_asset(frame,fee_rate=fee,slippage_rate=slip)
+
+
+def test_backtest_rejects_high_probability_with_no_positive_cost_edge(monkeypatch):
+    import walkforward
+    def no_edge(past_close,horizon,round_trip_cost):
+        return {"approved_for_paper":True,"conservative_net_pct":-.1,"up_pct":99.0}
+    monkeypatch.setattr(walkforward,"research_direction",no_edge)
+    frame=pd.DataFrame({"Open":[100.0]*355,"Close":[100.0]*355})
+    result=backtest_one_asset(frame,start_bars=320)
+    assert not result["trades"]
+    assert result["return_pct"]==0
+
+
+def test_wider_fee_assumptions_reach_the_model(monkeypatch):
+    import walkforward
+    costs=[]
+    def spy(past_close,horizon,round_trip_cost):
+        costs.append(round_trip_cost)
+        return None
+    monkeypatch.setattr(walkforward,"research_direction",spy)
+    frame=pd.DataFrame({"Open":[100.0]*355,"Close":[100.0]*355})
+    backtest_one_asset(frame,start_bars=320,fee_rate=.004,slippage_rate=.003)
+    assert costs and all(value==pytest.approx(.014) for value in costs)
