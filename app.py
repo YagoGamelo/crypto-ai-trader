@@ -492,13 +492,13 @@ with tab_goal:
         goal_wallet = create_portfolio()
     initial_amount = float(goal_wallet["initial_cash"])
     virtual_equity = portfolio_equity(goal_wallet)
-    goals = calculate_goal(initial_amount, max(0.000001,virtual_equity), 400.0, months)
+    goals = calculate_goal(initial_amount, max(0.0,virtual_equity), 400.0, months)
     m1,m2,m3,m4=st.columns(4)
     m1.metric("Saldo inicial virtual USD",f"{goals['initial']:.2f}")
     m2.metric("Meta final virtual USD",f"{goals['target_capital']:.2f}")
     m3.metric("Saldo atual virtual USD",f"{virtual_equity:.2f}",
               delta=f"{goals['current_return_pct']:+.1f}% desde início")
-    m4.metric("Crescimento mensal necessário",f"{goals['monthly_growth_needed_pct']:+.2f}%")
+    m4.metric("Crescimento mensal necessário",f"{goals['monthly_growth_needed_pct']:+.2f}%" if goals["monthly_growth_needed_pct"] is not None else "Impossível sem capital")
     st.progress(goals["goal_progress_pct"]/100,text=f"{goals['goal_progress_pct']:.1f}% do lucro necessário já atingido")
     st.caption(f"Para a meta faltam {goals['remaining_to_target']:.2f} USD nominais. A carteira é uma simulação em USD; isto NÃO representa o saldo real em euros de uma corretora.")
     required_rate=(5.0**(1.0/months)-1.0)*100.0
