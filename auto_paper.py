@@ -1,8 +1,9 @@
-"""Session-local automatic STOCK paper trader. NEVER connects to a broker.
+"""Session-local STOCK research trader; PAPER ONLY and no broker APIs.
 
-Signals: BUY p(up) >= 70%, SELL p(up) <= 50%, also sell at daily
-stop-loss of 5%. Statistical probabilities are uncalibrated, and
-historical closing prices cannot model actual intraday fills.
+A 70% forecast is not 70% profitable-trade certainty. Besides calibrated
+historic quality, entries need positive conservatively adjusted net edge.
+Daily closing prices are used as reference; simulated entry/exit slippage
+makes estimated virtual fills less optimistic, but not executable quotes.
 """
 from __future__ import annotations
 import math
@@ -22,7 +23,9 @@ STOP_LOSS = .05
 PROFIT_RESERVE = .30
 MAX_DAILY_DRAWDOWN = .05
 MIN_PURCHASE_USD = 2.0
-MAX_PRICE_AGE_DAYS = 7
+MAX_PRICE_AGE_DAYS = 4
+SIMULATED_SLIPPAGE = .001
+COOLDOWN_CALENDAR_DAYS = 2
 
 def create_portfolio(starting_cash=STARTING_CASH_USD):
     if not math.isfinite(starting_cash) or starting_cash <= 0:
@@ -31,7 +34,8 @@ def create_portfolio(starting_cash=STARTING_CASH_USD):
             "trades":[],"last_evaluated":{},"last_prices":{},
             "daily_reference":None,"daily_reference_date":None,
             "last_run":None,"initial_cash":float(starting_cash),
-            "peak_equity":float(starting_cash)}
+            "peak_equity":float(starting_cash),
+            "last_exit_date":{}}
 
 def portfolio_equity(portfolio):
     return portfolio["cash"] + portfolio["reserved"] + sum(
@@ -63,15 +67,16 @@ def _normalize(row, today):
         return None
     if not 0 <= (today-day).days <= MAX_PRICE_AGE_DAYS:
         return None
-    # New research requires separate calibration + holdout success; legacy
-    # fixtures without the field keep their existing conservative Brier check.
-    approved = row.get("Aprovado para virtual", True)
+    # No approval, no explicit positive after-cost edge => no trade.
+    approved = row.get("Aprovado para virtual", False)
+    edge = _valid_number(row.get("Vantagem líquida conservadora %"))
     buy_eligible=(brier is not None and base is not None and tested is not None
-                  and tested >= 30 and brier < base and approved is True)
+                  and tested >= 30 and brier < base and approved is True
+                  and edge is not None and edge > 0)
     atr=_valid_number(row.get("ATR 14 %"))
     return {"ticker":ticker,"price":price,"up":p_up/100.0,
             "down":1-p_up/100.0,"trading_day":day.isoformat(),
-            "buy_eligible":buy_eligible,"atr_pct":atr}
+            "buy_eligible":buy_eligible,"atr_pct":atr,"net_edge_pct":edge}
 
 def _exit_reason(position, price, up):
     """Sell in spot only when already held; never short securities."""
@@ -111,7 +116,8 @@ def decision_table(portfolio, rows, *, now=None):
                         "Motivo":reason or ("subida >=70% e modelo supera referência"
                                          if decision.startswith("COMPRAR") else
                                          "sem posição / sinal insuficiente"),
-                        "Modelo supera referência":x["buy_eligible"],
+                        "Filtros e vantagem líquida aprovados":x["buy_eligible"],
+                        "Vantagem líquida conservadora %":x["net_edge_pct"],
                         "Posição aberta":bool(pos),
                         "Data":x["trading_day"]})
     return sorted(results,key=lambda x:-x["Subida estimada %"])
@@ -148,7 +154,8 @@ def evaluate_cycle(portfolio, rows, *, now=None):
         if not reason:
             continue
         qty=position["quantity"]
-        gross=qty*px
+        virtual_fill=px*(1-SIMULATED_SLIPPAGE)
+        gross=qty*virtual_fill
         fee=gross*FEE_PER_SIDE
         net=gross-fee
         realized=net-position["total_cost"]
@@ -156,8 +163,10 @@ def evaluate_cycle(portfolio, rows, *, now=None):
         portfolio["cash"]+=net-reserve
         portfolio["reserved"]+=reserve
         del portfolio["positions"][ticker]
+        portfolio["last_exit_date"][ticker]=x["trading_day"]
         event={"data":now.isoformat(),"ação":"VENDER","ativo":ticker,
-               "preço":px,"quantidade":qty,"comissão":fee,
+               "preço":px,"preço_simulado":virtual_fill,
+               "quantidade":qty,"comissão":fee,
                "lucro_realizado":realized,"lucro_reservado":reserve,
                "prob_subida":x["up"],
                "motivo":reason,
@@ -173,8 +182,14 @@ def evaluate_cycle(portfolio, rows, *, now=None):
     buy_candidates=sorted(
         (x for x in new if x["ticker"] not in portfolio["positions"]
          and x["buy_eligible"] and x["up"]>=BUY_THRESHOLD
+         and (x["ticker"] not in portfolio["last_exit_date"] or
+              (date.fromisoformat(x["trading_day"]) -
+               date.fromisoformat(portfolio["last_exit_date"][x["ticker"]])).days >= COOLDOWN_CALENDAR_DAYS)
          and not any(event["ativo"]==x["ticker"] for event in actions)),
-        key=lambda x:(-x["up"],x["ticker"])
+        # Rank by conservative expected after-cost return per unit of
+        # volatility, not by the highest headline probability alone.
+        key=lambda x:(-(x["net_edge_pct"]/max(2.0,x["atr_pct"] or 5.0)),
+                      -x["up"],x["ticker"])
     )
     if allowed and len(portfolio["positions"])<MAX_POSITIONS:
         for x in buy_candidates[:1]:
@@ -184,21 +199,23 @@ def evaluate_cycle(portfolio, rows, *, now=None):
             if budget<MIN_PURCHASE_USD:
                 break
             px=x["price"]
-            qty=budget/(px*(1+FEE_PER_SIDE))
-            fee=qty*px*FEE_PER_SIDE
+            virtual_fill=px*(1+SIMULATED_SLIPPAGE)
+            qty=budget/(virtual_fill*(1+FEE_PER_SIDE))
+            fee=qty*virtual_fill*FEE_PER_SIDE
             portfolio["cash"]-=budget
             portfolio["positions"][x["ticker"]]={
-                "quantity":qty,"entry_price":px,
+                "quantity":qty,"entry_price":virtual_fill,
                 "total_cost":budget,"open_date":x["trading_day"],
                 "highest_observed":px,
                 "atr_pct":x.get("atr_pct"),
                 "stop_fraction":entry_stop_fraction(x.get("atr_pct"))}
             event={"data":now.isoformat(),"ação":"COMPRAR",
                    "ativo":x["ticker"],"preço":px,
+                   "preço_simulado":virtual_fill,
                    "quantidade":qty,"comissão":fee,
                    "lucro_realizado":0.0,"lucro_reservado":0.0,
                    "prob_subida":x["up"],
-                   "motivo":"subida >=70%; modelo supera referência",
+                   "motivo":"subida >=70%; teste de qualidade e vantagem líquida positiva",
                    "data_mercado":x["trading_day"]}
             actions.append(event)
             portfolio["trades"].append(event)
