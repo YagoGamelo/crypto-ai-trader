@@ -81,3 +81,39 @@ def test_circuit_breaker_blocks_new_buys():
     result=evaluate_cycle(p,[row("AAPL",p=90)],now=CLOCK)
     assert result["risk_gate_open"] is False
     assert not result["actions"]
+
+def test_70_percent_down_is_explicit_sell_reason():
+    p=create_portfolio()
+    evaluate_cycle(p,[row(p=70)],now=CLOCK)
+    result=evaluate_cycle(p,[row(p=30,price=110,when="2026-10-14")],
+                          now=CLOCK+timedelta(days=1))
+    assert result["actions"][0]["ação"]=="VENDER"
+    assert "descida estimada >=70%" in result["actions"][0]["motivo"]
+
+def test_trailing_exit_after_profitable_peak():
+    p=create_portfolio()
+    evaluate_cycle(p,[row(p=80,price=100)],now=CLOCK)
+    evaluate_cycle(p,[row(p=80,price=110,when="2026-10-14")],
+                   now=CLOCK+timedelta(days=1))
+    result=evaluate_cycle(p,[row(p=65,price=106,when="2026-10-15")],
+                          now=CLOCK+timedelta(days=2))
+    assert result["actions"][0]["ação"]=="VENDER"
+    assert "stop móvel" in result["actions"][0]["motivo"]
+    assert p["reserved"]>0
+
+def test_decision_table_shows_both_directions_without_orders():
+    from auto_paper import decision_table
+    p=create_portfolio()
+    records=[row("AAPL",p=71),row("MSFT",p=29)]
+    signals=decision_table(p,records,now=CLOCK)
+    assert {x["Ativo"]:x["Sinal"] for x in signals}=={
+        "AAPL":"COMPRAR (candidato)","MSFT":"ESPERAR"}
+    assert p["positions"]=={}
+    assert all(x["Descida estimada %"]==100-x["Subida estimada %"]
+               for x in signals)
+
+def test_no_shorts_when_down_prediction_high():
+    p=create_portfolio()
+    result=evaluate_cycle(p,[row(p=20)],now=CLOCK)
+    assert result["actions"]==[]
+    assert p["positions"]=={}
