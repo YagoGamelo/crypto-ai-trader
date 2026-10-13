@@ -59,7 +59,7 @@ PROVIDERS = [
         "risks": "Não confundir preçário Coinbase Exchange institucional com Advanced de retalho",
         "website": "https://www.coinbase.com/advanced-trade",
         "fees": "https://help.coinbase.com/en-gb/coinbase/trading-and-funding/advanced-trade/advanced-trade-fees",
-        "api_docs": "https://docs.cdp.coinbase.com/advanced-trade",
+        "api_docs": "https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/sdk",
         "regulator": "https://www.coinbase.com/pt-pt/legal/licenses/europe",
         "fee_model": "variable", "trade_rate": None, "fx_rate": None, "fee_fixed": None
     },
