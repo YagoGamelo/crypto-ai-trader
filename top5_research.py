@@ -29,6 +29,7 @@ def evaluate(close, horizon=5):
         "Sinais subida >=70 teste": result["bullish_signals"],
         "Acerto dos sinais >=70 %": (
             round(result["bullish_hit_rate"] * 100, 1) if result["bullish_hit_rate"] is not None else None),
+        "Rentab. líquida média sinais >=70 %": (round(result["bullish_avg_net_pct"],2) if result["bullish_avg_net_pct"] is not None else None),
         "Aprovado para virtual": result["approved_for_paper"],
     }
 
