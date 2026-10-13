@@ -19,7 +19,7 @@ a,b,c=st.columns(3)
 a.metric("Universo monitorizado",len(WATCHLIST))
 b.metric("Empresas",len(STOCKS))
 c.metric("Cripto + ETFs",len(CRYPTO)+len(ETFS))
-tab1,tab2,tab3,tab4=st.tabs(["🏆 Top 5","📈 Explorar ativo","🧪 Trading virtual","ℹ️ Metodologia"])
+tab1,tab2,tab3,tab4,tab5=st.tabs(["🏆 Top 5","📈 Explorar ativo","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs"])
 with tab1:
     st.subheader("As 5 maiores estimativas de subida")
     st.write("O modelo analisa todos os ativos disponíveis, testa o desempenho fora da amostra e compara previsões para os próximos **5 dias**.")
@@ -83,7 +83,7 @@ with tab2:
         except Exception as exc: st.error(f"Não foi possível analisar: {exc}")
 with tab3:
     st.subheader("Carteira de demonstração")
-    st.caption("Este motor executa apenas um ciclo quando carregas no botão. Sem negociação contínua.")
+    st.caption("Cada visitante tem uma carteira virtual própria, temporária e separada por ativo. Sem negociação contínua.")
     from market import candles
     from model import fit_and_score,latest_signal
     from paper import connect,snapshot,step,history as trade_history
@@ -94,16 +94,27 @@ with tab3:
             df=candles(sym)
             _,_,_,report=fit_and_score(df)
             p=latest_signal(df); price=float(df.close.iloc[-1])
-            db=connect("paper_btc.db" if sym=="BTC/USD" else "paper_eth.db")
-            action=step(db,price,p,.70,enabled)
+            # Session-only: public visitors must never share a single SQLite wallet.
+            if "paper_wallets" not in st.session_state:
+                st.session_state["paper_wallets"] = {}
+            if sym not in st.session_state["paper_wallets"]:
+                st.session_state["paper_wallets"][sym] = connect(":memory:")
+            db = st.session_state["paper_wallets"][sym]
+            # Historical Brier score must exceed the naive reference before
+            # authorizing even a simulated entry.
+            validated = report["brier"] < report["baseline_brier"]
+            action = step(db,price,p,.70,enabled and validated)
+            if enabled and not validated:
+                st.warning("Operações bloqueadas: o modelo não superou a previsão de referência no teste histórico.")
             snap=snapshot(db,price)
             x,y,z=st.columns(3)
             x.metric("Saldo virtual USD",f"{snap['equity']:.2f}")
             y.metric("Estimativa",f"{p:.1%}")
             z.metric("Preço USD",f"{price:,.2f}")
             st.info(action)
+            st.metric("Lucros reservados (30%) USD",f"{snap['reserved']:.2f}")
             st.dataframe(pd.DataFrame(trade_history(db),columns=["Data","Ação","Preço","Unidades","Taxa","Motivo"]),hide_index=True,use_container_width=True)
-            st.caption(f"Diagnóstico: {report}")
+            st.caption(f"Diagnóstico: {report}. Stop-loss verificado apenas neste ciclo. Carteira apagada ao terminar a sessão." )
         except Exception as exc: st.error(str(exc))
 with tab4:
     st.subheader("O que a IA estuda")
@@ -112,3 +123,39 @@ with tab4:
     st.write("**Gestão de risco:** nenhum sinal é uma ordem; o módulo de trading atual é exclusivamente virtual e manual por ciclo.")
     st.write("**Limites:** a seleção do Top 5 entre muitos modelos pode amplificar falsos positivos. É necessária validação adicional, calibração e testes de custos antes de negociar.")
     st.caption("Dados Yahoo Finance via yfinance, para investigação; verifica condições de uso antes de publicar comercialmente.")
+
+with tab5:
+    from brokers import PROVIDERS, CHECKED_ON, comparable_stock_costs
+    st.subheader("Corretoras, custos e ligação ao bot")
+    st.caption(f"Pesquisa orientada a residentes em Portugal · fontes oficiais consultadas em {CHECKED_ON}")
+    st.info("Uma API de negociação permite estudar uma futura integração, mas o NEXUS não liga contas reais, não recebe credenciais e não envia ordens. A regulamentação e disponibilidade devem ser verificadas para a entidade que te serve.")
+    a,b=st.columns(2)
+    market=a.selectbox("Tipo de investimento",["Todos","Ações e ETFs","Criptomoedas"],key="broker_type")
+    api_only=b.toggle("Só com API oficial de trading",value=False)
+    candidates=[p for p in PROVIDERS if (market=="Todos" or p["type"]==market) and (not api_only or p["api_ok"])]
+    view=pd.DataFrame([{
+        "Plataforma":p["name"],"Mercado":p["type"],"API p/ bot":p["api"],
+        "Compras/vendas":p["trade"],"Câmbio EUR/USD":p["fx"],
+        "Saque EUR":p["withdraw_eur"],"Saque USD":p["withdraw_usd"]
+    } for p in candidates])
+    st.dataframe(view,hide_index=True,use_container_width=True)
+    st.markdown("### Qual poderá compensar?")
+    st.write("**Para um bot de ações pequeno:** Trading 212 Invest (API beta + demo + 0 € de comissão própria). **Para automação avançada de ações:** Interactive Brokers (API robusta, mas mínimos por ordem). **Para cripto spot:** Kraken Pro, a comparar com Coinbase Advanced. XTB e DEGIRO são opções para negociar manualmente, sem API oficial.")
+    st.caption("A classificação é editorial e depende dos produtos, montantes, país, impostos, spreads, conversão e condições da tua conta. Não é uma garantia de segurança nem recomendação personalizada.")
+    amount=st.number_input("Exemplo de custo: comprar e vender ações dos EUA, conta em EUR",min_value=10.0,max_value=100000.0,value=50.0,step=10.0,format="%.2f")
+    pairs=comparable_stock_costs(amount)
+    st.dataframe(pd.DataFrame([{"Corretora":name,"Custo teórico total EUR":fee,"Peso do custo %":round(100*fee/amount,2)} for name,fee in pairs]),hide_index=True,use_container_width=True)
+    st.caption("Exemplo ilustrativo: compra + venda pelo mesmo preço em USD, duas conversões EUR↔USD. Exclui spread, impostos, diferenças de câmbio, comissões de terceiros e levantamentos. Não é uma cotação de custos. IBKR não entra nesta comparação porque tem preçários e mínimos distintos.")
+    st.markdown("### Detalhes, regulamentação e tabelas oficiais")
+    for p in candidates:
+        with st.expander(p["name"]+"  ·  "+("API disponível" if p["api_ok"] else "Sem API para o bot")):
+            st.write("**Indicação:** "+p["fit"])
+            st.write("**Negociação:** "+p["trade"])
+            st.write("**EUR/USD:** "+p["fx"])
+            st.write("**Levantamento EUR:** "+p["withdraw_eur"])
+            st.write("**Levantamento USD:** "+p["withdraw_usd"])
+            st.write("**Supervisão:** "+p["regulation"])
+            st.write("**Atenção:** "+p["risks"])
+            st.markdown(f"[Site oficial]({p['website']}) · [Preçário]({p['fees']}) · [API / situação]({p['api_docs']}) · [Regulamentação]({p['regulator']})")
+    st.warning("Uma taxa de levantamento não é uma percentagem dos lucros. Muitas plataformas cobram 0 € ou montante fixo em EUR; compras, vendas, câmbio, impostos e spreads são custos distintos. Em Portugal, as opções binárias com pagamento fixo são sujeitas a proibições/restrições para investidores de retalho na UE e não estão incluídas como plataformas para integrar.")
+    st.caption("Antes de qualquer integração real: confirmar licenças junto da CMVM/ESMA/regulador competente, testar em demo, autenticação segura, permissões de negociação sem levantamentos, limites de perdas e supervisão humana.")
