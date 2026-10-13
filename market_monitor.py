@@ -66,7 +66,10 @@ def build_model_rows(previous, now, *, scanner=None):
     """
     saved = previous.get("models")
     updated = parse_time(previous.get("model_updated_at"))
-    if isinstance(saved, dict) and saved and updated and timedelta(0) <= now-updated < timedelta(hours=MODEL_RECALC_HOURS):
+    previous_universe=previous.get("universe_count")
+    watchlist_changed=(isinstance(previous_universe,int) and previous_universe!=len(WATCHLIST))
+    if (not watchlist_changed and isinstance(saved, dict) and saved and updated and
+            timedelta(0) <= now-updated < timedelta(hours=MODEL_RECALC_HOURS)):
         return saved, previous["model_updated_at"], False
     if scanner is None:
         from top5_research import scan_all
