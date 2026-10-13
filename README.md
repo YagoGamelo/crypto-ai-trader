@@ -1,5 +1,87 @@
 # NEXUS / Crypto AI Trader — pesquisa e simulação
 
+
+## Versão 4 — procurar vantagem líquida, não perseguir lucros
+
+**Meta de estudo: +400% num ano.** Com capital inicial de 50 unidades,
+seriam 250 unidades no fim (200 de lucro): cerca de +14,35% composto ao
+mês. **Não existe uma combinação conhecida que torne +400% provável e,
+ao mesmo tempo, de baixo risco.** É perfeitamente possível perder o
+capital. Nenhuma probabilidade de atingir esta meta é inferida da IA.
+
+Por isso, a meta continua a ser apenas uma referência no separador
+`🎯 Meta 400%`. Não foi acrescentada alavancagem nem acesso a
+corretoras reais, nem são aumentadas as posições para recuperar perdas.
+
+### Alterações ao motor de decisão
+
+- **`edge_filter.py`** estima uma margem de vantagem de uma operação
+  com as magnitudes médias das subidas e descidas do bloco de teste,
+  o custo suposto de compra+venda e a probabilidade mais recente.
+  Reduz a probabilidade favorável em pelo menos **8 pontos percentuais**
+  ou no erro de calibração medido (o que for maior), para construir
+  uma expectativa líquida conservadora.
+- **`research_v2.py`** exige 12 sinais de subida >=70% no bloco
+  histórico de teste, dos quais pelo menos **8 períodos sem sobreposição
+  de resultados**, acerto observado e um limite inferior aproximado
+  de confiança (>50%) calculado com a fórmula de Wilson, além dos
+  filtros existentes de Brier, ECE e rentabilidade média após custos.
+  Os testes não asseguram independência estatística de regimes de
+  mercado nem lucro futuro; não corrigem seleção múltipla entre ativos.
+- **A entrada virtual é bloqueada** se faltar qualquer indicador de
+  aprovação, se não houver vantagem líquida conservadora positiva ou
+  se uma fonte não fornecer dados. **Nenhum sinal também é um resultado
+  válido.** P(subida) ≥70% é condição necessária, mas não suficiente.
+- Entre duas ações que passaram os filtros, **`auto_paper.py`**
+  prefere a maior vantagem líquida conservadora por unidade de
+  volatilidade ATR, em vez de selecionar automaticamente a
+  probabilidade mais alta. Esta métrica de prioridade é uma heurística
+  de investigação e **não está provada como melhor**.
+- Compra/venda virtuais agora acrescentam **0,1% de derrapagem
+  desfavorável por lado** além da comissão, mas continuam a usar
+  preços de fecho como referência. São preenchimentos inventados
+  para contabilizar custos e não equivalem à abertura real seguinte.
+- Após vender uma ação existe uma pausa de pelo menos **dois dias
+  de calendário** para esse símbolo, para reduzir operações repetidas.
+  Preços diários com mais de **quatro dias** ficam inelegíveis.
+- **`walkforward.py`** passou a usar o mesmo pressuposto de custos na
+  validação do sinal, recusa vantagens líquidas negativas, introduz
+  cooldown e bloqueia novas compras depois de -15% do máximo
+  observado. As saídas continuam permitidas.
+- **`strategy_scorecard.py`** deixa claro se um backtest isolado
+  satisfaz critérios mínimos para **mais estudo**: 252 sessões fora da
+  amostra, pelo menos 30 vendas concluídas, lucro líquido positivo e
+  maior queda da carteira não inferior a -15%. Mesmo quando todos
+  passam, **o resultado não valida +400% nem autoriza operações reais**.
+
+### O que o site passa a mostrar
+
+Em **🏆 Top 5** há agora duas perspetivas: probabilidade estimada
+de subida, e os candidatos que também têm vantagem líquida positiva
+depois de uma margem conservadora e que passaram os filtros históricos.
+Em **📈 Explorar ativo**, após um backtest, o site mostra o resultado
+da auditoria da amostra e das perdas. A aba **🎯 Meta 400%** recupera
+o último backtest disponível na sessão e indica se há sequer amostra
+suficiente para continuar a investigar.
+
+**Ponto de risco:** a confiança de Wilson é apenas uma aproximação,
+e as observações selecionadas continuam dependentes de fatores comuns
+do mercado; as comissões reais, dividendos, impostos, movimentos
+intradiários, liquidez, câmbio e gaps podem alterar radicalmente o
+resultado. Estes filtros podem causar semanas ou meses sem compras.
+Isso é preferível a apresentar falsas garantias.
+
+### Testes
+
+Foram acrescentados testes unitários em
+`tests/test_edge_filter.py`, `tests/test_strategy_scorecard.py`,
+`tests/test_auto_paper.py` e `tests/test_walkforward.py`.
+O GitHub Actions executa `python -m pytest -q` a cada atualização
+da branch `main`. A existência dos testes **não prova que passaram**
+ou que a estratégia seja rentável; verificar sempre o estado do
+workflow em `Actions → Tests and syntax`.
+
+
 ## Criptomoedas, memecoins e opções — módulos de estudo
 
 ### Cripto spot e memecoins
