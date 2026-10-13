@@ -7,6 +7,7 @@ historical closing prices cannot model actual intraday fills.
 from __future__ import annotations
 import math
 from datetime import date, datetime, timezone
+from risk_rules import budget_for_entry, entry_stop_fraction, trailing_exit
 
 BUY_THRESHOLD = .70
 SELL_THRESHOLD = .50
@@ -29,7 +30,8 @@ def create_portfolio(starting_cash=STARTING_CASH_USD):
     return {"cash":float(starting_cash),"reserved":0.0,"positions":{},
             "trades":[],"last_evaluated":{},"last_prices":{},
             "daily_reference":None,"daily_reference_date":None,
-            "last_run":None,"initial_cash":float(starting_cash)}
+            "last_run":None,"initial_cash":float(starting_cash),
+            "peak_equity":float(starting_cash)}
 
 def portfolio_equity(portfolio):
     return portfolio["cash"] + portfolio["reserved"] + sum(
@@ -61,11 +63,15 @@ def _normalize(row, today):
         return None
     if not 0 <= (today-day).days <= MAX_PRICE_AGE_DAYS:
         return None
+    # New research requires separate calibration + holdout success; legacy
+    # fixtures without the field keep their existing conservative Brier check.
+    approved = row.get("Aprovado para virtual", True)
     buy_eligible=(brier is not None and base is not None and tested is not None
-                  and tested >= 30 and brier < base)
+                  and tested >= 30 and brier < base and approved is True)
+    atr=_valid_number(row.get("ATR 14 %"))
     return {"ticker":ticker,"price":price,"up":p_up/100.0,
             "down":1-p_up/100.0,"trading_day":day.isoformat(),
-            "buy_eligible":buy_eligible}
+            "buy_eligible":buy_eligible,"atr_pct":atr}
 
 def _exit_reason(position, price, up):
     """Sell in spot only when already held; never short securities."""
@@ -73,12 +79,12 @@ def _exit_reason(position, price, up):
         return "descida estimada >=70%"
     if up <= SELL_THRESHOLD:
         return "subida estimada <=50%"
-    if price <= position["entry_price"]*(1-STOP_LOSS):
-        return "stop de 5% (fecho diário)"
+    stop=position.get("stop_fraction",STOP_LOSS)
+    if price <= position["entry_price"]*(1-stop):
+        return f"stop de {stop*100:.1f}% (fecho diário)"
     peak=max(position.get("highest_observed",position["entry_price"]),price)
-    if (peak >= position["entry_price"]*(1+TRAIL_ENABLE_AFTER_GAIN)
-            and price <= peak*(1-TRAIL_FROM_PEAK)):
-        return "stop móvel de lucro (recuo >=3% do máximo observado)"
+    if trailing_exit(position["entry_price"],peak,price,position.get("atr_pct")):
+        return "stop móvel de lucro (ajustado à volatilidade)"
     return None
 
 def decision_table(portfolio, rows, *, now=None):
@@ -159,7 +165,11 @@ def evaluate_cycle(portfolio, rows, *, now=None):
         actions.append(event)
         portfolio["trades"].append(event)
     ref=portfolio["daily_reference"]
-    allowed=ref>0 and portfolio_equity(portfolio)>=ref*(1-MAX_DAILY_DRAWDOWN)
+    current_equity=portfolio_equity(portfolio)
+    portfolio["peak_equity"]=max(portfolio.get("peak_equity",portfolio["initial_cash"]),current_equity)
+    # Lifetime -15% circuit breaker blocks new buys, not protective exits.
+    allowed=(ref>0 and current_equity>=ref*(1-MAX_DAILY_DRAWDOWN)
+             and current_equity>=portfolio["peak_equity"]*.85)
     buy_candidates=sorted(
         (x for x in new if x["ticker"] not in portfolio["positions"]
          and x["buy_eligible"] and x["up"]>=BUY_THRESHOLD
@@ -168,8 +178,9 @@ def evaluate_cycle(portfolio, rows, *, now=None):
     )
     if allowed and len(portfolio["positions"])<MAX_POSITIONS:
         for x in buy_candidates[:1]:
-            budget=min(portfolio["cash"],
-                       (portfolio_equity(portfolio)-portfolio["reserved"])*MAX_POSITION_FRACTION)
+            budget=budget_for_entry(
+                portfolio["cash"],portfolio_equity(portfolio)-portfolio["reserved"],
+                x.get("atr_pct"))
             if budget<MIN_PURCHASE_USD:
                 break
             px=x["price"]
@@ -179,7 +190,9 @@ def evaluate_cycle(portfolio, rows, *, now=None):
             portfolio["positions"][x["ticker"]]={
                 "quantity":qty,"entry_price":px,
                 "total_cost":budget,"open_date":x["trading_day"],
-                "highest_observed":px}
+                "highest_observed":px,
+                "atr_pct":x.get("atr_pct"),
+                "stop_fraction":entry_stop_fraction(x.get("atr_pct"))}
             event={"data":now.isoformat(),"ação":"COMPRAR",
                    "ativo":x["ticker"],"preço":px,
                    "quantidade":qty,"comissão":fee,
@@ -197,4 +210,6 @@ def evaluate_cycle(portfolio, rows, *, now=None):
             "valid_signals":len(signals),
             "new_signals":len(new),"buy_candidates":len(buy_candidates),
             "risk_gate_open":allowed,"equity":portfolio_equity(portfolio),
+            "peak_equity":portfolio["peak_equity"],
+            "current_drawdown_pct":round(100*(portfolio_equity(portfolio)/portfolio["peak_equity"]-1),2),
             "positions":len(portfolio["positions"])}
