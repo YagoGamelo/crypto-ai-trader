@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, timezone
 
 import pandas as pd
 import pytest
+from catalog import WATCHLIST
 
 from market_monitor import (
     build_model_rows,
@@ -58,12 +59,12 @@ def test_model_research_stays_separate_from_intraday_updates():
     assert new_models == models
 
 
-def test_report_has_precise_5day_horizon_and_all_170_assets():
+def test_report_has_precise_5day_horizon_and_full_watchlist():
     models, asof, _ = build_model_rows({}, NOW, scanner=research_rows)
     report = build_report({}, models, asof, fake_quotes(), NOW)
-    assert report["universe_count"] == 170
+    assert report["universe_count"] == len(WATCHLIST)
     assert report["model_coverage"] == 2
-    assert len(report["assets"]) == 170
+    assert len(report["assets"]) == len(WATCHLIST)
     assert report["recent_30m_quotes"] == 1
     assert report["top_up"][0]["symbol"] == "AAPL"
     assert report["top_down"][0]["symbol"] == "MSFT"
