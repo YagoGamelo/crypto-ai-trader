@@ -1,5 +1,116 @@
 # NEXUS / Crypto AI Trader — pesquisa e simulação
 
+## Versão 3 — qualidade do sinal + disciplina de risco
+
+Esta versão foi implementada para **reduzir entradas sem evidência**, melhorar
+a compreensão das perdas e evitar simulações excessivamente otimistas.
+**Não é possível programar lucros máximos garantidos.**
+
+### 1. Modelo único para radar e gráficos
+
+`research_v2.py` passou a ser o motor comum do `Top 5` e de
+`Explorar ativo` (`asset_analysis.py`):
+
+- Usa indicadores com dados **anteriores à previsão**: retornos, média
+  móvel de 20 e 50 sessões e volatilidade de 20 sessões.
+- Para testar a previsão de subida em **cinco velas diárias**, divide o
+  histórico em 55% treino / 20% calibração / 25% teste, com intervalo de
+  separação (*embargo*) de cinco sessões entre conjuntos. Isto evita
+  sobreposição direta de rótulos.
+- Ajusta as probabilidades no período de calibração e mede a qualidade
+  exclusivamente num teste posterior, através de Brier, baseline, erro
+  de calibração (ECE), amostras e acerto das previsões ≥70%.
+- Reajusta treino/calibração cronologicamente para a estimativa mais
+  recente, **sem usar o futuro**.
+- Descarta por prudência a vela diária de hoje, que pode ainda estar
+  em formação; alguns mercados podem apresentar um dia adicional de
+  atraso.
+
+A decisão de **comprar virtualmente** requer tudo o seguinte:
+
+1. estimativa de subida ≥70%;
+2. Brier inferior à referência por pelo menos 0,005;
+3. erro de calibração no teste ≤12 pontos percentuais;
+4. pelo menos oito previsões históricas com ≥70% de subida no teste;
+5. pelo menos 60% de acerto nesse pequeno grupo histórico.
+
+Estas exigências **não garantem** acerto futuro de 70%, significância
+estatística ou lucro líquido. São travões de segurança preliminares,
+não uma certificação da IA. Se ninguém cumprir, a IA **não compra**.
+O Top 5 pode mostrar ativos interessantes que **não foram aprovados
+para operações virtuais**.
+
+### 2. Carteira virtual de ações
+
+O `auto_paper.py` continua em simulação isolada por sessão e
+mantém os limiares escolhidos:
+
+- **Compra:** sinal calibrado ≥70% com critérios de qualidade aprovados.
+- **Venda:** 70% ou mais de descida estimada, ou subida ≤50%,
+  apenas de ações efetivamente detidas. Não abre *shorts*.
+- **Saída de segurança:** stop por volatilidade = duas vezes o ATR de
+  14 dias, limitado a 3–8% (5% na ausência de ATR). Stop móvel armado
+  depois de +4% ou 1,5 ATR; permite um recuo de 3% ou um ATR do máximo
+  observado. Estes são controlos avaliados no **fecho diário**, não
+  ordens stop executadas pela corretora.
+- **Quantidade por entrada:** até 20% do capital investível e orçamento
+  equivalente a aproximadamente 1% de risco inicial da carteira se
+  o stop hipotético for respeitado (a volatilidade e gaps podem causar
+  perdas maiores).
+- **Proteção da carteira:** até 3 ações abertas; uma entrada nova por
+  ciclo; bloqueio de novas compras depois de uma queda diária de 5%
+  ou total de 15% desde o máximo observado na sessão; 30% dos lucros
+  líquidos realizados vão para reserva virtual.
+- O histórico e os limites não sobrevivem ao fecho/reinício da sessão
+  Streamlit. **Não é adequado para trading real 24 horas por dia.**
+
+### 3. Backtest *walk-forward* por ativo
+
+No separador **📈 Explorar ativo**, seleciona uma empresa e carrega em
+**Executar backtest do ativo selecionado**. O ficheiro `walkforward.py`
+reproduz o percurso histórico sem usar dados futuros em cada decisão:
+
+- Refaz a previsão periodicamente utilizando apenas cotações até à
+  **sessão anterior** à operação simulada.
+- Compra e vende virtualmente na **abertura seguinte**, acrescentando
+  0,2% de comissão simulada por lado e 0,1% de derrapagem por lado.
+- Mede retorno, máxima queda observada (*drawdown*), transações
+  fechadas, taxas totais, exposição e retorno de uma estratégia
+  comparável de comprar e manter.
+- Simulação **de um único ativo**, não uma simulação integral da
+  escolha diária dos melhores entre os 170. Não inclui dividendos,
+  impostos, câmbio, falta de liquidez, execução parcial nem todas as
+  fricções da bolsa. Pode produzir **zero operações**. O retorno
+  anualizado, quando mostrado, é apenas uma transformação matemática
+  da amostra, **não uma previsão de lucro anual**.
+
+### 4. Execução e ligação a corretoras
+
+`trading212_demo.py` continua **exclusivamente DEMO**, sem host
+de trading real. O monitor GitHub Actions atualiza o relatório público
+de forma agendada, não opera posições. O Render Free e o Codespaces
+podem suspender e não garantem tarefas automáticas 24/7.
+
+A fonte Yahoo Finance/`yfinance` limita a utilização de dados a
+contextos pessoais/de investigação, dependendo das condições
+específicas. Para uso público/comercial ou ordens reais, é
+indispensável licenciamento de dados, um servidor persistente,
+autenticação forte, reconciliação de ordens, auditoria, recuperação
+de falhas e validação estatística independente.
+
+### Testar
+
+```bash
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m streamlit run app.py --server.address 0.0.0.0
+```
+
+O workflow `.github/workflows/tests.yml` testa sintaxe e cenários
+sem contacto com corretoras. Não confundir testes unitários aprovados
+com uma estratégia financeiramente rentável.
+
+
 Projeto educativo para iPad, GitHub Codespaces, Render e Streamlit. **Não negocia dinheiro real**, não recebe chaves de corretoras nem autoriza levantamentos.
 
 ## Site
