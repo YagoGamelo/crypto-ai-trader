@@ -1,40 +1,47 @@
-# Crypto AI Trader — PAPER ONLY
+# NEXUS / Crypto AI Trader — pesquisa e simulação
 
-Protótipo educativo de trading automático **simulado**, desenvolvido para abrir no iPad através de GitHub Codespaces e Streamlit. Não usa chaves de exchange nem envia ordens reais.
+Projeto educativo para iPad, GitHub Codespaces, Render e Streamlit. **Não negocia dinheiro real**, não recebe chaves de corretoras nem autoriza levantamentos.
 
-## Iniciar no iPad
+## Site
 
-1. No GitHub, abre este repositório → **Code** → **Codespaces** → **Create codespace**.
-2. No terminal do Codespaces:
-   ```bash
-   pip install -r requirements.txt
-   streamlit run app.py --server.address 0.0.0.0
-   ```
-3. No separador **Ports**, abre a porta 8501; mantém-na privada.
-4. Escolhe BTC/USD ou ETH/USD, ativa operações virtuais e carrega no botão de análise.
+Separadores:
+1. **Top 5:** analisa até 170 ativos (50 cripto, 100 ações, 20 ETFs) com dados públicos; ordena as estimativas de subida para cinco dias apenas entre modelos cujo Brier de teste supera uma previsão de referência. Não corrige seleção múltipla nem calibra probabilidades: **não usar para colocar ordens reais**.
+2. **Explorar ativo:** gráfico de velas, médias móveis e estudo estatístico a 1, 5 e 20 dias.
+3. **Trading virtual:** um ciclo por clique, BTC/USD ou ETH/USD, carteira local **privada por sessão do navegador** e por símbolo; saldo inicial nominal de 50 USD. Reserva 30% do lucro líquido realizado sem reinvestir; não reserva quando há perdas. Compras virtuais bloqueadas quando o teste Brier não supera a referência.
+4. **Metodologia:** limitações e origem dos dados.
+5. **Corretoras & APIs:** comparação orientada a residentes em Portugal com taxas de negociação, câmbio, levantamentos EUR e USD, requisitos de API, regulamentação, sites oficiais e exemplo de custos em ações USD. Pesquisa verificada em 13-10-2026 no ficheiro `brokers.py`.
 
-## Funcionamento
-
-- Obtém velas públicas de 1h da Kraken, sem vela em formação.
-- Treina regressão logística com indicadores de preços e volume.
-- Mede Brier score e sinais >=70% em 30% finais dos dados, separados cronologicamente.
-- Simula compra quando probabilidade >=70%, até 20% da carteira por entrada, com stop 3%, objetivo 6% e taxa simulada 0,2% por ordem.
-- Regista trades em SQLite local. BTC e ETH usam carteiras virtuais separadas, de **50 unidades nominais** cada.
-- Executa apenas **um ciclo por clique**; Codespaces não é um robô 24/7.
-
-## Avisos e limitações
-
-- O saldo nominal é calculado com preços em USD, **não convertido para EUR**. Não interpretar como 50 € reais.
-- Probabilidades **não estão calibradas**: uma previsão de 70% não garante 70% de sucesso.
-- Não há validação walk-forward completa, comparação com buy-and-hold, spreads reais, slippage, impostos ou conversão cambial.
-- Stop-loss só é verificado quando o utilizador carrega no botão; não é proteção contínua.
-- A base SQLite local pode perder-se se o Codespace for apagado.
-- **Sem depósitos, sem API keys, sem ordens reais e sem alavancagem.**
-
-## Testes
+## Arranque
 
 ```bash
-pytest -q
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m streamlit run app.py --server.address 0.0.0.0
 ```
 
-Próximas fases: calibrar probabilidades, walk-forward, simulação realista e serviço persistente para paper trading agendado. Só depois considerar integração real, com aprovação explícita e controlos de segurança.
+Abre a porta 8501 no Codespaces, mantendo-a **privada**. Em Render, o comando de arranque é:
+
+```bash
+python -m streamlit run app.py --server.address 0.0.0.0 --server.port $PORT
+```
+
+Os testes de sintaxe e unitários também têm uma verificação GitHub Actions em `.github/workflows/tests.yml`.
+
+## Funcionamento e limitações técnicas
+
+- Dados de mercado: `yfinance` para radar e análise; dados públicos OHLCV da Kraken via `ccxt` no trading virtual. Verifica a licença/termos da fonte antes de oferecer um serviço público.
+- Modelos: regressão logística, features de histórico, validação cronológica em 30% final com separação/embargo no treino.
+- **Probabilidades não calibradas.** Probabilidade de subir não equivale a probabilidade de um trade com lucro após comissões; ranking Top 5 entre muitos ativos introduz viés de seleção.
+- O programa não recolhe automaticamente notícias, recomendações profissionais nem vídeos. Não inventa essas fontes.
+- A carteira virtual é mantida apenas em memória do Streamlit por sessão e perde-se quando a sessão terminar. Não é partilhada entre visitantes e não serve como histórico duradouro.
+- Os controlos de stop-loss só são avaliados no clique, **não de forma permanente**. Os preços, o slippage, impostos e spreads reais diferem da simulação.
+- `brokers.py` não usa APIs privadas, não contém credenciais e não estabelece ligações a corretoras. Taxas e disponibilidade podem mudar. Abrir conta está sujeito a elegibilidade e supervisão específicas.
+- As opções binárias com pagamento fixo têm limitações/restrições regulamentares para retalho na UE; não há integração binária.
+- Alojamento gratuito no Render pode suspender; **nenhum robô automático 24/7 está implementado**.
+- Nunca adicionar segredos ao GitHub nem publicar o painel de um dia para o outro com permissões de negociação reais sem autenticação e controlos específicos.
+
+## Antes de considerar trading real
+
+Calibração e backtesting walk-forward sem look-ahead, custos reais por mercado, fonte de dados licenciada e fiável, persistência isolada, autenticação de utilizadores, reconciliação de ordens, limites de risco, botão de emergência, sandbox e aprovação humana. Se forem concedidas permissões API, **desativar levantamentos** e manter a chave apenas em armazenamento secreto do servidor. Os serviços de corretagem devem ser disponibilizados pelo próprio intermediário autorizado.
+
+Consulta a aba Corretoras & APIs para enlaces aos documentos oficiais. Não é aconselhamento de investimento ou parecer jurídico.
