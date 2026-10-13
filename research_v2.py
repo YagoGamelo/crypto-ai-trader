@@ -100,8 +100,18 @@ def research_direction(close, horizon=HORIZON, *, round_trip_cost=.006):
     bull_count = int(bullish.sum())
     bear_count = int(bearish.sum())
     bull_win = float(y[bullish].mean()) if bull_count else None
-    bull_lower_bound = (wilson_lower_bound(int(y[bullish].sum()), bull_count)
-                        if bull_count else None)
+    # A five-bar forward outcome overlaps with the next four observations.
+    # Do not treat overlapping high-confidence labels as independent trials.
+    nonoverlap = []
+    previous_index = -horizon
+    for index in np.flatnonzero(bullish):
+        if index - previous_index >= horizon:
+            nonoverlap.append(int(index))
+            previous_index = int(index)
+    independent_count = len(nonoverlap)
+    independent_wins = int(y[nonoverlap].sum()) if nonoverlap else 0
+    bull_lower_bound = (wilson_lower_bound(independent_wins, independent_count)
+                        if independent_count else None)
     # Average forward price changes per class on the held-out window.
     avg_up_return = float(test.forward_return.to_numpy()[y == 1].mean())
     avg_down_return = float(test.forward_return.to_numpy()[y == 0].mean())
@@ -113,7 +123,8 @@ def research_direction(close, horizon=HORIZON, *, round_trip_cost=.006):
     # have *some* evidence on held-out data. Not proof of future accuracy.
     model_quality = bool(
         brier + .005 < baseline and ece <= .12 and
-        bull_count >= 12 and bull_win is not None and bull_win >= .60 and
+        bull_count >= 12 and independent_count >= 8 and
+        bull_win is not None and bull_win >= .60 and
         bull_lower_bound is not None and bull_lower_bound > .50 and
         avg_net is not None and avg_net > 0
     )
@@ -148,6 +159,7 @@ def research_direction(close, horizon=HORIZON, *, round_trip_cost=.006):
         "bullish_signals": bull_count,
         "bullish_hit_rate": round(bull_win, 4) if bull_win is not None else None,
         "bullish_wilson_lower": round(bull_lower_bound, 4) if bull_lower_bound is not None else None,
+        "independent_bullish_signals": independent_count,
         "average_positive_return_pct": round(avg_up_return * 100, 3),
         "average_negative_return_pct": round(avg_down_return * 100, 3),
         "expected_net_pct": round(advantage["expected_net_fraction"] * 100, 3),
