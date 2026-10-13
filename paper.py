@@ -56,7 +56,7 @@ def step(db, price, probability, threshold=0.70, enabled=True):
             reason = "stop loss virtual"
         elif price >= s["entry"] * (1 + TAKE_PROFIT):
             reason = "take profit virtual"
-        elif probability < 0.45:
+        elif probability <= 0.50:
             reason = "sinal fraco"
         if reason:
             action = "SELL"
