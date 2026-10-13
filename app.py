@@ -327,14 +327,15 @@ with tab6:
 with tab_auto:
     from datetime import datetime, timezone
     import time
-    from auto_paper import create_portfolio, evaluate_cycle, portfolio_equity
+    from auto_paper import create_portfolio, evaluate_cycle, portfolio_equity, decision_table
     st.subheader("Piloto automático · Ações")
     st.caption("O modelo escolhe empresas para comprar e vender em carteira virtual. Nenhuma ordem é enviada à Trading 212 ou a qualquer corretora.")
-    left,mid,right=st.columns(3)
-    left.metric("COMPRAR", "≥ 70%", help="Estimativa de subida para 5 dias; não calibrada.")
-    mid.metric("VENDER", "≤ 50%", help="Vende a posição quando a previsão de subida cai para 50% ou menos.")
-    right.metric("STOP de segurança", "−5%", help="Avaliado apenas quando existem novos preços diários; não é stop real intradiário.")
-    st.info("O motor analisa ações através dos preços de fecho diários. Sem 70% e modelo melhor que a referência, não abre compras. Reservará 30% dos lucros líquidos realizados.")
+    m1,m2,m3,m4=st.columns(4)
+    m1.metric("COMPRAR", "Subida ≥70%", help="Estimativa de subida para 5 dias; não calibrada.")
+    m2.metric("VENDER", "Descida ≥70%", help="Só vende posições existentes; não abre short.")
+    m3.metric("FECHAR", "Subida ≤50%", help="Fecha a posição mesmo que a descida ainda não tenha atingido 70%.")
+    m4.metric("Proteção lucro", "−3% do pico", help="Stop móvel virtual quando houve valorização observada de 4%; também existe stop de perda de 5%.")
+    st.info("O motor usa a mesma previsão da tabela das empresas. Compra a partir de 70% de subida apenas se o modelo superar a referência; vende se a descida atingir 70%, se a subida cair até 50% ou se disparar uma proteção de risco. Reserva 30% dos lucros líquidos realizados.")
     if "autobot_wallet" not in st.session_state:
         st.session_state["autobot_wallet"] = create_portfolio()
     st.warning("Somente simulação: preços históricos de fecho, sem execução real. As percentagens NÃO são probabilidades calibradas de lucro. O modo automático funciona apenas enquanto a sessão do site estiver conectada.")
@@ -356,15 +357,21 @@ with tab_auto:
                     if dataset.empty:
                         st.warning("Não há preços e previsões suficientes; nenhuma operação foi executada.")
                     else:
-                        cycle=evaluate_cycle(portfolio,dataset.to_dict("records"),
-                                             now=datetime.now(timezone.utc))
+                        latest_rows=dataset.to_dict("records")
+                        st.session_state["autobot_latest_rows"]=latest_rows
+                        if enabled:
+                            cycle=evaluate_cycle(portfolio,latest_rows,now=datetime.now(timezone.utc))
+                        else:
+                            cycle={"actions":[],"signal_table":decision_table(portfolio,latest_rows)}
                         st.session_state["autobot_last_cycle"]=cycle
                         st.session_state["autobot_coverage"]=len(dataset)
                         st.session_state["autobot_last_analysis"]=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
                         if cycle["actions"]:
-                            st.success(f"{len(cycle['actions'])} decisão(ões) virtuais registadas neste ciclo.")
+                            st.success(f"{len(cycle['actions'])} operação(ões) virtuais registadas neste ciclo.")
+                        elif enabled:
+                            st.info("Análise concluída: nenhum novo trade satisfaz as regras ou o sinal do dia já foi processado.")
                         else:
-                            st.info("Análise concluída: aguardar. Nenhuma nova operação satisfaz as regras.")
+                            st.info("Análise efetuada sem operações. Ativa o interruptor para permitir execução virtual automática.")
             except Exception as exc:
                 st.error(f"Falha na análise automática; sem novas operações: {exc}")
         metrics=st.columns(4)
@@ -376,6 +383,15 @@ with tab_auto:
             st.caption(f"Última análise: {st.session_state['autobot_last_analysis']} · Ações com dados: {st.session_state.get('autobot_coverage',0)}.")
         else:
             st.caption("Ainda não houve análise nesta sessão.")
+        if "autobot_latest_rows" in st.session_state:
+            st.markdown("#### Tabela de previsões e decisões da IA")
+            table_rows=decision_table(portfolio,st.session_state["autobot_latest_rows"])
+            if table_rows:
+                table=pd.DataFrame(table_rows)
+                st.dataframe(table,use_container_width=True,hide_index=True)
+                st.caption("70% SUBIDA = candidato a compra; 70% DESCIDA = vender se detido; 50% ou menos SUBIDA = fechar se detido. Sinais são previsões não calibradas.")
+            else:
+                st.caption("Nenhum sinal recente de ações.")
         if portfolio["positions"]:
             st.markdown("#### Empresas em carteira")
             positions=[]
@@ -399,5 +415,5 @@ with tab_auto:
                 for key in ("autobot_last_cycle","autobot_coverage","autobot_last_analysis","autobot_checked_epoch"):
                     st.session_state.pop(key,None)
                 st.rerun()
-        st.caption("Máx. 20% do saldo investível por compra, 3 posições abertas, 1 compra nova por ciclo, stop estimado de 5% e pausa de novas compras após uma queda diária de 5%. Dados diários: atualizar de hora a hora não cria novas velas nem trades repetidos.")
+        st.caption("Máx. 20% do saldo investível por compra, 3 posições, 1 nova compra por ciclo, stop virtual de 5%, trailing stop de 3% após +4% observado e bloqueio de novas compras após queda diária de 5%. Cada ativo só é negociado uma vez por vela diária. Enquanto esta página estiver aberta, o site reavalia aproximadamente de hora a hora; Render/Codespaces podem suspender e interromper a execução.")
     automatic_paper_dashboard()
