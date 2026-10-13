@@ -30,6 +30,13 @@ def evaluate(close, horizon=5):
         "Acerto dos sinais >=70 %": (
             round(result["bullish_hit_rate"] * 100, 1) if result["bullish_hit_rate"] is not None else None),
         "Rentab. líquida média sinais >=70 %": (round(result["bullish_avg_net_pct"],2) if result["bullish_avg_net_pct"] is not None else None),
+        "Vantagem líquida estimada %": result["expected_net_pct"],
+        "Vantagem líquida conservadora %": result["conservative_net_pct"],
+        "Margem de incerteza %": result["probability_haircut_pct"],
+        "Limite inferior de acerto (sinais ≥70%) %": (
+            round(result["bullish_wilson_lower"]*100,1)
+            if result["bullish_wilson_lower"] is not None else None),
+        "Acima da média de 50 velas": result["above_ma50"],
         "Aprovado para virtual": result["approved_for_paper"],
     }
 
