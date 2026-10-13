@@ -91,19 +91,27 @@ with tab2:
         except Exception as exc: st.error(f"Não foi possível analisar: {exc}")
     st.divider()
     st.subheader("Backtest walk-forward · testar antes de investir")
-    st.caption("Previsões com dados anteriores a cada operação, execução virtual na abertura seguinte, taxas de 0,2% e derrapagem simulada de 0,1% por lado. Não é uma previsão de rendimento anual.")
+    st.caption("Previsões com dados anteriores a cada operação e execução virtual na abertura seguinte. Compara cenários de custos antes de considerar qualquer investimento.")
+    cost_scenarios = {
+        "Custos base · taxa 0,2% + derrapagem 0,1% por lado":(.002,.001),
+        "Custos superiores · taxa 0,4% + derrapagem 0,3% por lado":(.004,.003),
+        "Custos extremos · taxa 0,8% + derrapagem 0,5% por lado":(.008,.005),
+    }
+    cost_profile = st.selectbox("Custos hipotéticos do backtest",list(cost_scenarios),key="wf_fee_profile")
+    fee_rate,slippage_rate=cost_scenarios[cost_profile]
     if st.button("Executar backtest do ativo selecionado",key="run_wf_backtest"):
         try:
             from asset_analysis import history
             from walkforward import backtest_one_asset
             with st.spinner("A simular uma estratégia passada sem conhecer antecipadamente os preços futuros..."):
                 research_data=history(sym,"5y")
-                result=backtest_one_asset(research_data,retrain_every=10)
-                st.session_state["wf_backtest"]=dict(result, symbol=sym)
+                result=backtest_one_asset(research_data,retrain_every=10,
+                                         fee_rate=fee_rate,slippage_rate=slippage_rate)
+                st.session_state["wf_backtest"]=dict(result,symbol=sym,cost_profile=cost_profile)
         except Exception as exc:
             st.error(f"Backtest não disponível: {exc}")
     previous=st.session_state.get("wf_backtest")
-    if previous and previous.get("symbol")==sym:
+    if previous and previous.get("symbol")==sym and previous.get("cost_profile")==cost_profile:
         v1,v2,v3,v4=st.columns(4)
         v1.metric("Retorno virtual no período",f"{previous['return_pct']:+.2f}%")
         v2.metric("Queda máxima observada",f"{previous['max_drawdown_pct']:.2f}%")
@@ -119,7 +127,7 @@ with tab2:
         st.caption(f"Período de {previous['bars_tested']} velas; comissões virtuais: {previous['total_fees_usd']:.2f} USD; exposição em {previous['invested_days_pct']:.1f}% dos dias; lucro reservado: {previous['reserved_usd']:.2f} USD.")
         if previous["annualized_pct"] is not None:
             st.caption(f"Retorno anualizado hipotético da amostra: {previous['annualized_pct']:+.2f}%. É matemática sobre dados passados, não expectativa de ganho futuro.")
-        st.warning("Um backtest isolado não prova capacidade futura; pode ter poucas ou zero operações. O resultado exclui impostos, dividendos e conversão de moeda. Não foram feitas ordens reais.")
+        st.warning("Um backtest isolado não prova capacidade futura; pode ter poucas ou zero operações. O benchmark assume 100% do capital investido, enquanto o robô limita a exposição, pelo que os riscos são diferentes. Exclui impostos, dividendos, conversão de moeda e falhas de execução. Não houve ordens reais.")
 with tab3:
     st.subheader("Carteira de demonstração")
     st.caption("Cada visitante tem uma carteira virtual própria, temporária e separada por ativo. Sem negociação contínua.")
