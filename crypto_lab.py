@@ -95,6 +95,15 @@ def study_crypto(base, *, timeframe="30m", now=None, exchange=None):
     spread_ceiling=MAX_SPREAD_MEME if is_meme else MAX_SPREAD_MAJOR
     liquidity_ok=(spread is not None and spread<=spread_ceiling
                   and quote_volume>=turnover_floor)
+    # Virtual execution must not assume that a 50 USD wallet can trade
+    # below the exchange's advertised minimum order size/notional.
+    limits=market.get("limits") or {}
+    minimum_cost=_valid_number((limits.get("cost") or {}).get("min"))
+    minimum_amount=_valid_number((limits.get("amount") or {}).get("min"))
+    budget_ceiling=5.0 if is_meme else 10.0
+    nominal_price=float(x["close"].iloc[-1])
+    min_order_ok=((minimum_cost is None or minimum_cost<=budget_ceiling)
+                  and (minimum_amount is None or minimum_amount*nominal_price<=budget_ceiling))
     close=pd.Series(x["close"].to_numpy(dtype=float),index=x["timestamp"])
     model=research_direction(close,horizon=HORIZON_BARS,
                              round_trip_cost=expected_cost_fraction(is_meme))
@@ -105,12 +114,13 @@ def study_crypto(base, *, timeframe="30m", now=None, exchange=None):
     max_single_move=float(recent_return.abs().max())
     violent_market=max_single_move > (.12 if is_meme else .06)
     eligible=(bool(model["approved_for_paper"]) and fresh and
-              liquidity_ok and not violent_market)
+              liquidity_ok and min_order_ok and not violent_market)
     reasons=[]
     if not fresh: reasons.append("Preço desatualizado")
     if quote_volume<turnover_floor: reasons.append("Volume negociado baixo")
     if spread is None: reasons.append("Spread indisponível")
     elif spread>spread_ceiling: reasons.append("Spread elevado")
+    if not min_order_ok: reasons.append("Mínimo de ordem superior ao orçamento virtual")
     if violent_market: reasons.append("Variação recente extrema")
     if not model["approved_for_paper"]: reasons.append("Modelo não superou filtros históricos")
     return {
@@ -120,6 +130,7 @@ def study_crypto(base, *, timeframe="30m", now=None, exchange=None):
         "data_age_minutes":round(age_minutes,1),
         "latest_candles":x[["timestamp","open","high","low","close","volume"]].tail(120).copy(),
         "quote_volume_24h_usd":round(quote_volume,2),
+        "minimum_order_ok":min_order_ok,
         "spread_pct":round(100*spread,3) if spread is not None else None,
         "max_one_candle_move_pct":round(100*max_single_move,2),
         "fee_per_side_pct":FEE_PER_SIDE*100,
