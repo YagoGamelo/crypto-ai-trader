@@ -1,74 +1,111 @@
-"""Screen all configured assets; estimates are experimental, not calibrated.
-Historical predictions use chronological holdout with an embargo.
-No broker access, real trades, opinions, or video sentiment are implied.
+"""Daily cross-asset research. Educational data, never broker instructions.
+
+Only completed UTC dates are analyzed to avoid in-progress candles. Each
+symbol has purged train / calibration / holdout periods; predictions are not
+guaranteed, and model selection across a large watchlist has selection bias.
 """
-import numpy as np
+from __future__ import annotations
+
+from datetime import datetime, timezone
+import math
 import pandas as pd
-import yfinance as yf
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import brier_score_loss
 from catalog import WATCHLIST
+from research_v2 import research_direction
+
 
 def evaluate(close, horizon=5):
-    c = close.astype(float).dropna()
-    ret = c.pct_change()
-    x = pd.DataFrame({"r1":ret,"r5":c.pct_change(5),"r20":c.pct_change(20),
-                      "vol":ret.rolling(20).std(),"ma20":c/c.rolling(20).mean()-1,
-                      "ma50":c/c.rolling(50).mean()-1})
-    future = c.shift(-horizon)/c-1
-    labeled = x.iloc[:-horizon].copy()
-    labeled["target"] = (future.iloc[:-horizon] > 0).astype(int)
-    labeled = labeled.replace([np.inf,-np.inf],np.nan).dropna()
-    if len(labeled)<160: return None
-    split=int(len(labeled)*.7)
-    train=labeled.iloc[:split-horizon]; test=labeled.iloc[split:]
-    if train.target.nunique()<2 or test.target.nunique()<2: return None
-    features=["r1","r5","r20","vol","ma20","ma50"]
-    clf=make_pipeline(StandardScaler(),LogisticRegression(max_iter=500))
-    clf.fit(train[features],train.target)
-    pred=clf.predict_proba(test[features])[:,1]
-    brier=float(brier_score_loss(test.target,pred))
-    baseline=float(brier_score_loss(test.target,np.full(len(test),train.target.mean())))
-    accuracy=float(((pred>=.5)==test.target.to_numpy()).mean())
-    recent=x.iloc[[-1]][features].replace([np.inf,-np.inf],np.nan)
-    if recent.isna().any().any(): return None
-    clf.fit(labeled[features],labeled.target)
-    up=float(clf.predict_proba(recent)[0,1])
-    return {"Prob. subir (estimada)":round(up*100,1),
-            "Prob. descer (estimada)":round((1-up)*100,1),
-            "Acerto teste %":round(accuracy*100,1),
-            "Brier":round(brier,4),"Brier referência":round(baseline,4),
-            "Validação":"Supera referência" if brier<baseline else "Não supera referência",
-            "Amostras teste":len(test)}
+    result = research_direction(close, horizon=horizon)
+    if result is None:
+        return None
+    return {
+        "Prob. subir (estimada)": result["up_pct"],
+        "Prob. descer (estimada)": result["down_pct"],
+        "Acerto teste %": round(result["holdout_accuracy"] * 100, 1),
+        "Brier": result["brier"],
+        "Brier referência": result["baseline_brier"],
+        "Validação": "Supera referência" if result["better_than_baseline"] else "Não supera referência",
+        "Amostras teste": result["holdout_count"],
+        "Erro calibração %": round(result["ece"] * 100, 1),
+        "Sinais subida >=70 teste": result["bullish_signals"],
+        "Acerto dos sinais >=70 %": (
+            round(result["bullish_hit_rate"] * 100, 1) if result["bullish_hit_rate"] is not None else None),
+        "Aprovado para virtual": result["approved_for_paper"],
+    }
 
-def scan_all(progress=None, categories=None):
+
+def _latest_complete(raw, today):
+    """Exclude today's UTC session, even if some foreign exchanges already closed.
+
+    Conservative exclusion is deliberate: it never uses a partly formed daily
+    bar for a forecast; the cost can be a one-day delay for some markets.
+    """
+    if raw is None or raw.empty:
+        return raw
+    try:
+        dates = pd.DatetimeIndex(raw.index).date
+        return raw.loc[dates < today].sort_index()
+    except (TypeError, ValueError):
+        return raw.iloc[:0]
+
+
+def _atr_percent(raw):
+    if not set(("Close", "High", "Low")).issubset(raw.columns) or len(raw)<30:
+        return None
+    c, h, l = raw["Close"], raw["High"], raw["Low"]
+    tr = pd.concat([(h-l).abs(), (h-c.shift(1)).abs(), (l-c.shift(1)).abs()],axis=1).max(axis=1)
+    atr = float(tr.rolling(14).mean().iloc[-1])
+    price = float(c.iloc[-1])
+    val = 100 * atr / price if price>0 else float("nan")
+    return round(val, 2) if math.isfinite(val) else None
+
+
+def scan_all(progress=None, categories=None, *, downloader=None, now=None):
+    if downloader is None:
+        import yfinance as yf
+        downloader = yf.download
+    now = now or datetime.now(timezone.utc)
+    today = now.astimezone(timezone.utc).date()
+    assets = WATCHLIST if categories is None else [a for a in WATCHLIST if a["category"] in categories]
+    count=len(assets)
     rows=[]
-    assets = WATCHLIST if categories is None else [a for a in WATCHLIST if a['category'] in categories]
-    total=len(assets)
-    for start in range(0,total,12):
-        group=assets[start:start+12]; names=[a["symbol"] for a in group]
+    for start in range(0,count,12):
+        batch=assets[start:start+12]
+        symbols=[x["symbol"] for x in batch]
         try:
-            data=yf.download(names,period="2y",interval="1d",group_by="ticker",
-                             auto_adjust=True,progress=False,threads=True,timeout=15)
+            data=downloader(symbols,period="2y",interval="1d",group_by="ticker",
+                            auto_adjust=True,progress=False,threads=True,timeout=20)
         except Exception:
             data=pd.DataFrame()
-        for asset in group:
-            name=asset["symbol"]
+        for asset in batch:
+            symbol=asset["symbol"]
             try:
-                if data.empty: continue
-                sub=data[name] if isinstance(data.columns,pd.MultiIndex) else data
-                close=sub["Close"].dropna()
-                if len(close)<180: continue
+                if data is None or data.empty:
+                    continue
+                part = data[symbol] if isinstance(data.columns,pd.MultiIndex) else data
+                part = _latest_complete(part,today)
+                if part is None or len(part)<310:
+                    continue
+                close=part["Close"].dropna()
+                if len(close)<300:
+                    continue
                 result=evaluate(close)
-                if result is None: continue
-                r1=float(close.iloc[-1]/close.iloc[-2]-1)*100
-                rows.append({"Ativo":name,"Mercado":asset["category"],
-                             "Último fecho":round(float(close.iloc[-1]),4),
-                             "Variação diária %":round(r1,2),
-                             "Data":str(close.index[-1].date()),**result})
-            except Exception:
+                if result is None:
+                    continue
+                price=float(close.iloc[-1])
+                if not math.isfinite(price) or price<=0:
+                    continue
+                previous=float(close.iloc[-2])
+                variation=100*(price/previous-1) if previous>0 else None
+                rows.append({
+                    "Ativo":symbol,"Mercado":asset["category"],
+                    "Último fecho":round(price,4),
+                    "Variação diária %":round(variation,2) if variation is not None else None,
+                    "ATR 14 %":_atr_percent(part),
+                    "Data":str(pd.Timestamp(close.index[-1]).date()),
+                    **result,
+                })
+            except (KeyError,ValueError,TypeError,IndexError,OverflowError):
                 continue
-        if progress is not None: progress(min(start+len(group),total),total)
+        if progress is not None:
+            progress(min(start+len(batch),count),count)
     return pd.DataFrame(rows)
