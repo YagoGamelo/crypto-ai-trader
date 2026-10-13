@@ -11,6 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import brier_score_loss
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
+from edge_filter import evaluate_edge, wilson_lower_bound
 
 HORIZON = 5
 FEATURES = ("ret1", "ret5", "ret20", "vol20", "above20", "above50")
@@ -99,15 +100,23 @@ def research_direction(close, horizon=HORIZON, *, round_trip_cost=.006):
     bull_count = int(bullish.sum())
     bear_count = int(bearish.sum())
     bull_win = float(y[bullish].mean()) if bull_count else None
+    bull_lower_bound = (wilson_lower_bound(int(y[bullish].sum()), bull_count)
+                        if bull_count else None)
+    # Average forward price changes per class on the held-out window.
+    avg_up_return = float(test.forward_return.to_numpy()[y == 1].mean())
+    avg_down_return = float(test.forward_return.to_numpy()[y == 0].mean())
     # Deduct assumed total commissions + slippage for BOTH sides.
     # This is a cost assumption, not a quote of a real broker.
     avg_net = float((test.forward_return.to_numpy()[bullish] - round_trip_cost).mean()) if bull_count else None
     bear_win = float((1 - y[bearish]).mean()) if bear_count else None
     # Conservative entry gate: accuracy of predictions above 70% must also
     # have *some* evidence on held-out data. Not proof of future accuracy.
-    gate = bool(brier + .005 < baseline and ece <= .12 and
-                 bull_count >= 8 and bull_win is not None and bull_win >= .60 and
-                avg_net is not None and avg_net > 0)
+    model_quality = bool(
+        brier + .005 < baseline and ece <= .12 and
+        bull_count >= 12 and bull_win is not None and bull_win >= .60 and
+        bull_lower_bound is not None and bull_lower_bound > .50 and
+        avg_net is not None and avg_net > 0
+    )
 
     # Final inference refit: label overlap purged between fit/calibration.
     refit_end = int(n * .70)
@@ -123,6 +132,11 @@ def research_direction(close, horizon=HORIZON, *, round_trip_cost=.006):
     if current.isna().any(axis=None):
         return None
     up = float(_calibrated(final, final_cal, current)[0])
+    advantage = evaluate_edge(up, avg_up_return, avg_down_return,
+                              round_trip_cost, ece)
+    # Trend confirmation is descriptive, NOT a proven source of alpha.
+    current_trend_above_ma50 = bool(float(current["above50"].iloc[0]) > 0)
+    gate = bool(model_quality and advantage["after_cost_positive"])
     return {
         "up_pct": round(up * 100, 2),
         "down_pct": round((1 - up) * 100, 2),
@@ -133,10 +147,18 @@ def research_direction(close, horizon=HORIZON, *, round_trip_cost=.006):
         "holdout_count": len(test),
         "bullish_signals": bull_count,
         "bullish_hit_rate": round(bull_win, 4) if bull_win is not None else None,
+        "bullish_wilson_lower": round(bull_lower_bound, 4) if bull_lower_bound is not None else None,
+        "average_positive_return_pct": round(avg_up_return * 100, 3),
+        "average_negative_return_pct": round(avg_down_return * 100, 3),
+        "expected_net_pct": round(advantage["expected_net_fraction"] * 100, 3),
+        "conservative_net_pct": round(advantage["conservative_net_fraction"] * 100, 3),
+        "probability_haircut_pct": round(advantage["uncertainty_haircut"] * 100, 2),
+        "above_ma50": current_trend_above_ma50,
         "bullish_avg_net_pct": round(avg_net * 100, 3) if avg_net is not None else None,
         "bearish_signals": bear_count,
         "bearish_hit_rate": round(bear_win, 4) if bear_win is not None else None,
         "approved_for_paper": gate,
+        "passed_history_checks": model_quality,
         "better_than_baseline": bool(brier < baseline),
         "horizon": horizon,
         "assumed_round_trip_cost_pct": round(round_trip_cost*100,3),
