@@ -37,3 +37,28 @@ def test_forecaster_never_sees_price_on_its_execution_day(monkeypatch):
     assert max(observed_sizes)==354
     assert result["return_pct"]==0
     assert result["completed_trades"]==0
+
+
+def test_stress_costs_reduce_flat_market_returns(monkeypatch):
+    import walkforward
+    def deterministic_signal(past_close,horizon):
+        return {"approved_for_paper":True,"up_pct":75.0 if len(past_close)<322 else 45.0}
+    monkeypatch.setattr(walkforward,"research_direction",deterministic_signal)
+    prices=[100.0]*355
+    frame=pd.DataFrame({"Open":prices,"Close":prices})
+    base=backtest_one_asset(frame,start_bars=320,retrain_every=1,
+                            fee_rate=.002,slippage_rate=.001)
+    stressed=backtest_one_asset(frame,start_bars=320,retrain_every=1,
+                                fee_rate=.008,slippage_rate=.005)
+    assert base["completed_trades"] == stressed["completed_trades"] == 1
+    assert stressed["return_pct"] < base["return_pct"]
+    assert stressed["total_fees_usd"] > base["total_fees_usd"]
+    assert stressed["slippage_pct"] == .5
+    assert base["fee_rate_pct"] == .2
+
+
+@pytest.mark.parametrize("fee,slip",[(-.01,0),(.06,0),(0,-.1),(0,float("nan"))])
+def test_invalid_cost_assumptions_rejected(fee,slip):
+    frame=pd.DataFrame({"Open":[100.0]*355,"Close":[100.0]*355})
+    with pytest.raises(ValueError):
+        backtest_one_asset(frame,fee_rate=fee,slippage_rate=slip)
