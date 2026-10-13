@@ -10,6 +10,9 @@ from datetime import date, datetime, timezone
 
 BUY_THRESHOLD = .70
 SELL_THRESHOLD = .50
+DOWN_SELL_THRESHOLD = .70
+TRAIL_ENABLE_AFTER_GAIN = .04
+TRAIL_FROM_PEAK = .03
 STARTING_CASH_USD = 50.0
 FEE_PER_SIDE = .002
 MAX_POSITION_FRACTION = .20
@@ -61,7 +64,51 @@ def _normalize(row, today):
     buy_eligible=(brier is not None and base is not None and tested is not None
                   and tested >= 30 and brier < base)
     return {"ticker":ticker,"price":price,"up":p_up/100.0,
-            "trading_day":day.isoformat(),"buy_eligible":buy_eligible}
+            "down":1-p_up/100.0,"trading_day":day.isoformat(),
+            "buy_eligible":buy_eligible}
+
+def _exit_reason(position, price, up):
+    """Sell in spot only when already held; never short securities."""
+    if 1-up >= DOWN_SELL_THRESHOLD-1e-9:
+        return "descida estimada >=70%"
+    if up <= SELL_THRESHOLD:
+        return "subida estimada <=50%"
+    if price <= position["entry_price"]*(1-STOP_LOSS):
+        return "stop de 5% (fecho diário)"
+    peak=max(position.get("highest_observed",position["entry_price"]),price)
+    if (peak >= position["entry_price"]*(1+TRAIL_ENABLE_AFTER_GAIN)
+            and price <= peak*(1-TRAIL_FROM_PEAK)):
+        return "stop móvel de lucro (recuo >=3% do máximo observado)"
+    return None
+
+def decision_table(portfolio, rows, *, now=None):
+    """UI-only preview. Does not place virtual or real orders."""
+    now=now or datetime.now(timezone.utc)
+    today=now.astimezone(timezone.utc).date()
+    results=[]
+    for row in rows:
+        x=_normalize(row,today)
+        if x is None:
+            continue
+        pos=portfolio["positions"].get(x["ticker"])
+        reason=_exit_reason(pos,x["price"],x["up"]) if pos else None
+        if pos:
+            decision="VENDER" if reason else "MANTER"
+        elif x["up"]>=BUY_THRESHOLD and x["buy_eligible"]:
+            decision="COMPRAR (candidato)"
+        else:
+            decision="ESPERAR"
+        results.append({"Ativo":x["ticker"],
+                        "Subida estimada %":round(100*x["up"],1),
+                        "Descida estimada %":round(100*x["down"],1),
+                        "Sinal":decision,
+                        "Motivo":reason or ("subida >=70% e modelo supera referência"
+                                         if decision.startswith("COMPRAR") else
+                                         "sem posição / sinal insuficiente"),
+                        "Modelo supera referência":x["buy_eligible"],
+                        "Posição aberta":bool(pos),
+                        "Data":x["trading_day"]})
+    return sorted(results,key=lambda x:-x["Subida estimada %"])
 
 def evaluate_cycle(portfolio, rows, *, now=None):
     """Evaluate daily research data. Writes to an isolated in-memory ledger ONLY.
@@ -90,9 +137,9 @@ def evaluate_cycle(portfolio, rows, *, now=None):
             continue
         position=portfolio["positions"][ticker]
         px=x["price"]
-        stop=px <= position["entry_price"]*(1-STOP_LOSS)
-        sell=x["up"] <= SELL_THRESHOLD
-        if not (stop or sell):
+        reason=_exit_reason(position,px,x["up"])
+        position["highest_observed"]=max(position.get("highest_observed",position["entry_price"]),px)
+        if not reason:
             continue
         qty=position["quantity"]
         gross=qty*px
@@ -107,7 +154,7 @@ def evaluate_cycle(portfolio, rows, *, now=None):
                "preço":px,"quantidade":qty,"comissão":fee,
                "lucro_realizado":realized,"lucro_reservado":reserve,
                "prob_subida":x["up"],
-               "motivo":"stop de 5% (fecho diário)" if stop else "previsão de subida <=50%",
+               "motivo":reason,
                "data_mercado":x["trading_day"]}
         actions.append(event)
         portfolio["trades"].append(event)
@@ -131,7 +178,8 @@ def evaluate_cycle(portfolio, rows, *, now=None):
             portfolio["cash"]-=budget
             portfolio["positions"][x["ticker"]]={
                 "quantity":qty,"entry_price":px,
-                "total_cost":budget,"open_date":x["trading_day"]}
+                "total_cost":budget,"open_date":x["trading_day"],
+                "highest_observed":px}
             event={"data":now.isoformat(),"ação":"COMPRAR",
                    "ativo":x["ticker"],"preço":px,
                    "quantidade":qty,"comissão":fee,
@@ -145,7 +193,8 @@ def evaluate_cycle(portfolio, rows, *, now=None):
         portfolio["last_evaluated"][x["ticker"]]=x["trading_day"]
     portfolio["last_run"]=now.isoformat()
     portfolio["trades"]=portfolio["trades"][-250:]
-    return {"actions":actions,"valid_signals":len(signals),
+    return {"actions":actions,"signal_table":decision_table(portfolio,rows,now=now),
+            "valid_signals":len(signals),
             "new_signals":len(new),"buy_candidates":len(buy_candidates),
             "risk_gate_open":allowed,"equity":portfolio_equity(portfolio),
             "positions":len(portfolio["positions"])}
