@@ -7,9 +7,10 @@ Projeto educativo para iPad, GitHub Codespaces, Render e Streamlit. **Não negoc
 Separadores:
 1. **Top 5:** analisa até 170 ativos (50 cripto, 100 ações, 20 ETFs) com dados públicos; ordena as estimativas de subida para cinco dias apenas entre modelos cujo Brier de teste supera uma previsão de referência. Não corrige seleção múltipla nem calibra probabilidades: **não usar para colocar ordens reais**.
 2. **Explorar ativo:** gráfico de velas, médias móveis e estudo estatístico a 1, 5 e 20 dias.
-3. **Trading virtual:** um ciclo por clique, BTC/USD ou ETH/USD, carteira local **privada por sessão do navegador** e por símbolo; saldo inicial nominal de 50 USD. Reserva 30% do lucro líquido realizado sem reinvestir; não reserva quando há perdas. Compras virtuais bloqueadas quando o teste Brier não supera a referência.
-4. **Metodologia:** limitações e origem dos dados.
-5. **Corretoras & APIs:** comparação orientada a residentes em Portugal com taxas de negociação, câmbio, levantamentos EUR e USD, requisitos de API, regulamentação, sites oficiais e exemplo de custos em ações USD. Pesquisa verificada em 13-10-2026 no ficheiro `brokers.py`.
+3. **Auto-trading virtual:** pesquisa automaticamente as 100 ações do catálogo de hora a hora enquanto a sessão Streamlit estiver aberta, compra virtualmente quando o modelo estima ≥70% de subida em cinco dias e vende quando essa estimativa cai para ≤50% (ou ao atingir o stop diário de 5%). Não executa operações reais.
+4. **Trading virtual:** um ciclo por clique, BTC/USD ou ETH/USD, carteira local **privada por sessão do navegador** e por símbolo; saldo inicial nominal de 50 USD. Reserva 30% do lucro líquido realizado sem reinvestir; não reserva quando há perdas. Compras virtuais bloqueadas quando o teste Brier não supera a referência.
+5. **Metodologia:** limitações e origem dos dados.
+6. **Corretoras & APIs:** comparação orientada a residentes em Portugal com taxas de negociação, câmbio, levantamentos EUR e USD, requisitos de API, regulamentação, sites oficiais e exemplo de custos em ações USD. Pesquisa verificada em 13-10-2026 no ficheiro `brokers.py`.
 
 ## Arranque
 
@@ -115,3 +116,20 @@ Fontes oficiais:
 - Como gerar chaves e gerir permissões:
   https://helpcentre.trading212.com/hc/en-us/articles/14584770928157-How-can-I-generate-an-API-key
 - Ordens limite: https://docs.trading212.com/api/orders/placelimitorder
+
+## Regras 70/50 para ações (simulação, outubro de 2026)
+
+Na aba **🤖 Auto-trading virtual**:
+- **COMPRAR** uma ação ao preço do último fecho disponível quando a estimativa de subida para os próximos cinco dias for **≥70%** e o Brier fora da amostra superar a previsão de referência.
+- **VENDER** uma posição quando a estimativa de subida descer para **≤50%**, mesmo que a comparação Brier se tenha deteriorado.
+- Como salvaguarda, vender também se o último fecho cair **5% abaixo do preço de entrada**. Não existe stop intradiário garantido: só é verificado quando chega uma nova vela diária.
+- Entre 50% e 70%, manter a posição aberta. Nunca abrir posições só para o bot parecer ativo.
+- Até **20%** do património investível por nova compra, no máximo **3 posições**, e **1 nova posição** por ciclo. Depois de uma queda diária de 5% face à referência, parar novas compras.
+- Quando fechar uma posição com ganho líquido após taxa simulada de 0,2% por lado, **reservar 30% do lucro realizado**. Em perdas, não reservar.
+- Simular com **50 USD nominais**, ações USD do catálogo. Não confundir com depósito de 50 EUR; FX, spreads reais, impostos e preenchimento de ordens não estão simulados em detalhe.
+- As previsões **não estão calibradas**, não demonstram uma taxa de acerto de 70% e a simples comparação Brier com uma referência é insuficiente para garantir viabilidade. A seleção entre dezenas de empresas pode exagerar falsos sinais.
+- O motor usa os últimos preços de fecho; não executa trades automáticos dentro da Trading 212, não coloca ordens reais e não usa credenciais da corretora.
+- A atualização automática da sessão usa um fragmento Streamlit com intervalo de 1h. **Se a página perder a ligação ou o Codespace/Render parar, o bot deixa de executar.** Cada ativo é processado só uma vez por data de fecho, para não repetir entradas após atualizar a página. Quando termina a sessão, a carteira é apagada.
+- O botão de análise manual permite executar um ciclo virtual, mesmo com o modo automático desligado. O botão de reiniciar só aparece quando a automatização está desligada.
+
+Testes de estratégia em `tests/test_auto_paper.py`, sem rede ou corretoras. Para automatização persistente, será necessário um worker de produção, armazenamento duradouro, controlo de identidade e fontes de dados adequadas, além de revisão de segurança.
