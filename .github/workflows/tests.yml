@@ -17,6 +17,6 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
       - name: Python syntax
-        run: python -m compileall -q app.py market.py model.py paper.py scanner.py asset_analysis.py top5_research.py horizon_research.py brokers.py trading212_demo.py auto_paper.py catalog.py market_monitor.py monitor_panel.py research_v2.py edge_filter.py risk_rules.py walkforward.py goal_planner.py options_payoff.py crypto_lab.py crypto_paper.py
+        run: python -m compileall -q app.py market.py model.py paper.py scanner.py asset_analysis.py top5_research.py horizon_research.py brokers.py trading212_demo.py auto_paper.py catalog.py market_monitor.py monitor_panel.py research_v2.py edge_filter.py strategy_scorecard.py risk_rules.py walkforward.py goal_planner.py options_payoff.py crypto_lab.py crypto_paper.py
       - name: Tests
         run: python -m pytest -q
