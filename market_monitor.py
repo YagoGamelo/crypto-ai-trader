@@ -151,9 +151,12 @@ def fetch_completed_30m_quotes(now=None, *, assets=None, downloader=None):
                 if a is None or b is None or a <= 0 or b <= 0:
                     continue
                 ts = completed.index[-1].to_pydatetime()
+                gap_min = (completed.index[-1]-completed.index[-2]).total_seconds()/60
                 quotes[symbol] = {
                     "close": round(b, 6),
-                    "change_30m_pct": round(100*(b/a-1), 3),
+                    # A session gap (overnight/weekend) is NOT a 30m move.
+                    "change_30m_pct": round(100*(b/a-1), 3)
+                                      if 25 <= gap_min <= 35 else None,
                     "close_candle_start_utc": iso_utc(ts),
                     "age_minutes": round((now-ts).total_seconds()/60, 1),
                     "source": "Yahoo Finance intraday (30m, delayed possible)",
