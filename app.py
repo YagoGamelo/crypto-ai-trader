@@ -38,6 +38,12 @@ with tab1:
         if df.empty:
             st.warning("Não foram encontrados dados suficientes. Experimenta mais tarde.")
         else:
+            from auto_paper import create_portfolio, decision_table
+            wallet=st.session_state.get("autobot_wallet",create_portfolio())
+            decision_rows=decision_table(wallet,df.to_dict("records"))
+            decisions={row["Ativo"]:row["Sinal"] for row in decision_rows}
+            df=df.copy()
+            df["Sinal da IA 70/50"]=df["Ativo"].map(decisions).fillna("Só análise / indisponível")
             valid=df[df["Validação"]=="Supera referência"].sort_values("Prob. subir (estimada)",ascending=False)
             st.caption(f"{len(df)} ativos analisados com dados válidos; {len(WATCHLIST)-len(df)} indisponíveis ou sem histórico suficiente.")
             if valid.empty:
@@ -45,12 +51,12 @@ with tab1:
             else:
                 top=valid.head(5).copy()
                 top.insert(0,"Posição",range(1,len(top)+1))
-                st.dataframe(top[["Posição","Ativo","Mercado","Prob. subir (estimada)","Prob. descer (estimada)","Acerto teste %","Data"]],hide_index=True,use_container_width=True)
+                st.dataframe(top[["Posição","Ativo","Mercado","Prob. subir (estimada)","Prob. descer (estimada)","Sinal da IA 70/50","Acerto teste %","Data"]],hide_index=True,use_container_width=True)
                 st.caption("Ranking apenas entre modelos com Brier melhor do que a referência. Isto NÃO prova calibração nem rentabilidade.")
             with st.expander("Ver a tabela completa de todos os ativos analisados"):
                 st.dataframe(df.sort_values("Prob. subir (estimada)",ascending=False),hide_index=True,use_container_width=True)
                 st.download_button("Exportar CSV",df.to_csv(index=False).encode("utf-8-sig"),"analise_mercados.csv","text/csv")
-            st.warning("Probabilidades experimentais não calibradas. Não são sinais autorizados para operações automáticas.")
+            st.warning("Sinais da tabela são experimentais e não calibrados. Só a aba Auto-trading virtual executa operações simuladas, segundo as regras de risco.")
     else:
         st.info("Carrega em Analisar todo o mercado para gerar o ranking. Não são apresentados resultados fictícios.")
 with tab2:
