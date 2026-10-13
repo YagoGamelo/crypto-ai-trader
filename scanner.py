@@ -4,8 +4,8 @@ import numpy as np
 import yfinance as yf
 from catalog import WATCHLIST
 
-def scan(limit=150):
-    assets = WATCHLIST[:limit]
+def scan(limit=None):
+    assets = WATCHLIST if limit is None else WATCHLIST[:limit]
     symbols = [x["symbol"] for x in assets]
     frames = []
     # Batches limit the size of each request and allow partial failures.
