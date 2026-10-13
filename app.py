@@ -1,7 +1,7 @@
 """Minimal research-first interface. Paper trading only."""
 import streamlit as st
 import pandas as pd
-from catalog import WATCHLIST,CRYPTO,STOCKS,ETFS
+from catalog import WATCHLIST,CRYPTO,STOCKS,ETFS,MEMECOINS
 st.set_page_config(page_title="NEXUS • Market Intelligence",page_icon="✦",layout="wide",initial_sidebar_state="collapsed")
 st.markdown("""<style>
 .stApp {background:#f5f6f8;color:#17202b}
@@ -19,7 +19,7 @@ a,b,c=st.columns(3)
 a.metric("Universo monitorizado",len(WATCHLIST))
 b.metric("Empresas",len(STOCKS))
 c.metric("Cripto + ETFs",len(CRYPTO)+len(ETFS))
-tab1,tab_goal,tab_monitor,tab2,tab_auto,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","🎯 Meta 400%","📡 Monitor 30 min","📈 Explorar ativo","🤖 Auto-trading virtual","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
+tab1,tab_goal,tab_monitor,tab2,tab_auto,tab3,tab_crypto,tab_options,tab4,tab5,tab6=st.tabs(["🏆 Top 5","🎯 Meta 400%","📡 Monitor 30 min","📈 Explorar ativo","🤖 Ações virtuais","🧪 Trading virtual","🪙 Cripto e Memecoins","📉 Opções Call/Put","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
 with tab1:
     st.subheader("As 5 maiores estimativas de subida")
     st.write("O modelo analisa todos os ativos disponíveis, testa o desempenho fora da amostra e compara previsões para os próximos **5 dias**.")
@@ -524,3 +524,140 @@ with tab_goal:
     st.write("Mantemos compra apenas quando a previsão de subida é ≥70% e os testes de calibração, referência e custos aprovam o modelo. Vendemos se a previsão deteriorar ou se disparar uma proteção de risco.")
     st.write("Não vamos ligar alavancagem, aumentar o risco para recuperar perdas, nem usar dinheiro real para perseguir a meta. Com maior exposição poderias multiplicar tanto os ganhos como os prejuízos.")
     st.info("Para comparar desempenho histórico com custos, abre **📈 Explorar ativo → Executar backtest do ativo selecionado**. Uma estratégia que não supera a referência e não apresenta controlo das perdas não deve receber mais capital.")
+
+
+with tab_crypto:
+    import time
+    from crypto_paper import new_wallet as create_crypto_wallet, equity as crypto_wallet_equity, decision as crypto_decision
+    st.subheader("Cripto e Memecoins · Spot")
+    st.caption("Análise direcional por velas completas da Kraken. Sem alavancagem, contratos ou operações reais.")
+    st.info("A previsão para **4 velas** é separada da previsão de cinco dias das ações. Por exemplo, 4 velas de 30 min significam um horizonte de 2 horas.")
+    st.warning("Memecoins podem perder praticamente todo o valor, ter spreads elevados ou não permitir saída ao preço indicado. A IA exige filtros de volume e spread; se não houver dados, NÃO compra.")
+    bases=["BTC","ETH","SOL","XRP","DOGE"] + [x for x in MEMECOINS if x not in ("DOGE",)]
+    ca,cb=st.columns(2)
+    coin=ca.selectbox("Criptomoeda",bases,key="crypto_symbol")
+    timeframe=cb.selectbox("Vela de análise",["30m","1h","4h"],key="crypto_tf")
+    if coin in MEMECOINS:
+        st.caption("Segmento: MEMECOIN · requisitos de liquidez e orçamento de investimento mais rigorosos.")
+    else:
+        st.caption("Segmento: mercado spot cripto estabelecido · ainda assim altamente volátil.")
+    if "crypto_spot_wallet" not in st.session_state:
+        st.session_state["crypto_spot_wallet"]=create_crypto_wallet()
+    cw=st.session_state["crypto_spot_wallet"]
+    w1,w2,w3=st.columns(3)
+    w1.metric("Saldo virtual USD",f"{crypto_wallet_equity(cw):.2f}")
+    w2.metric("Lucros reservados USD",f"{cw['reserved']:.2f}")
+    w3.metric("Posição aberta",(cw["position"] or {}).get("pair","Nenhuma"))
+    st.caption("Limites: 20% por compra em cripto, 10% em memecoins; risco planeado até 1% ou 0,5% respetivamente. Só uma posição cripto aberta.")
+    autorizar=st.toggle("Ativar compras e vendas VIRTUAIS neste ativo enquanto o site estiver aberto",
+                        value=False,key="crypto_authorize")
+    @st.fragment(run_every="30m")
+    def crypto_fragment():
+        if st.button("🔎 Atualizar previsão e executar um ciclo",type="primary",key="crypto_run_now") or (
+            autorizar and (time.time()-st.session_state.get("crypto_last_epoch",0))>=1800):
+            try:
+                from crypto_lab import study_crypto
+                with st.spinner("A consultar velas spot, spread e volume na Kraken; a validar o modelo..."):
+                    result=study_crypto(coin,timeframe=timeframe)
+                st.session_state["crypto_last_study"]=result
+                st.session_state["crypto_last_epoch"]=time.time()
+                if autorizar:
+                    action=crypto_decision(cw,result,execute=True)
+                else:
+                    action=crypto_decision(cw,result,execute=False)
+                st.session_state["crypto_last_action"]=action
+            except Exception as exc:
+                st.error(f"Não houve novas operações. Não foi possível validar este mercado: {exc}")
+        study=st.session_state.get("crypto_last_study")
+        if study is None or study.get("base")!=coin or study.get("timeframe")!=timeframe:
+            st.info("Escolhe a moeda e carrega em Atualizar previsão. Só será possível negociar virtualmente depois de existirem dados suficientes.")
+            return
+        model=study["model"]
+        q1,q2,q3,q4=st.columns(4)
+        q1.metric("Preço de fecho USD",f"{study['price_usd']:,.8f}")
+        q2.metric("Chance subida estimada",f"{model['up_pct']:.1f}%")
+        q3.metric("Chance descida estimada",f"{model['down_pct']:.1f}%")
+        q4.metric("Horizonte",f"{study['forecast_horizon_minutes']} min")
+        st.caption(f"Última vela completa: {study['last_closed_utc']} · idade da cotação {study['data_age_minutes']:.0f} min.")
+        candles=study["latest_candles"]
+        import plotly.graph_objects as go
+        fig=go.Figure()
+        fig.add_trace(go.Candlestick(x=candles.timestamp,open=candles.open,high=candles.high,
+                                     low=candles.low,close=candles.close,name=coin))
+        fig.update_layout(template="plotly_white",height=380,xaxis_rangeslider_visible=False,
+                          margin=dict(l=8,r=8,t=22,b=8))
+        st.plotly_chart(fig,use_container_width=True,key=f"crypto_chart_{coin}_{timeframe}")
+        r1,r2,r3=st.columns(3)
+        r1.metric("Volume equivalente 24h",f"${study['quote_volume_24h_usd']:,.0f}")
+        r2.metric("Spread observado",f"{study['spread_pct']:.3f}%" if study["spread_pct"] is not None else "Indisponível")
+        r3.metric("Custos simulados ida+volta",f"{study['estimated_round_trip_cost_pct']:.1f}%")
+        if study["paper_buy_eligible"]:
+            st.success("Modelo, preço, spread e volume passaram os filtros experimentais para ENTRADA VIRTUAL.")
+        else:
+            st.warning("Entrada virtual bloqueada: "+", ".join(study["risk_notes"]))
+        if st.session_state.get("crypto_last_action"):
+            st.info(st.session_state["crypto_last_action"])
+        st.caption(f"Avaliação histórica: {model['holdout_count']} velas no teste; erro de calibração {100*model['ece']:.1f}%; previsões >=70% no teste: {model['bullish_signals']}. Estes resultados não garantem lucro.")
+        if cw["trades"]:
+            with st.expander("Histórico de trading spot virtual"):
+                st.dataframe(pd.DataFrame(cw["trades"]),use_container_width=True,hide_index=True)
+        if not autorizar and st.button("Reiniciar carteira cripto virtual",key="crypto_reset"):
+            st.session_state["crypto_spot_wallet"]=create_crypto_wallet()
+            for key in ("crypto_last_action","crypto_last_epoch"):
+                st.session_state.pop(key,None)
+            st.rerun()
+        st.caption("O motor avalia apenas a moeda selecionada, enquanto a sessão está aberta e o Codespace/Render não suspende. Não há compras ou vendas reais e não funciona 24/7.")
+    crypto_fragment()
+
+with tab_options:
+    from options_payoff import LongOption
+    from datetime import date,timedelta
+    st.subheader("Simulador de opções · CALL e PUT")
+    st.caption("Gráfico de pagamento no vencimento como o da imagem, não uma cotação de opções nem uma previsão de preços.")
+    st.info("Simulamos apenas a COMPRA de Call ou Put. Não vendemos opções descobertas e não executamos contratos reais ou produtos binários.")
+    c1,c2,c3=st.columns(3)
+    underlying=c1.selectbox("Ativo do exemplo",["O — Realty Income","TSLA — Tesla","NVDA — Nvidia","AAPL — Apple","BTC — Bitcoin"],key="opt_underlying")
+    side=c2.radio("Direção",["CALL ↗ Subida","PUT ↘ Descida"],horizontal=True,key="opt_side")
+    expiry=c3.date_input("Data de expiração hipotética",value=date.today()+timedelta(days=7),
+                         min_value=date.today(),key="opt_expiry")
+    p1,p2,p3=st.columns(3)
+    underlying_price=p1.number_input("Preço atual de exemplo (USD)",min_value=0.01,value=54.69,step=0.50,
+                                     key="opt_current")
+    strike=p2.number_input("Strike (USD)",min_value=0.01,value=55.00,step=0.50,key="opt_strike")
+    premium=p3.number_input("Prémio pago por unidade (USD)",min_value=0.01,value=0.30,step=0.05,
+                            key="opt_premium")
+    m1,m2,m3=st.columns(3)
+    multiplier=m1.number_input("Multiplicador do contrato (exemplo)",min_value=1,max_value=100000,
+                               value=100 if not underlying.startswith("BTC") else 1,step=1,key="opt_multiplier")
+    contract_count=m2.number_input("Contratos",min_value=1,max_value=100,value=1,step=1,key="opt_count")
+    commission=m3.number_input("Comissões totais assumidas (USD)",min_value=0.0,value=0.0,step=.5,key="opt_commission")
+    try:
+        option=LongOption("CALL" if side.startswith("CALL") else "PUT",strike,premium,
+                          int(multiplier),int(contract_count),commission)
+        p1,p2,p3=st.columns(3)
+        p1.metric("Perda máxima teórica",f"-${option.debit:,.2f}")
+        p2.metric("Break-even na expiração",f"${option.breakeven:,.2f}" if option.breakeven>=0 else "Não atingível")
+        p3.metric("Lucro máximo teórico","Sem limite (Call)" if option.max_gain is None else f"${option.max_gain:,.2f}")
+        import plotly.graph_objects as go
+        prices,pnls=option.chart(current_price=underlying_price)
+        fig=go.Figure()
+        fig.add_trace(go.Scatter(x=prices,y=pnls,mode="lines",name="Lucro/perda no vencimento",
+                                 line=dict(width=3),fill="tozeroy",fillcolor="rgba(76,174,128,.12)"))
+        fig.add_hline(y=0,line_dash="dash",line_color="#787d89")
+        fig.add_vline(x=strike,line_dash="dot",line_color="#b2a084")
+        if option.breakeven>=0:
+            fig.add_vline(x=option.breakeven,line_dash="dash",line_color="#32a387")
+        fig.update_layout(template="plotly_white",height=410,xaxis_title="Preço do ativo na expiração (USD)",
+                          yaxis_title="Lucro/prejuízo hipotético (USD)",
+                          margin=dict(l=10,r=10,t=15,b=10))
+        st.plotly_chart(fig,use_container_width=True,key="opt_payoff_chart")
+        chosen=st.slider("Experimentar preço do ativo na expiração",min_value=0.0,
+                          max_value=float(round(max(prices[-1],strike*1.1),2)),
+                          value=float(round(min(underlying_price,max(prices[-1],strike*1.1)),2)),
+                          step=0.01,key="opt_scenario")
+        pnl=option.payout(chosen)
+        st.metric("Resultado hipotético na expiração",f"{pnl:+,.2f} USD")
+        st.caption(f"Exemplo {underlying} · vencimento {expiry}. Premissas introduzidas manualmente: prémio, strike, número de contratos e multiplicador. Não existem cotações reais de opções neste simulador.")
+        st.warning("Antes de expirar, o preço da opção muda com o tempo e a volatilidade. Este gráfico mostra apenas o pagamento na expiração. Uma previsão de subida de 70% NÃO equivale a 70% de probabilidade de lucrar com a Call; o prémio e o strike também contam.")
+    except ValueError as exc:
+        st.error(str(exc))
