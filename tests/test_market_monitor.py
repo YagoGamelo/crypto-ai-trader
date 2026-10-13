@@ -157,3 +157,15 @@ def test_session_gap_is_not_a_fake_30minute_move():
         downloader=lambda *args,**kwargs:candles)
     assert quotes["AAPL"]["close"] == 110.0
     assert quotes["AAPL"]["change_30m_pct"] is None
+
+def test_expanded_memecoin_watchlist_forces_new_model_refresh():
+    from catalog import WATCHLIST
+    models, asof, _=build_model_rows({},NOW,scanner=research_rows)
+    previous={"models":models,"model_updated_at":asof,
+              "universe_count":len(WATCHLIST)-15}
+    _,new_time,recomputed=build_model_rows(
+        previous,NOW+timedelta(minutes=30),scanner=research_rows)
+    assert recomputed
+    assert new_time != ""
+
+
