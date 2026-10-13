@@ -93,18 +93,21 @@ PROVIDERS = [
     },
 ]
 
-def preview_roundtrip_eur(provider, amount_eur=50.0):
+def preview_roundtrip_eur(provider, amount_eur=50.0, asset_currency="USD"):
     """Illustrative EUR-account buy & sell of USD stocks at unchanged price.
     Excludes spreads, slippage, taxes, rebates, and third-party/withdrawal fees.
     Only compare providers with explicitly supported simple fee models.
     """
+    if asset_currency not in ("EUR", "USD"):
+        raise ValueError("Moeda inválida")
     if not 0 < amount_eur <= 1_000_000:
         raise ValueError("Montante inválido")
     if provider["type"] != "Ações e ETFs" or provider["fee_model"] == "variable":
         return None
-    return round(2 * (amount_eur * provider["fx_rate"] + amount_eur * provider["trade_rate"] + provider["fee_fixed"]), 2)
+    fx = provider["fx_rate"] if asset_currency == "USD" else 0
+    return round(2 * (amount_eur * fx + amount_eur * provider["trade_rate"] + provider["fee_fixed"]), 2)
 
-def comparable_stock_costs(amount_eur=50.0):
-    pairs = [(p["name"], preview_roundtrip_eur(p, amount_eur))
+def comparable_stock_costs(amount_eur=50.0, asset_currency="USD"):
+    pairs = [(p["name"], preview_roundtrip_eur(p, amount_eur, asset_currency))
              for p in PROVIDERS if p["type"] == "Ações e ETFs"]
     return sorted(((name, value) for name, value in pairs if value is not None), key=lambda x:x[1])
