@@ -110,7 +110,10 @@ def test_memecoin_allocation_half_and_no_short():
     wallet=new_wallet()
     assert decision(wallet,create_study(base="PEPE",up=20),execute=True).startswith("ESPERAR")
     assert wallet["position"] is None
-    assert decision(wallet,create_study(base="PEPE",up=80),execute=True).startswith("COMPRA")
+    # A fresh candle is required; same-candle entries cannot be retried.
+    assert decision(wallet,create_study(base="PEPE",up=80),execute=True).startswith("ESPERAR")
+    assert decision(wallet,create_study(base="PEPE",up=80,
+                    at="2026-10-13T12:30:00+00:00"),execute=True).startswith("COMPRA")
     assert wallet["cash"]==pytest.approx(45)
     other=create_study(base="BTC",up=92,at="2026-10-13T12:30:00+00:00")
     assert decision(wallet,other,execute=True).startswith("MANTER")
