@@ -41,6 +41,44 @@ Os testes de sintaxe e unitários também têm uma verificação GitHub Actions 
 - Alojamento gratuito no Render pode suspender; **nenhum robô automático 24/7 está implementado**.
 - Nunca adicionar segredos ao GitHub nem publicar o painel de um dia para o outro com permissões de negociação reais sem autenticação e controlos específicos.
 
+## IA 70/70/50 — motor automático virtual de ações
+
+A aba **🤖 Auto-trading virtual** usa a mesma tabela de previsões da
+pesquisa `top5_research.scan_all(categories=("Ações",))`, para as ações
+com dados históricos suficientes. Uma previsão é uma estimativa *não
+calibrada*, não uma garantia.
+
+- **COMPRAR** uma ação candidata quando P(subida em 5 dias) ≥ 70% **e**
+  o Brier da janela de teste for inferior ao da referência histórica, com
+  no mínimo 30 exemplos no teste.
+- **VENDER uma posição existente** quando P(descida) ≥ 70% (equivale a
+  P(subida) ≤ 30%), ou quando P(subida) ≤ 50%.
+- Também fecha virtualmente em **stop de perda de 5%** ou num **stop móvel
+  de 3% de recuo relativamente ao máximo observado**, mas só depois de
+  uma subida observada de pelo menos 4% desde a entrada.
+- **Nunca abre posições short**. Não compra ou vende se não houver dados
+  válidos recentes ou se o preço estiver desatualizado. O motor só
+  opera ações, não ETFs ou criptomoedas, nesta fase.
+- **Risco:** carteira inicial virtual de 50 USD, até 20% de cada compra,
+  3 posições simultâneas, 1 nova compra por ciclo, taxas simuladas
+  de 0,2% por compra e venda; reserva 30% de lucros líquidos realizados;
+  bloqueia novas compras após queda de 5% relativamente ao valor
+  de referência diário.
+- **Periodicidade:** uma tentativa de análise aproximadamente de
+  hora a hora **apenas enquanto a página e sessão estão abertas e a
+  opção de trading virtual está ativa**; também há botão de análise
+  manual, que não executa ordens quando a autorização está desligada.
+  Cada símbolo só executa decisões em novos fechos diários. Render Free
+  e Codespaces podem adormecer; isto não é serviço 24/7.
+- O motor mantém a sua carteira **apenas em memória na sessão atual**;
+  os resultados desaparecem quando a sessão termina. Não envia nenhuma
+  operação à Trading 212, sequer à demo: é um livro-razão interno.
+
+**Importante:** os lucros anuais, a taxa real de acerto e a
+qualidade preditiva ainda não foram demonstrados com backtests
+walk-forward rigorosos, liquidez e custos reais. O stop móvel não
+identifica o topo do preço e não oferece proteção contínua.
+
 ## Antes de considerar trading real
 
 Calibração e backtesting walk-forward sem look-ahead, custos reais por mercado, fonte de dados licenciada e fiável, persistência isolada, autenticação de utilizadores, reconciliação de ordens, limites de risco, botão de emergência, sandbox e aprovação humana. Se forem concedidas permissões API, **desativar levantamentos** e manter a chave apenas em armazenamento secreto do servidor. Os serviços de corretagem devem ser disponibilizados pelo próprio intermediário autorizado.
