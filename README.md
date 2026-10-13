@@ -1,5 +1,61 @@
 # NEXUS / Crypto AI Trader — pesquisa e simulação
 
+## Meta anual de +400% — painel de objetivos, não uma promessa
+
+**Uma rentabilidade de +400%** corresponde a multiplicar o capital por
+cinco: por exemplo, **50 € → 250 €**, ou +200 € de lucro, antes de
+impostos e custos adicionais. O crescimento composto necessário em 12
+meses é aproximadamente **14,35% ao mês**, todos os meses. Isso é uma
+meta extremamente agressiva, não a expectativa de rentabilidade do bot.
+
+Foi adicionada a aba **🎯 Meta 400%**, suportada por `goal_planner.py`.
+Ela apresenta:
+- o valor necessário para cumprir a meta e o progresso **real** da
+  carteira de simulação de ações (saldo virtual expresso em **USD
+  nominais**, não convertido para EUR);
+- a taxa composta mensal exigida para um prazo entre 6 e 36 meses;
+- trajetórias aritméticas hipotéticas de +5%, −5% e do crescimento
+  necessário para a meta, **sem extrapolar o rendimento da IA**;
+- estatísticas de operações virtualmente fechadas: lucro realizado,
+  número de trades e taxa de acerto. Com menos de 30 vendas o painel
+  avisa que a amostra ainda é demasiado pequena.
+
+Esta atualização **não aumentou a alavancagem nem os limites de risco**,
+nem alterou a compra acima dos 70% e saída aos 50% ou descida de 70%.
+A única forma responsável de decidir se vale a pena alterar a estratégia
+é demonstrar melhores resultados posteriores aos custos em teste
+independente. O objetivo não deve levar o bot a assumir perdas
+ilimitadas, negociar com empréstimos ou tentar recuperar prejuízos
+aumentando automaticamente as posições.
+
+### Custos mais altos podem eliminar ganhos
+
+O botão de backtest em **📈 Explorar ativo** agora oferece três
+cenários ilustrativos de execução, todos **por lado da operação**:
+
+| Cenário | Comissão | Derrapagem de preço |
+| --- | ---: | ---: |
+| Base | 0,2% | 0,1% |
+| Custos superiores | 0,4% | 0,3% |
+| Custos extremos | 0,8% | 0,5% |
+
+`walkforward.py` usa estas condições tanto nas compras/vendas como
+na comparação comprar-e-manter, pelo mesmo período histórico.
+A estratégia **não usa os resultados do teste para otimizar
+automaticamente os limiares**. Um bom resultado histórico não prova
+rentabilidade futura, e um único ativo não representa o portfólio de
+170 ativos. Impostos, dividendos, câmbio e outras fricções não foram
+incluídos.
+
+Para testar depois de fazer `git pull` no Codespaces:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m streamlit run app.py --server.address 0.0.0.0
+```
+
+
 ## Versão 3 — qualidade do sinal + disciplina de risco
 
 Esta versão foi implementada para **reduzir entradas sem evidência**, melhorar
