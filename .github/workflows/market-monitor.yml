@@ -1,6 +1,12 @@
 name: NEXUS market report every 30 minutes
 
 on:
+  # Run once on setup / monitor-code updates without waiting for the next slot.
+  push:
+    branches: [main]
+    paths:
+      - market_monitor.py
+      - .github/workflows/market-monitor.yml
   # GitHub schedules are best-effort: they may be delayed or skipped.
   schedule:
     - cron: "11,41 * * * *"
