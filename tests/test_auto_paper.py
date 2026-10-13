@@ -117,3 +117,33 @@ def test_no_shorts_when_down_prediction_high():
     result=evaluate_cycle(p,[row(p=20)],now=CLOCK)
     assert result["actions"]==[]
     assert p["positions"]=={}
+
+def test_new_calibrated_research_must_approve_buy():
+    p=create_portfolio()
+    candidate=dict(row("AAPL",p=95), **{"Aprovado para virtual":False, "ATR 14 %":2.5})
+    result=evaluate_cycle(p,[candidate],now=CLOCK)
+    assert result["actions"]==[]
+    assert "AAPL" not in p["positions"]
+
+def test_atr_sizing_reduces_position_in_volatile_stock():
+    low=create_portfolio()
+    high=create_portfolio()
+    first=dict(row("LOW",p=80), **{"Aprovado para virtual":True,"ATR 14 %":1})
+    second=dict(row("HIGH",p=80), **{"Aprovado para virtual":True,"ATR 14 %":7})
+    evaluate_cycle(low,[first],now=CLOCK)
+    evaluate_cycle(high,[second],now=CLOCK)
+    low_cost=low["positions"]["LOW"]["total_cost"]
+    high_cost=high["positions"]["HIGH"]["total_cost"]
+    assert high_cost<low_cost
+    assert low_cost<=50*.2+1e-7
+    assert high["positions"]["HIGH"]["stop_fraction"]==pytest.approx(.08)
+
+def test_lifetime_drawdown_prevents_new_entries_but_not_exits():
+    p=create_portfolio()
+    evaluate_cycle(p,[row("AAPL",p=75)],now=CLOCK)
+    # Simulate a previous higher equity peak, without borrowing funds.
+    p["peak_equity"]=100.
+    next_day=CLOCK+timedelta(days=1)
+    result=evaluate_cycle(p,[row("MSFT",p=85,when="2026-10-14")],now=next_day)
+    assert result["risk_gate_open"] is False
+    assert "MSFT" not in p["positions"]
