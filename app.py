@@ -19,7 +19,7 @@ a,b,c=st.columns(3)
 a.metric("Universo monitorizado",len(WATCHLIST))
 b.metric("Empresas",len(STOCKS))
 c.metric("Cripto + ETFs",len(CRYPTO)+len(ETFS))
-tab1,tab_monitor,tab2,tab_auto,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","📡 Monitor 30 min","📈 Explorar ativo","🤖 Auto-trading virtual","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
+tab1,tab_goal,tab_monitor,tab2,tab_auto,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","🎯 Meta 400%","📡 Monitor 30 min","📈 Explorar ativo","🤖 Auto-trading virtual","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
 with tab1:
     st.subheader("As 5 maiores estimativas de subida")
     st.write("O modelo analisa todos os ativos disponíveis, testa o desempenho fora da amostra e compara previsões para os próximos **5 dias**.")
@@ -472,3 +472,47 @@ with tab_monitor:
         refresh_monitor_dashboard()
     else:
         st.info("Abre o monitor para ver o relatório atualizado. Depois o painel verifica novas informações aproximadamente a cada 2 minutos enquanto esta sessão estiver aberta.")
+
+with tab_goal:
+    from goal_planner import calculate_goal, compound_path, summarize_closed_trades
+    from auto_paper import create_portfolio, portfolio_equity
+    st.subheader("Meta ambiciosa · +400% ao ano")
+    st.write("Este é um **objetivo de simulação**, não uma rentabilidade prometida nem uma ordem para aumentar o risco. Um lucro de 400% multiplica o capital inicial por cinco.")
+    months = st.slider("Meses para atingir a meta", min_value=6, max_value=36, value=12, step=1, key="goal_months")
+    goal_wallet = st.session_state.get("autobot_wallet")
+    if goal_wallet is None:
+        goal_wallet = create_portfolio()
+    initial_amount = float(goal_wallet["initial_cash"])
+    virtual_equity = portfolio_equity(goal_wallet)
+    goals = calculate_goal(initial_amount, max(0.000001,virtual_equity), 400.0, months)
+    m1,m2,m3,m4=st.columns(4)
+    m1.metric("Saldo inicial virtual USD",f"{goals['initial']:.2f}")
+    m2.metric("Meta final virtual USD",f"{goals['target_capital']:.2f}")
+    m3.metric("Saldo atual virtual USD",f"{virtual_equity:.2f}",
+              delta=f"{goals['current_return_pct']:+.1f}% desde início")
+    m4.metric("Crescimento mensal necessário",f"{goals['monthly_growth_needed_pct']:+.2f}%")
+    st.progress(goals["goal_progress_pct"]/100,text=f"{goals['goal_progress_pct']:.1f}% do lucro necessário já atingido")
+    st.caption(f"Para a meta faltam {goals['remaining_to_target']:.2f} USD nominais. A carteira é uma simulação em USD; isto NÃO representa o saldo real em euros de uma corretora.")
+    required_rate=(5.0**(1.0/months)-1.0)*100.0
+    comparison=pd.DataFrame({
+        "Trajetória para meta 400%":compound_path(initial_amount,required_rate,months),
+        "Cenário +5%/mês":compound_path(initial_amount,5.0,months),
+        "Cenário −5%/mês":compound_path(initial_amount,-5.0,months),
+    },index=list(range(months+1)))
+    comparison.index.name="Mês"
+    st.line_chart(comparison)
+    st.caption("As curvas mostram apenas matemática de juros compostos: retornos mensais constantes hipotéticos, sem impostos nem custos. Não são previsões da IA.")
+    st.markdown("#### Como saber se a IA está realmente a progredir?")
+    stats=summarize_closed_trades(goal_wallet.get("trades",[]))
+    a,b,c=st.columns(3)
+    a.metric("Operações virtuais fechadas",stats["trades"])
+    b.metric("Taxa de acerto observada",f"{stats['win_rate_pct']:.1f}%" if stats["win_rate_pct"] is not None else "—")
+    c.metric("Lucro líquido realizado USD",f"{stats['net_realized']:+.2f}")
+    if not stats["enough_for_preliminary_review"]:
+        st.warning("Ainda há poucas operações virtuais fechadas para avaliar a consistência. Não estimamos a probabilidade de atingir 400% nem o rendimento anual a partir de poucos trades.")
+    else:
+        st.info("Estas estatísticas descrevem as operações já fechadas, mas não provam um retorno futuro. Verifica também a perda máxima e os custos no backtest.")
+    st.markdown("#### Plano da estratégia")
+    st.write("Mantemos compra apenas quando a previsão de subida é ≥70% e os testes de calibração, referência e custos aprovam o modelo. Vendemos se a previsão deteriorar ou se disparar uma proteção de risco.")
+    st.write("Não vamos ligar alavancagem, aumentar o risco para recuperar perdas, nem usar dinheiro real para perseguir a meta. Com maior exposição poderias multiplicar tanto os ganhos como os prejuízos.")
+    st.info("Para comparar desempenho histórico com custos, abre **📈 Explorar ativo → Executar backtest do ativo selecionado**. Uma estratégia que não supera a referência e não apresenta controlo das perdas não deve receber mais capital.")
