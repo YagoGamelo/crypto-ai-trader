@@ -16,6 +16,6 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
       - name: Python syntax
-        run: python -m compileall -q app.py market.py model.py paper.py scanner.py asset_analysis.py top5_research.py horizon_research.py brokers.py catalog.py
+        run: python -m compileall -q app.py market.py model.py paper.py scanner.py asset_analysis.py top5_research.py horizon_research.py brokers.py trading212_demo.py catalog.py
       - name: Tests
         run: python -m pytest -q
