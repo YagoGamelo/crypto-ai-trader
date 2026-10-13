@@ -142,3 +142,15 @@ def test_run_serializes_valid_json_without_network(tmp_path):
     assert read_json(report_path)["model_coverage"] == 2
     assert len(read_json(history_path)["samples"]) == 1
     assert report["recent_30m_quotes"] == 0  # no fabricated prices
+
+def test_session_gap_is_not_a_fake_30minute_move():
+    stamps=pd.DatetimeIndex([
+        pd.Timestamp("2026-10-12T20:00:00Z"),
+        pd.Timestamp("2026-10-13T12:30:00Z"),
+    ])
+    candles=pd.DataFrame({"Close":[100.0,110.0]},index=stamps)
+    quotes=fetch_completed_30m_quotes(NOW,assets=[{
+        "symbol":"AAPL","category":"Ações"}],
+        downloader=lambda *args,**kwargs:candles)
+    assert quotes["AAPL"]["close"] == 110.0
+    assert quotes["AAPL"]["change_30m_pct"] is None
