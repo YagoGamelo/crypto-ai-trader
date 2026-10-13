@@ -19,7 +19,7 @@ a,b,c=st.columns(3)
 a.metric("Universo monitorizado",len(WATCHLIST))
 b.metric("Empresas",len(STOCKS))
 c.metric("Cripto + ETFs",len(CRYPTO)+len(ETFS))
-tab1,tab2,tab_auto,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","📈 Explorar ativo","🤖 Auto-trading virtual","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
+tab1,tab_monitor,tab2,tab_auto,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","📡 Monitor 30 min","📈 Explorar ativo","🤖 Auto-trading virtual","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
 with tab1:
     st.subheader("As 5 maiores estimativas de subida")
     st.write("O modelo analisa todos os ativos disponíveis, testa o desempenho fora da amostra e compara previsões para os próximos **5 dias**.")
@@ -423,3 +423,16 @@ with tab_auto:
                 st.rerun()
         st.caption("Máx. 20% do saldo investível por compra, 3 posições, 1 nova compra por ciclo, stop virtual de 5%, trailing stop de 3% após +4% observado e bloqueio de novas compras após queda diária de 5%. Cada ativo só é negociado uma vez por vela diária. Enquanto esta página estiver aberta, o site reavalia aproximadamente de hora a hora; Render/Codespaces podem suspender e interromper a execução.")
     automatic_paper_dashboard()
+
+with tab_monitor:
+    st.caption("Observação dos mercados sem negociar — relatório gerado fora do Streamlit, mesmo quando o Render adormece.")
+    if st.button("📡 Abrir monitor e atualizar automaticamente", key="open_monitor"):
+        st.session_state["market_monitor_visible"] = True
+    if st.session_state.get("market_monitor_visible", False):
+        from monitor_panel import render_monitor
+        @st.fragment(run_every="2m")
+        def refresh_monitor_dashboard():
+            render_monitor()
+        refresh_monitor_dashboard()
+    else:
+        st.info("Abre o monitor para ver o relatório atualizado. Depois o painel verifica novas informações aproximadamente a cada 2 minutos enquanto esta sessão estiver aberta.")
