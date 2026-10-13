@@ -41,7 +41,7 @@ a{color:var(--accent);text-underline-offset:3px}#update{margin-left:auto}
 <section class="split">
 <div class="card"><div class="card-title"><span>↗ Top 5 subida</span><span class="small">Horizonte 5 velas diárias</span></div><div id="top-up" class="note">Sem resultados</div></div>
 <div class="card"><div class="card-title"><span>↘ Top 5 descida</span><span class="small">Horizonte 5 velas diárias</span></div><div id="top-down" class="note">Sem resultados</div></div></section>
-<h2>Todos os ativos</h2><p class="small">Ordena e filtra 170 ativos. A coluna 30 min é a variação entre as duas últimas velas completas disponíveis, não a previsão do modelo.</p>
+<h2>Todos os ativos</h2><p class="small">Ordena e filtra 185 ativos. A coluna 30 min é a variação entre as duas últimas velas completas disponíveis, não a previsão do modelo.</p>
 <div class="controls"><input id="search" aria-label="Pesquisar ativo" placeholder="Pesquisar empresa ou ticker…">
 <select id="market" aria-label="Tipo de mercado"><option value="">Todos os mercados</option><option>Ações</option><option>Cripto</option><option>ETF</option></select>
 <select id="order" aria-label="Ordenação"><option value="up">Probabilidade subir</option><option value="down">Probabilidade descer</option><option value="move">Variação 30 min</option></select></div>
@@ -80,7 +80,7 @@ const data=await response.json();
 if(data.schema_version!==1)throw new Error("Formato não reconhecido");
 if(!data.generated_at_utc){el("status").textContent="Aguarda a primeira análise. Abre 'Histórico de execuções' para executar manualmente.";el("update").textContent="Ainda sem dados";return}
 assets=Array.isArray(data.assets)?data.assets:[];
-el("m1").textContent=String(data.model_coverage??0)+"/"+String(data.universe_count??170);
+el("m1").textContent=String(data.model_coverage??0)+"/"+String(data.universe_count??185);
 el("m2").textContent=String(data.recent_30m_quotes??0);
 el("m3").textContent=String(data.buy_candidates??0);
 el("m4").textContent=String(data.sell_if_held??0);
