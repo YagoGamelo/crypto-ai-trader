@@ -1,0 +1,55 @@
+name: NEXUS market report every 30 minutes
+
+on:
+  # GitHub schedules are best-effort: they may be delayed or skipped.
+  schedule:
+    - cron: "11,41 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-public-market-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - name: Checkout monitored source
+        uses: actions/checkout@v4
+
+      - name: Checkout report storage (separate branch)
+        uses: actions/checkout@v4
+        with:
+          ref: market-data
+          path: monitor-data
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+
+      - name: Install only research dependencies
+        run: python -m pip install "yfinance>=0.2.60,<2" "pandas>=2.2,<3" "numpy>=1.26,<3" "scikit-learn>=1.5,<2"
+
+      - name: Refresh completed 30m prices and model report
+        run: python market_monitor.py --report monitor-data/data/latest.json --history monitor-data/data/history.json
+
+      - name: Publish latest public data without redeploying Streamlit
+        working-directory: monitor-data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/latest.json data/history.json
+          if git diff --cached --quiet; then
+            echo "No changes in market report"
+          else
+            git commit -m "market monitor: update public 30-minute snapshot"
+            git push origin HEAD:market-data
+          fi
