@@ -53,11 +53,23 @@ def test_wallet_closed_trades_do_not_include_open_buys():
 
 
 @pytest.mark.parametrize("invalid",[0,-1,float("nan"),float("inf"),True])
-def test_invalid_capitals_rejected(invalid):
+def test_invalid_initial_capital_rejected(invalid):
     with pytest.raises(ValueError):
         calculate_goal(invalid,50)
+
+
+@pytest.mark.parametrize("invalid",[-1,float("nan"),float("inf"),True])
+def test_invalid_current_capital_rejected(invalid):
     with pytest.raises(ValueError):
         calculate_goal(50,invalid)
+
+
+def test_zero_balance_is_not_a_compounding_opportunity():
+    result=calculate_goal(50,0,400,12)
+    assert result["current_return_pct"]==-100
+    assert result["goal_progress_pct"]==0
+    assert result["monthly_growth_needed_pct"] is None
+    assert result["remaining_to_target"]==250
 
 
 def test_no_unreasonable_monthly_rates():
