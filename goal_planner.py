@@ -22,6 +22,18 @@ def _positive(value, label):
     return number
 
 
+def _nonnegative(value, label):
+    if isinstance(value, bool):
+        raise ValueError(f"{label}: invalid amount")
+    try:
+        number=float(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"{label}: invalid amount") from exc
+    if not math.isfinite(number) or number < 0:
+        raise ValueError(f"{label}: must be finite and nonnegative")
+    return number
+
+
 def calculate_goal(initial_capital, current_capital, target_gain_pct=400.0,
                    remaining_months=12):
     """Compute a target and required growth rate, never a success probability.
@@ -30,7 +42,7 @@ def calculate_goal(initial_capital, current_capital, target_gain_pct=400.0,
     Initial and current amounts MUST be denominated in the same currency.
     """
     initial = _positive(initial_capital, "capital inicial")
-    current = _positive(current_capital, "capital atual")
+    current = _nonnegative(current_capital, "capital atual")
     if isinstance(target_gain_pct, bool):
         raise ValueError("invalid target")
     gain = float(target_gain_pct)
@@ -39,7 +51,7 @@ def calculate_goal(initial_capital, current_capital, target_gain_pct=400.0,
     if isinstance(remaining_months, bool) or not isinstance(remaining_months, int) or not 1 <= remaining_months <= 120:
         raise ValueError("remaining_months must be 1..120")
     final_goal = initial * (1 + gain / 100)
-    monthly_needed = (final_goal / current) ** (1 / remaining_months) - 1
+    monthly_needed = (final_goal / current) ** (1 / remaining_months) - 1 if 0 < current < final_goal else (0.0 if current >= final_goal else None)
     progress = ((current - initial) / (final_goal - initial)
                 if final_goal > initial else float(current >= initial))
     return {
@@ -51,7 +63,7 @@ def calculate_goal(initial_capital, current_capital, target_gain_pct=400.0,
         "current_return_pct": round(100 * (current / initial - 1), 3),
         "remaining_to_target": round(max(0, final_goal - current), 4),
         "goal_progress_pct": round(max(0, min(100, progress * 100)), 2),
-        "monthly_growth_needed_pct": round(monthly_needed * 100, 3),
+        "monthly_growth_needed_pct": round(monthly_needed * 100, 3) if monthly_needed is not None else None,
         "months": remaining_months,
         "reached": current >= final_goal,
     }
