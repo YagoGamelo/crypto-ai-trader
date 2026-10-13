@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXUS — Monitor de Mercados 30 min</title><meta name="description" content="Radar público de criptomoedas, ações e ETFs; atualização programada de 30 minutos, previsões de 5 dias.">
+<style>
+:root{color-scheme:dark;--bg:#080d17;--panel:#101a29;--border:#28334a;--ink:#eef2fb;--muted:#94a0b8;--accent:#64b6f4;--good:#4ad7aa;--bad:#fb8b96}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{width:min(1240px,calc(100% - 32px));margin:auto;padding:32px 0 56px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.brand{font-weight:900;letter-spacing:3px;font-size:18px}.small{color:var(--muted);font-size:13px}.badge{color:var(--good);border:1px solid #286655;padding:5px 11px;border-radius:99px;font-size:12px}
+h1{letter-spacing:-.065em;font-size:clamp(35px,7vw,72px);line-height:1.04;margin:42px 0 12px}
+.lead{color:var(--muted);font-size:17px;max-width:730px}
+button,select,input{font:inherit}button{background:var(--accent);color:#05121f;border:0;border-radius:10px;padding:10px 16px;font-weight:750;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent)}
+.status{margin:26px 0;color:var(--muted);border-left:3px solid var(--accent);padding:12px 16px;background:var(--panel)}
+.status.warn{border-color:var(--bad);color:var(--bad)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0}
+.metric,.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px}
+.metric .value{display:block;font-size:clamp(23px,3vw,34px);font-weight:800;margin:7px 0}
+.metric .caption{font-size:12px;color:var(--muted)}h2{font-size:23px;letter-spacing:-.04em;margin:36px 0 12px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card-title{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:17px;font-weight:750}
+.rank{display:flex;gap:12px;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border);align-items:center}
+.rank:first-child{margin-top:15px}.p{font-weight:850;font-size:18px}.up{color:var(--good)}.down{color:var(--bad)}
+.note{color:var(--muted);font-size:13px;margin-top:12px}.controls{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+input,select{background:#141f30;color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:12px}
+input{flex:1;min-width:160px}table{border-collapse:collapse;width:100%;font-size:13px;min-width:710px}td,th{border-bottom:1px solid var(--border);text-align:left;padding:12px 9px}th{color:var(--muted);font-weight:500}td:first-child{font-weight:750}
+.table-wrap{overflow-x:auto;border-radius:14px;background:var(--panel);border:1px solid var(--border)}
+footer{margin-top:50px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+a{color:var(--accent);text-underline-offset:3px}#update{margin-left:auto}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}main{width:min(100% - 24px,1000px)}}
+</style></head>
+<body><main>
+<header><div><div class="brand">✦ NEXUS</div><div class="small">MARKET INTELLIGENCE / 30 MIN</div></div><span class="badge">APENAS ANÁLISE</span></header>
+<h1>O mercado.<br>Sem ruído.</h1>
+<p class="lead">As mudanças dos últimos 30 minutos, as estimativas de subida e descida para cinco velas diárias e as cinco hipóteses mais fortes do nosso modelo experimental.</p>
+<div class="controls"><button id="reload">↻ Atualizar relatório</button><span class="small" id="update">A iniciar…</span></div>
+<div role="status" aria-live="polite" class="status" id="status">A consultar o relatório público…</div>
+<section class="metrics" aria-label="Resumo"><div class="metric"><div class="caption">Mercados analisados</div><span id="m1" class="value">—</span></div>
+<div class="metric"><div class="caption">Cotações 30 min recentes</div><span id="m2" class="value">—</span></div>
+<div class="metric"><div class="caption">Candidatos à subida</div><span id="m3" class="value">—</span></div>
+<div class="metric"><div class="caption">Sinais de saída se detido</div><span id="m4" class="value">—</span></div></section>
+<section class="split">
+<div class="card"><div class="card-title"><span>↗ Top 5 subida</span><span class="small">Horizonte 5 velas diárias</span></div><div id="top-up" class="note">Sem resultados</div></div>
+<div class="card"><div class="card-title"><span>↘ Top 5 descida</span><span class="small">Horizonte 5 velas diárias</span></div><div id="top-down" class="note">Sem resultados</div></div></section>
+<h2>Todos os ativos</h2><p class="small">Ordena e filtra 170 ativos. A coluna 30 min é a variação entre as duas últimas velas completas disponíveis, não a previsão do modelo.</p>
+<div class="controls"><input id="search" aria-label="Pesquisar ativo" placeholder="Pesquisar empresa ou ticker…">
+<select id="market" aria-label="Tipo de mercado"><option value="">Todos os mercados</option><option>Ações</option><option>Cripto</option><option>ETF</option></select>
+<select id="order" aria-label="Ordenação"><option value="up">Probabilidade subir</option><option value="down">Probabilidade descer</option><option value="move">Variação 30 min</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Ativo</th><th>Mercado</th><th>Chance subir 5d*</th><th>Chance descer 5d*</th><th>Mudança 30 min</th><th>Última vela UTC</th><th>Sinal experimental</th></tr></thead><tbody id="all-rows"></tbody></table></div>
+<footer><strong>O que estes números significam:</strong> as probabilidades são estimativas estatísticas não calibradas e não prometem lucros. O cálculo do modelo é renovado separadamente das cotações de 30 minutos. A bolsa pode estar fechada; os preços podem chegar com atraso. Sem ordens nem conta bancária conectada. O GitHub Actions agenda execuções de 30 em 30 minutos, mas pode atrasar ou falhar.<p><a href="https://github.com/YagoGamelo/crypto-ai-trader/actions/workflows/market-monitor.yml">Histórico de execuções</a> · <a href="https://github.com/YagoGamelo/crypto-ai-trader">Código no GitHub</a></p></footer>
+</main>
+<script>
+"use strict";
+const DATA="https://raw.githubusercontent.com/YagoGamelo/crypto-ai-trader/market-data/data/latest.json";
+let assets=[];
+const el=id=>document.getElementById(id);
+const fmt=n=>typeof n==="number"&&Number.isFinite(n)?n.toLocaleString("pt-PT",{maximumFractionDigits:1})+"%":"—";
+const txt=(parent,value,cls="")=>{const node=document.createElement("span");node.textContent=String(value??"—");if(cls)node.className=cls;parent.appendChild(node);return node};
+function fmtTime(t){if(!t)return "—";const d=new Date(t);return isNaN(d)?"—":d.toLocaleString("pt-PT",{timeZone:"UTC",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}
+function ageMin(t){const m=(Date.now()-Date.parse(t))/60000;return Number.isFinite(m)?m:Infinity}
+function rank(node,items,key){node.replaceChildren();if(!items.length){node.textContent="Sem modelos suficientemente avaliados.";return}
+items.slice(0,5).forEach((a,i)=>{const row=document.createElement("div");row.className="rank";
+const left=document.createElement("div");txt(left,"#"+(i+1)+"  "+a.symbol);left.appendChild(document.createElement("br"));txt(left,a.market,"small");
+const right=document.createElement("div");txt(right,fmt(a[key]),key==="prob_up_pct"?"p up":"p down");row.append(left,right);node.appendChild(row)})}
+function renderTable(){const text=el("search").value.trim().toUpperCase(),type=el("market").value,sort=el("order").value;
+const rows=assets.filter(a=>(!type||a.market===type)&&(!text||String(a.symbol).toUpperCase().includes(text)));
+const key=sort==="down"?"prob_down_pct":sort==="move"?"change_30m_pct":"prob_up_pct";
+const score=a=>key==="change_30m_pct"?(a.quote?.age_minutes<=90?a.quote?.change_30m_pct:undefined):a[key];
+rows.sort((a,b)=>(Number.isFinite(score(b))?score(b):-Infinity)-(Number.isFinite(score(a))?score(a):-Infinity));
+const body=el("all-rows");body.replaceChildren();rows.forEach(a=>{const tr=document.createElement("tr");
+const q=a.quote||{},v=[a.symbol,a.market,fmt(a.prob_up_pct),fmt(a.prob_down_pct),q.age_minutes<=90?fmt(q.change_30m_pct):"—",fmtTime(q.close_candle_start_utc),a.signal||"—"];
+v.forEach((x,i)=>{const td=document.createElement("td");td.textContent=String(x);if(i===2)td.className="up";if(i===3)td.className="down";tr.appendChild(td)});body.appendChild(tr)});
+if(!rows.length){const tr=document.createElement("tr"),td=document.createElement("td");td.colSpan=7;td.textContent="Sem ativos com estes filtros.";tr.appendChild(td);body.appendChild(tr)}
+}
+async function load(){
+try{el("update").textContent="A obter dados…";
+const url=DATA+"?refresh="+Math.floor(Date.now()/120000);
+const response=await fetch(url,{cache:"no-store"});
+if(!response.ok)throw new Error("HTTP "+response.status);
+const data=await response.json();
+if(data.schema_version!==1)throw new Error("Formato não reconhecido");
+if(!data.generated_at_utc){el("status").textContent="Aguarda a primeira análise. Abre 'Histórico de execuções' para executar manualmente.";el("update").textContent="Ainda sem dados";return}
+assets=Array.isArray(data.assets)?data.assets:[];
+el("m1").textContent=String(data.model_coverage??0)+"/"+String(data.universe_count??170);
+el("m2").textContent=String(data.recent_30m_quotes??0);
+el("m3").textContent=String(data.buy_candidates??0);
+el("m4").textContent=String(data.sell_if_held??0);
+rank(el("top-up"),data.top_up||[],"prob_up_pct");rank(el("top-down"),data.top_down||[],"prob_down_pct");
+const mins=ageMin(data.generated_at_utc),modelAge=ageMin(data.model_updated_at);
+el("status").className="status"+(mins>75?" warn":"");
+el("status").textContent=mins>75?"Relatório desatualizado ("+Math.round(mins)+" minutos). Verifica o GitHub Actions.":"Relatório criado há "+Math.round(mins)+" minutos. Estimativas do modelo geradas "+(Number.isFinite(modelAge)?Math.round(modelAge)+" min atrás":"em data desconhecida")+".";
+el("update").textContent="Atualização UTC: "+fmtTime(data.generated_at_utc);
+renderTable();
+}catch(e){el("status").className="status warn";el("status").textContent="Não foi possível carregar os dados. Confirma o estado do monitor no GitHub Actions.";el("update").textContent="Erro de rede"}
+}
+el("reload").addEventListener("click",load);
+["search","market","order"].forEach(id=>el(id).addEventListener(id==="search"?"input":"change",renderTable));
+load();setInterval(load,120000);
+</script></body></html>
