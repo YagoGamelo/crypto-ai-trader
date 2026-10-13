@@ -19,7 +19,7 @@ a,b,c=st.columns(3)
 a.metric("Universo monitorizado",len(WATCHLIST))
 b.metric("Empresas",len(STOCKS))
 c.metric("Cripto + ETFs",len(CRYPTO)+len(ETFS))
-tab1,tab2,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","📈 Explorar ativo","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
+tab1,tab2,tab_auto,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","📈 Explorar ativo","🤖 Auto-trading virtual","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
 with tab1:
     st.subheader("As 5 maiores estimativas de subida")
     st.write("O modelo analisa todos os ativos disponíveis, testa o desempenho fora da amostra e compara previsões para os próximos **5 dias**.")
@@ -323,3 +323,81 @@ with tab6:
             except (TypeError, ValueError):
                 st.error("Resposta inesperada da conta demo. Não foi enviada uma nova ordem após este erro.")
     st.caption("A conta demo Trading 212 é independente da carteira simulada de 50 USD do separador anterior. Sem negociação real, sem execução automática e sem API de levantamentos.")
+
+with tab_auto:
+    from datetime import datetime, timezone
+    import time
+    from auto_paper import create_portfolio, evaluate_cycle, portfolio_equity
+    st.subheader("Piloto automático · Ações")
+    st.caption("O modelo escolhe empresas para comprar e vender em carteira virtual. Nenhuma ordem é enviada à Trading 212 ou a qualquer corretora.")
+    left,mid,right=st.columns(3)
+    left.metric("COMPRAR", "≥ 70%", help="Estimativa de subida para 5 dias; não calibrada.")
+    mid.metric("VENDER", "≤ 50%", help="Vende a posição quando a previsão de subida cai para 50% ou menos.")
+    right.metric("STOP de segurança", "−5%", help="Avaliado apenas quando existem novos preços diários; não é stop real intradiário.")
+    st.info("O motor analisa ações através dos preços de fecho diários. Sem 70% e modelo melhor que a referência, não abre compras. Reservará 30% dos lucros líquidos realizados.")
+    if "autobot_wallet" not in st.session_state:
+        st.session_state["autobot_wallet"] = create_portfolio()
+    st.warning("Somente simulação: preços históricos de fecho, sem execução real. As percentagens NÃO são probabilidades calibradas de lucro. O modo automático funciona apenas enquanto a sessão do site estiver conectada.")
+    @st.fragment(run_every="1h")
+    def automatic_paper_dashboard():
+        portfolio=st.session_state["autobot_wallet"]
+        enabled=st.toggle("Ativar decisões virtuais automáticas enquanto o site estiver aberto",
+                          value=False,key="autobot_enabled")
+        run_now=st.button("🔍 Analisar empresas e executar um ciclo virtual agora",
+                          type="primary",key="autobot_run_now")
+        current=time.time()
+        due=enabled and current-st.session_state.get("autobot_checked_epoch",0)>=3600
+        if run_now or due:
+            try:
+                from top5_research import scan_all
+                with st.spinner("A analisar o histórico das empresas e calcular sinais..."):
+                    dataset=scan_all(categories=("Ações",))
+                    st.session_state["autobot_checked_epoch"]=time.time()
+                    if dataset.empty:
+                        st.warning("Não há preços e previsões suficientes; nenhuma operação foi executada.")
+                    else:
+                        cycle=evaluate_cycle(portfolio,dataset.to_dict("records"),
+                                             now=datetime.now(timezone.utc))
+                        st.session_state["autobot_last_cycle"]=cycle
+                        st.session_state["autobot_coverage"]=len(dataset)
+                        st.session_state["autobot_last_analysis"]=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+                        if cycle["actions"]:
+                            st.success(f"{len(cycle['actions'])} decisão(ões) virtuais registadas neste ciclo.")
+                        else:
+                            st.info("Análise concluída: aguardar. Nenhuma nova operação satisfaz as regras.")
+            except Exception as exc:
+                st.error(f"Falha na análise automática; sem novas operações: {exc}")
+        metrics=st.columns(4)
+        metrics[0].metric("Carteira virtual (USD)",f"{portfolio_equity(portfolio):.2f}")
+        metrics[1].metric("Disponível USD",f"{portfolio['cash']:.2f}")
+        metrics[2].metric("Lucros reservados USD",f"{portfolio['reserved']:.2f}")
+        metrics[3].metric("Posições abertas",len(portfolio["positions"]))
+        if "autobot_last_analysis" in st.session_state:
+            st.caption(f"Última análise: {st.session_state['autobot_last_analysis']} · Ações com dados: {st.session_state.get('autobot_coverage',0)}.")
+        else:
+            st.caption("Ainda não houve análise nesta sessão.")
+        if portfolio["positions"]:
+            st.markdown("#### Empresas em carteira")
+            positions=[]
+            for ticker,position in portfolio["positions"].items():
+                last_price=portfolio["last_prices"].get(ticker,position["entry_price"])
+                positions.append({"Empresa":ticker,"Entrada USD":round(position["entry_price"],4),
+                                  "Último fecho USD":round(last_price,4),
+                                  "Unidades":round(position["quantity"],6),
+                                  "Valor virtual USD":round(position["quantity"]*last_price,2),
+                                  "Variação desde entrada %":round(100*(last_price/position["entry_price"]-1),2)})
+            st.dataframe(pd.DataFrame(positions),hide_index=True,use_container_width=True)
+        if portfolio["trades"]:
+            st.markdown("#### Histórico de decisões")
+            transactions=pd.DataFrame(portfolio["trades"][::-1])
+            transactions["prob_subida"]=transactions["prob_subida"].mul(100).round(1)
+            transactions=transactions.rename(columns={"prob_subida":"Subida estimada %"})
+            st.dataframe(transactions.head(40),hide_index=True,use_container_width=True)
+        if not enabled:
+            if st.button("Reiniciar esta carteira virtual",key="autobot_reset"):
+                st.session_state["autobot_wallet"]=create_portfolio()
+                for key in ("autobot_last_cycle","autobot_coverage","autobot_last_analysis","autobot_checked_epoch"):
+                    st.session_state.pop(key,None)
+                st.rerun()
+        st.caption("Máx. 20% do saldo investível por compra, 3 posições abertas, 1 compra nova por ciclo, stop estimado de 5% e pausa de novas compras após uma queda diária de 5%. Dados diários: atualizar de hora a hora não cria novas velas nem trades repetidos.")
+    automatic_paper_dashboard()
