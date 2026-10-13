@@ -94,7 +94,7 @@ PROVIDERS = [
 ]
 
 def preview_roundtrip_eur(provider, amount_eur=50.0, asset_currency="USD"):
-    """Illustrative EUR-account buy & sell of USD stocks at unchanged price.
+    """Illustrative EUR-account buy & sell of EUR- or USD-quoted stocks at unchanged price.
     Excludes spreads, slippage, taxes, rebates, and third-party/withdrawal fees.
     Only compare providers with explicitly supported simple fee models.
     """
