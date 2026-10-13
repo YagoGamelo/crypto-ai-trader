@@ -1,5 +1,86 @@
 # NEXUS / Crypto AI Trader — pesquisa e simulação
 
+## Criptomoedas, memecoins e opções — módulos de estudo
+
+### Cripto spot e memecoins
+
+O catálogo foi expandido com **15 memecoins**, totalizando até
+**185 ativos de investigação** (65 criptomoedas, 100 ações e 20 ETFs).
+Uma moeda no catálogo **NÃO** significa que esteja disponível para
+negociação na Kraken nem que tenha dados históricos suficientes.
+
+A aba **🪙 Cripto e Memecoins** consulta apenas preços públicos do mercado
+**spot USD** da Kraken via `ccxt`, usando velas completas de 30 minutos,
+1 hora ou 4 horas. O modelo `research_v2.py` avalia as **próximas quatro
+velas** (por exemplo, **2 horas** quando cada vela tem 30 minutos), com
+treino, calibração e teste em períodos distintos. Este sinal cripto NÃO
+é igual às estimativas de subida nos cinco dias das ações.
+
+- **Entradas virtuais:** subida prevista ≥70%, desempenho histórico
+  aprovado, cotação recente, mínimo de volume negociado em 24 horas e
+  spread observado compatível com o mercado. Sem spread, sem histórico ou
+  com mercado indisponível, **não há compra**.
+- **Saídas virtuais:** descida prevista ≥70%; subida ≤50%; stop móvel
+  adaptativo; stop de perda; tempo máximo de observação. Uma descida
+  prevista de 70% só encerra uma posição **existente**; nunca abre short.
+- **Ações por clique** ou tentativa de reavaliação a cada meia hora
+  enquanto a sessão Streamlit estiver aberta e o alojamento ativo.
+  **Não é um serviço de trading contínuo 24/7.**
+- **Mercados maiores:** investimento máximo de 20% do valor livre numa
+  entrada; risco hipotético de 1% da carteira.
+- **Memecoins:** máximo de 10% numa entrada e 0,5% de risco inicial
+  planeado; volume de referência ≥500 mil USD nas últimas 24h,
+  spread observado ≤1,5% e bloqueio em variações extremamente violentas.
+  São estimativas imperfeitas: volume de negociação NÃO equivale à
+  liquidez do livro de ordens.
+- **Custos simulados por operação completa**: 1,4% nas criptomoedas
+  maiores e 2,8% nas memecoins (comissões e derrapagem assumidas).
+  A Kraken pode cobrar valores reais diferentes por par e escalão.
+- **A carteira é virtual e separada por sessão**, começa com 50 unidades
+  USD nominais e não pode ser vinculada à API da Trading 212 nem a uma
+  conta de exchange real. Não disponibiliza levantamentos.
+
+Os preços e os modelos podem tornar-se desatualizados; quando não há
+confirmação do par spot e indicadores de liquidez, o sistema falha sem
+comprar. O utilizador precisa de selecionar o ativo que quer observar;
+a carteira virtual não faz varrimento autónomo de todas as moedas em
+segundo plano.
+
+### CALL e PUT — gráfico ilustrativo de lucro/prejuízo
+
+Na aba **📉 Opções Call/Put** é possível ajustar o preço do ativo
+subjacente, strike, prémio pago, multiplicador, quantidade de contratos,
+comissões e uma data de expiração **meramente indicativa**.
+
+O ficheiro `options_payoff.py` mostra **apenas na expiração**:
+
+- **Compra de Call:** lucro líquido =
+  `max(0, preço_final - strike) × unidades - prémio_total - comissões`.
+  Break-even = strike + custo por unidade. A perda máxima teórica é
+  o débito pago; o lucro máximo teórico não tem limite superior.
+- **Compra de Put:** lucro líquido =
+  `max(0, strike - preço_final) × unidades - prémio_total - comissões`.
+  Break-even = strike − custo por unidade. A perda máxima teórica é
+  o débito pago; o lucro máximo ocorre teoricamente com preço final
+  zero e é limitado.
+- A linha do gráfico **não** inclui valor temporal da opção antes da
+  expiração, volatilidade implícita, dividendos, FX, conversão de
+  moeda, regras de exercício nem possíveis comissões adicionais.
+  Por isso **não é uma cotação da corretora** e não prevê a evolução
+  real do prémio.
+- **NÃO** há venda de opções descobertas, ordens de derivados, opções
+  binárias, margem ou alavancagem. Estes contratos NÃO são executados
+  pela Trading 212 API do projeto.
+
+**Aviso importante:** 70% de hipótese de subida de um ativo não é
+70% de hipótese de lucro numa Call; também é necessário ultrapassar
+o strike, o prémio e os custos *antes do prazo escolhido*.
+
+Antes de qualquer integração real, seria necessário contratar dados
+de opções autorizados, verificar acesso regulamentar aos instrumentos,
+confirmar condições de corretagem e testar exaustivamente as ordens.
+
+
 ## Meta anual de +400% — painel de objetivos, não uma promessa
 
 **Uma rentabilidade de +400%** corresponde a multiplicar o capital por
@@ -44,7 +125,7 @@ na comparação comprar-e-manter, pelo mesmo período histórico.
 A estratégia **não usa os resultados do teste para otimizar
 automaticamente os limiares**. Um bom resultado histórico não prova
 rentabilidade futura, e um único ativo não representa o portfólio de
-170 ativos. Impostos, dividendos, câmbio e outras fricções não foram
+185 ativos. Impostos, dividendos, câmbio e outras fricções não foram
 incluídos.
 
 Para testar depois de fazer `git pull` no Codespaces:
@@ -135,7 +216,7 @@ reproduz o percurso histórico sem usar dados futuros em cada decisão:
   fechadas, taxas totais, exposição e retorno de uma estratégia
   comparável de comprar e manter.
 - Simulação **de um único ativo**, não uma simulação integral da
-  escolha diária dos melhores entre os 170. Não inclui dividendos,
+  escolha diária dos melhores entre os 185. Não inclui dividendos,
   impostos, câmbio, falta de liquidez, execução parcial nem todas as
   fricções da bolsa. Pode produzir **zero operações**. O retorno
   anualizado, quando mostrado, é apenas uma transformação matemática
@@ -173,7 +254,7 @@ Projeto educativo para iPad, GitHub Codespaces, Render e Streamlit. **Não negoc
 ## Site
 
 Separadores:
-1. **Top 5:** analisa até 170 ativos (50 cripto, 100 ações, 20 ETFs) com dados públicos; ordena as estimativas de subida para cinco dias apenas entre modelos cujo Brier de teste supera uma previsão de referência. Não corrige seleção múltipla nem calibra probabilidades: **não usar para colocar ordens reais**.
+1. **Top 5:** analisa até 185 ativos (65 cripto (incluindo 15 memecoins), 100 ações, 20 ETFs) com dados públicos; ordena as estimativas de subida para cinco dias apenas entre modelos cujo Brier de teste supera uma previsão de referência. Não corrige seleção múltipla nem calibra probabilidades: **não usar para colocar ordens reais**.
 2. **Explorar ativo:** gráfico de velas, médias móveis e estudo estatístico a 1, 5 e 20 dias.
 3. **Auto-trading virtual:** pesquisa automaticamente as 100 ações do catálogo de hora a hora enquanto a sessão Streamlit estiver aberta, compra virtualmente quando o modelo estima ≥70% de subida em cinco dias e vende quando essa estimativa cai para ≤50% (ou ao atingir o stop diário de 5%). Não executa operações reais.
 4. **Trading virtual:** um ciclo por clique, BTC/USD ou ETH/USD, carteira local **privada por sessão do navegador** e por símbolo; saldo inicial nominal de 50 USD. Reserva 30% do lucro líquido realizado sem reinvestir; não reserva quando há perdas. Compras virtuais bloqueadas quando o teste Brier não supera a referência.
@@ -357,7 +438,7 @@ O NEXUS tem agora dois processos separados:
    consulta o relatório aproximadamente a cada dois minutos.
 
 **Dados e precisão:**
-- Tenta obter uma **vela de 30 minutos já concluída** para cada um dos 170
+- Tenta obter uma **vela de 30 minutos já concluída** para cada um dos 185
   ativos. Dados podem chegar com atraso; mercados de ações fecham à
   noite e ao fim de semana. Uma mudança que atravessa o fecho de uma
   bolsa **não** é rotulada como movimento de 30 minutos.
