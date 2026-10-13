@@ -4,7 +4,7 @@
 
 ### Cripto spot e memecoins
 
-O catálogo foi expandido com **15 memecoins**, totalizando até
+O catálogo foi expandido com **15 novas memecoins** (além da Dogecoin, que já existia), totalizando até
 **185 ativos de investigação** (65 criptomoedas, 100 ações e 20 ETFs).
 Uma moeda no catálogo **NÃO** significa que esteja disponível para
 negociação na Kraken nem que tenha dados históricos suficientes.
@@ -254,7 +254,7 @@ Projeto educativo para iPad, GitHub Codespaces, Render e Streamlit. **Não negoc
 ## Site
 
 Separadores:
-1. **Top 5:** analisa até 185 ativos (65 cripto (incluindo 15 memecoins), 100 ações, 20 ETFs) com dados públicos; ordena as estimativas de subida para cinco dias apenas entre modelos cujo Brier de teste supera uma previsão de referência. Não corrige seleção múltipla nem calibra probabilidades: **não usar para colocar ordens reais**.
+1. **Top 5:** analisa até 185 ativos (65 cripto (incluindo 16 memecoins, contando DOGE), 100 ações, 20 ETFs) com dados públicos; ordena as estimativas de subida para cinco dias apenas entre modelos cujo Brier de teste supera uma previsão de referência. Não corrige seleção múltipla nem calibra probabilidades: **não usar para colocar ordens reais**.
 2. **Explorar ativo:** gráfico de velas, médias móveis e estudo estatístico a 1, 5 e 20 dias.
 3. **Auto-trading virtual:** pesquisa automaticamente as 100 ações do catálogo de hora a hora enquanto a sessão Streamlit estiver aberta, compra virtualmente quando o modelo estima ≥70% de subida em cinco dias e vende quando essa estimativa cai para ≤50% (ou ao atingir o stop diário de 5%). Não executa operações reais.
 4. **Trading virtual:** um ciclo por clique, BTC/USD ou ETH/USD, carteira local **privada por sessão do navegador** e por símbolo; saldo inicial nominal de 50 USD. Reserva 30% do lucro líquido realizado sem reinvestir; não reserva quando há perdas. Compras virtuais bloqueadas quando o teste Brier não supera a referência.
