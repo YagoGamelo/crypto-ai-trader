@@ -13,3 +13,10 @@ def test_no_trade_without_permission(tmp_path):
     db = connect(str(tmp_path / "test.db"))
     assert step(db, 100, .99, enabled=False) == "Pausado"
     assert snapshot(db, 100)["cash"] == 50
+
+def test_sell_when_probability_reaches_50(tmp_path):
+    db = connect(str(tmp_path / "threshold.db"))
+    assert step(db, 100, .70, enabled=True).startswith("BUY")
+    # 50% triggers exit, rather than waiting for probability to fall to 45%.
+    assert step(db, 100, .50, enabled=True).startswith("SELL")
+    assert snapshot(db, 100)["units"] == 0
