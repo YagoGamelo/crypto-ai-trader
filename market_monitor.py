@@ -186,6 +186,13 @@ def build_report(previous, models, model_updated_at, quotes, now):
             old = next((x.get("quote") for x in previous.get("assets", [])
                         if x.get("symbol") == symbol), None)
             quote = old if isinstance(old, dict) else None
+        # Calculate age from the candle timestamp, even for fallback quotes:
+        # a cached quote must not appear fresh on a later scheduled run.
+        if isinstance(quote, dict):
+            quote = dict(quote)
+            quote_time = parse_time(quote.get("close_candle_start_utc"))
+            quote["age_minutes"] = (round((now-quote_time).total_seconds()/60, 1)
+                                    if quote_time is not None else None)
         up = _number(model.get("up_pct"))
         down = _number(model.get("down_pct"))
         validated = bool(model.get("better_than_baseline"))
@@ -203,7 +210,8 @@ def build_report(previous, models, model_updated_at, quotes, now):
     top_up = sorted(candidates, key=lambda x: x["prob_up_pct"], reverse=True)[:5]
     top_down = sorted(candidates, key=lambda x: x["prob_down_pct"], reverse=True)[:5]
     recent_quotes = [x for x in universe if x["quote"] is not None and
-                     (_number(x["quote"].get("age_minutes")) or 99999) <= 90]
+                     _number(x["quote"].get("age_minutes")) is not None and
+                     0 <= x["quote"]["age_minutes"] <= 90]
     reported = {
         "schema_version": 1,
         "generated_at_utc": iso_utc(now),
