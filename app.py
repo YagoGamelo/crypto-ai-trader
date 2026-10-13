@@ -14,7 +14,7 @@ div.stButton>button[kind="primary"] {background:#111827;border-radius:12px;borde
 </style>""",unsafe_allow_html=True)
 st.caption("✦ NEXUS   /   MARKET INTELLIGENCE")
 st.title("Menos ruído. Melhores decisões.")
-st.caption("Pesquisa quantitativa em ações, ETFs e criptoativos. Apenas simulação — nenhuma ordem real.")
+st.caption("Pesquisa quantitativa em ações, ETFs e criptoativos. Modelos avaliados com testes cronológicos. Apenas simulação — nenhuma ordem real.")
 a,b,c=st.columns(3)
 a.metric("Universo monitorizado",len(WATCHLIST))
 b.metric("Empresas",len(STOCKS))
@@ -51,12 +51,12 @@ with tab1:
             else:
                 top=valid.head(5).copy()
                 top.insert(0,"Posição",range(1,len(top)+1))
-                st.dataframe(top[["Posição","Ativo","Mercado","Prob. subir (estimada)","Prob. descer (estimada)","Sinal da IA 70/50","Acerto teste %","Data"]],hide_index=True,use_container_width=True)
-                st.caption("Ranking apenas entre modelos com Brier melhor do que a referência. Isto NÃO prova calibração nem rentabilidade.")
+                st.dataframe(top[["Posição","Ativo","Mercado","Prob. subir (estimada)","Prob. descer (estimada)","Sinal da IA 70/50","Erro calibração %","Aprovado para virtual","Acerto teste %","Data"]],hide_index=True,use_container_width=True)
+                st.caption("Top 5 de estudo histórico. Uma previsão pode estar calibrada em dados passados e AINDA NÃO estar aprovada para trading virtual. O ranking não garante retornos; a seleção entre muitos ativos aumenta falsos positivos.")
             with st.expander("Ver a tabela completa de todos os ativos analisados"):
                 st.dataframe(df.sort_values("Prob. subir (estimada)",ascending=False),hide_index=True,use_container_width=True)
                 st.download_button("Exportar CSV",df.to_csv(index=False).encode("utf-8-sig"),"analise_mercados.csv","text/csv")
-            st.warning("Sinais da tabela são experimentais e não calibrados. Só a aba Auto-trading virtual executa operações simuladas, segundo as regras de risco.")
+            st.warning("Estimativas calibradas com um bloco de dados histórico separado, mas sem prova de lucros reais. Só a aba Auto-trading virtual executa operações simuladas, se o filtro de qualidade estiver aprovado.")
     else:
         st.info("Carrega em Analisar todo o mercado para gerar o ranking. Não são apresentados resultados fictícios.")
 with tab2:
@@ -84,9 +84,40 @@ with tab2:
             if reports:
                 st.dataframe(pd.DataFrame([{"Prazo (dias)":r["horizon"],"Subida estimada %":round(r["p_up"]*100,1),
                     "Descida estimada %":round(r["p_down"]*100,1),"Acerto teste %":round(r["accuracy"]*100,1),
-                    "Brier":round(r["brier"],3),"Referência":round(r["baseline"],3)} for r in reports]),hide_index=True,use_container_width=True)
-            st.caption(f"Dados até {raw.index[-1].date()}. Probabilidades não calibradas.")
+                    "Brier":round(r["brier"],3),"Referência":round(r["baseline"],3),
+                    "Erro calibração %":round(100*r["ece"],1),
+                    "Aprovado para virtual":r["approved_for_paper"]} for r in reports]),hide_index=True,use_container_width=True)
+            st.caption(f"Dados até {raw.index[-1].date()}. Probabilidades calibradas num segmento histórico separado e avaliadas noutro. Ainda podem falhar e não indicam lucros líquidos.")
         except Exception as exc: st.error(f"Não foi possível analisar: {exc}")
+    st.divider()
+    st.subheader("Backtest walk-forward · testar antes de investir")
+    st.caption("Previsões com dados anteriores a cada operação, execução virtual na abertura seguinte, taxas de 0,2% e derrapagem simulada de 0,1% por lado. Não é uma previsão de rendimento anual.")
+    if st.button("Executar backtest do ativo selecionado",key="run_wf_backtest"):
+        try:
+            from asset_analysis import history
+            from walkforward import backtest_one_asset
+            with st.spinner("A simular uma estratégia passada sem conhecer antecipadamente os preços futuros..."):
+                research_data=history(sym,"5y")
+                result=backtest_one_asset(research_data,retrain_every=10)
+                st.session_state["wf_backtest"]=dict(result, symbol=sym)
+        except Exception as exc:
+            st.error(f"Backtest não disponível: {exc}")
+    previous=st.session_state.get("wf_backtest")
+    if previous and previous.get("symbol")==sym:
+        v1,v2,v3,v4=st.columns(4)
+        v1.metric("Retorno virtual no período",f"{previous['return_pct']:+.2f}%")
+        v2.metric("Queda máxima observada",f"{previous['max_drawdown_pct']:.2f}%")
+        v3.metric("Comprar e manter",f"{previous['benchmark_buy_hold_pct']:+.2f}%")
+        v4.metric("Operações fechadas",previous["completed_trades"])
+        if previous["equity_curve"]:
+            curve=pd.DataFrame(previous["equity_curve"])
+            curve["data"]=pd.to_datetime(curve["date"])
+            st.line_chart(curve.set_index("data")["equity"])
+        if previous["trades"]:
+            with st.expander("Mostrar compras, vendas e custos simulados"):
+                st.dataframe(pd.DataFrame(previous["trades"]),use_container_width=True,hide_index=True)
+        st.caption(f"Período de {previous['bars_tested']} velas; comissões virtuais: {previous['total_fees_usd']:.2f} USD; exposição em {previous['invested_days_pct']:.1f}% dos dias; lucro reservado: {previous['reserved_usd']:.2f} USD.")
+        st.warning("Um backtest isolado não prova capacidade futura; pode ter poucas ou zero operações. O resultado exclui impostos, dividendos e conversão de moeda. Não foram feitas ordens reais.")
 with tab3:
     st.subheader("Carteira de demonstração")
     st.caption("Cada visitante tem uma carteira virtual própria, temporária e separada por ativo. Sem negociação contínua.")
@@ -385,6 +416,9 @@ with tab_auto:
         metrics[1].metric("Disponível USD",f"{portfolio['cash']:.2f}")
         metrics[2].metric("Lucros reservados USD",f"{portfolio['reserved']:.2f}")
         metrics[3].metric("Posições abertas",len(portfolio["positions"]))
+        if portfolio.get("peak_equity", 0)>0:
+            current_dd=100*(portfolio_equity(portfolio)/portfolio["peak_equity"]-1)
+            st.caption(f"Maior queda desde máximo observado na sessão: {current_dd:.2f}%. Novas compras ficam bloqueadas após -15% desde esse máximo.")
         if "autobot_last_analysis" in st.session_state:
             st.caption(f"Última análise: {st.session_state['autobot_last_analysis']} · Ações com dados: {st.session_state.get('autobot_coverage',0)}.")
         else:
