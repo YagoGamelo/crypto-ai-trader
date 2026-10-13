@@ -40,7 +40,8 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
     required={"Open", "Close"}
     if not isinstance(frame,pd.DataFrame) or not required.issubset(frame.columns):
         raise ValueError("Requires Open and Close price columns")
-    data=frame[["Open", "Close"]].astype(float).replace([np.inf,-np.inf],np.nan).dropna()
+    price_columns=["Open","Close"]+[col for col in ("High","Low") if col in frame.columns]
+    data=frame[price_columns].astype(float).replace([np.inf,-np.inf],np.nan).dropna(subset=["Open","Close"])
     if len(data)<start_bars+30:
         raise ValueError("At least 350 completed bars required")
     if not isinstance(retrain_every,int) or retrain_every<1:
@@ -55,6 +56,7 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
     units=0.
     cost=0.
     entry_price=peak=0.
+    position_atr_pct=None
     fees_total=0.
     wins=losses=0
     last_signal=None
@@ -68,11 +70,22 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
         model=last_signal
         close_before=float(data.Close.iloc[i-1])
         opening=float(data.Open.iloc[i])
+        current_atr_pct=None
+        if "High" in data and "Low" in data and i>=25:
+            h=data.High.iloc[i-15:i]
+            l=data.Low.iloc[i-15:i]
+            c=data.Close.iloc[i-16:i-1]
+            if len(h)==len(c) and c.notna().all() and h.notna().all() and l.notna().all():
+                tr=np.maximum.reduce([
+                    (h-l).abs().to_numpy(),
+                    np.abs(h.to_numpy()-c.to_numpy()),
+                    np.abs(l.to_numpy()-c.to_numpy())])
+                current_atr_pct=float(np.nanmean(tr))*100/close_before
         action=None
         if units>0:
             peak=max(peak,close_before)
-            exit_by_price=(close_before<=entry_price*(1-entry_stop_fraction(None))
-                           or trailing_exit(entry_price,peak,close_before))
+            exit_by_price=(close_before<=entry_price*(1-entry_stop_fraction(position_atr_pct))
+                           or trailing_exit(entry_price,peak,close_before,position_atr_pct))
             exit_by_prob=(model is not None and model["up_pct"]<=SELL_THRESHOLD*100)
             if exit_by_price or exit_by_prob:
                 fill=opening*(1-SLIPPAGE)
@@ -90,12 +103,13 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
                                "net_pnl":round(realized,4),"reserved":round(reserve,4),
                                "reason":"price protection" if exit_by_price else "up <=50%"})
                 units=entry_price=peak=cost=0.
+                position_atr_pct=None
                 action="SELL"
         # No same-bar reversal from SELL to BUY.
         if (units==0 and action is None and model and model["approved_for_paper"]
                 and model["up_pct"]>=BUY_THRESHOLD*100):
             investible=cash
-            budget=budget_for_entry(cash,investible,None)
+            budget=budget_for_entry(cash,investible,current_atr_pct)
             if budget>0:
                 fill=opening*(1+SLIPPAGE)
                 units=budget/(fill*(1+FEE))
@@ -103,6 +117,7 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
                 cash-=budget
                 cost=budget
                 entry_price=peak=fill
+                position_atr_pct=current_atr_pct
                 fees_total+=fee
                 trades.append({"date":str(data.index[i]),"action":"BUY","price":round(fill,4),
                                "p_up":model["up_pct"],"net_pnl":0.,"reserved":0.,
