@@ -22,6 +22,8 @@ def research_rows():
         "Ativo": "AAPL", "Prob. subir (estimada)": 74.2,
         "Prob. descer (estimada)": 25.8, "Brier": .15,
         "Brier referência": .20, "Amostras teste": 145,
+        "Aprovado para virtual": True, "Erro calibração %": 7.5,
+        "Sinais subida >=70 teste": 12,
         "Data": "2026-10-12"
     }, {
         "Ativo": "MSFT", "Prob. subir (estimada)": 30.,
