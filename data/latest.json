@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": null,
+  "model_updated_at": null,
+  "universe_count": 170,
+  "model_coverage": 0,
+  "recent_30m_quotes": 0,
+  "buy_candidates": 0,
+  "sell_if_held": 0,
+  "forecast_horizon": "5 velas diárias (aguarda primeira execução)",
+  "quote_interval": "30 minutos",
+  "assets": [],
+  "models": {},
+  "top_up": [],
+  "top_down": [],
+  "notes": [
+    "Aguardando a primeira execução do GitHub Actions."
+  ]
+}
