@@ -1,11 +1,9 @@
 """Per-asset daily chart and experimental out-of-sample direction forecasts."""
+from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 import yfinance as yf
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import brier_score_loss
+from research_v2 import research_direction
 
 def history(symbol, period="2y"):
     raw = yf.download(symbol, period=period, interval="1d", auto_adjust=True,
@@ -18,7 +16,13 @@ def history(symbol, period="2y"):
     required = ["Open", "High", "Low", "Close", "Volume"]
     if not all(k in raw for k in required):
         raise ValueError("Dados OHLCV incompletos")
-    return raw[required].dropna(subset=["Close"]).copy()
+    result=raw[required].dropna(subset=["Close"]).copy()
+    # Never use today's partly formed daily candle in a forecast.
+    today_utc=datetime.now(timezone.utc).date()
+    result=result.loc[pd.DatetimeIndex(result.index).date < today_utc]
+    if len(result)<300:
+        raise ValueError("Histórico completo insuficiente")
+    return result
 
 def indicators(raw):
     x = raw.copy()
@@ -35,39 +39,24 @@ def indicators(raw):
     x["VolumeRatio"] = x.Volume / x.Volume.rolling(20).mean().replace(0, np.nan)
     return x
 
-FEATURES = ["Ret1", "Ret5", "Ret20", "Vol20", "RSI14", "VolumeRatio", "DistMA20", "DistMA50"]
-
 def forecast(raw, horizon):
-    if horizon not in (1, 5, 20):
+    """Use exactly the same calibrated model as the global research table."""
+    if horizon not in (1,5,20):
         raise ValueError("Horizonte inválido")
-    x = indicators(raw)
-    x["DistMA20"] = x.Close / x.MA20 - 1
-    x["DistMA50"] = x.Close / x.MA50 - 1
-    x["Forward"] = x.Close.shift(-horizon) / x.Close - 1
-    labeled = x.iloc[:-horizon].dropna(subset=FEATURES + ["Forward"]).copy()
-    if len(labeled) < 180:
-        raise ValueError("Histórico insuficiente para validar este prazo")
-    labeled["Up"] = (labeled.Forward > 0).astype(int)
-    split = int(len(labeled) * 0.7)
-    train = labeled.iloc[:split-horizon]
-    test = labeled.iloc[split:]
-    if train.Up.nunique() < 2 or test.Up.nunique() < 2:
-        raise ValueError("Pouca diversidade nos resultados históricos")
-    model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
-    model.fit(train[FEATURES], train.Up)
-    predicted = model.predict_proba(test[FEATURES])[:, 1]
-    brier = float(brier_score_loss(test.Up, predicted))
-    baseline = float(brier_score_loss(test.Up, np.full(len(test), train.Up.mean())))
-    accuracy = float(((predicted >= 0.5) == test.Up.to_numpy()).mean())
-    latest = x.iloc[[-1]][FEATURES]
-    if latest.isna().any().any():
-        raise ValueError("Indicadores recentes incompletos")
-    # Refit using fully labeled history, leaving current unobserved horizon out.
-    model.fit(labeled[FEATURES], labeled.Up)
-    p_up = float(model.predict_proba(latest)[0, 1])
+    result=research_direction(raw["Close"],horizon=horizon)
+    if result is None:
+        raise ValueError("Histórico insuficiente para treino, calibração e teste independentes")
     return {
-        "p_up": p_up, "p_down": 1-p_up, "horizon": horizon,
-        "brier": brier, "baseline": baseline, "accuracy": accuracy,
-        "samples": len(test), "better_than_baseline": brier < baseline,
-        "last_date": str(x.index[-1].date()),
+        "p_up":result["up_pct"]/100,
+        "p_down":result["down_pct"]/100,
+        "horizon":horizon,
+        "brier":result["brier"],
+        "baseline":result["baseline_brier"],
+        "accuracy":result["holdout_accuracy"],
+        "samples":result["holdout_count"],
+        "ece":result["ece"],
+        "high_confidence_count":result["bullish_signals"],
+        "approved_for_paper":result["approved_for_paper"],
+        "better_than_baseline":result["better_than_baseline"],
+        "last_date":str(pd.Timestamp(raw.index[-1]).date()),
     }
