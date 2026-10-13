@@ -32,7 +32,8 @@ A decisão de **comprar virtualmente** requer tudo o seguinte:
 2. Brier inferior à referência por pelo menos 0,005;
 3. erro de calibração no teste ≤12 pontos percentuais;
 4. pelo menos oito previsões históricas com ≥70% de subida no teste;
-5. pelo menos 60% de acerto nesse pequeno grupo histórico.
+5. pelo menos 60% de acerto nesse pequeno grupo histórico;
+6. rendimento médio histórico dos sinais ≥70% positivo **depois de uma dedução teórica de 0,6%** por compra e venda (comissão de 0,2% e derrapagem de 0,1% por lado).
 
 Estas exigências **não garantem** acerto futuro de 70%, significância
 estatística ou lucro líquido. São travões de segurança preliminares,
