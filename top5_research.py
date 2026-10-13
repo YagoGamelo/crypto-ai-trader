@@ -43,8 +43,10 @@ def evaluate(close, horizon=5):
             "Validação":"Supera referência" if brier<baseline else "Não supera referência",
             "Amostras teste":len(test)}
 
-def scan_all(progress=None):
-    rows=[]; assets=WATCHLIST; total=len(assets)
+def scan_all(progress=None, categories=None):
+    rows=[]
+    assets = WATCHLIST if categories is None else [a for a in WATCHLIST if a['category'] in categories]
+    total=len(assets)
     for start in range(0,total,12):
         group=assets[start:start+12]; names=[a["symbol"] for a in group]
         try:
