@@ -94,7 +94,7 @@ def render_monitor():
     if model_age is None or model_age > 30*60:
         st.warning("O modelo histórico está antigo ou sem data válida. A previsão não foi recalculada neste ciclo.")
     st.caption(f"Relatório UTC: {generated} · Modelo (5 velas diárias) atualizado UTC: {report.get('model_updated_at','indisponível')}")
-    st.info("As cotações podem mudar de 30 em 30 minutos; as probabilidades abaixo **não** são previsões para os próximos 30 minutos, nem estão calibradas. Ações e ETFs não negoceiam de madrugada ou ao fim de semana.")
+    st.info("As cotações podem mudar de 30 em 30 minutos; as probabilidades foram calibradas apenas em dados históricos independentes e **não** são previsões para os próximos 30 minutos nem garantias de lucro. Ações e ETFs não negoceiam de madrugada ou ao fim de semana.")
     t1,t2,t3=st.tabs(["↗️ Cinco maiores subidas","↘️ Cinco maiores descidas","📈 Variação dos 30 minutos"])
     with t1:
         rows=report.get("top_up",[])
@@ -159,4 +159,4 @@ def render_monitor():
             st.caption("Histórico ainda vazio.")
     except (requests.RequestException,ValueError,TypeError,KeyError):
         st.caption("Histórico indisponível neste momento.")
-    st.warning("Monitor apenas informativo. Não dá garantias de lucro, não executa ordens automáticas e não envia notificações push. O agendamento GitHub é aproximado, não um serviço com garantia 24/7.")
+    st.warning("Monitor apenas informativo. Os modelos podem não superar a referência e podem gerar sinais falsos. Não dá garantias de lucro, não executa ordens automáticas e não envia notificações push. O agendamento GitHub é aproximado, não um serviço com garantia 24/7.")
