@@ -8,7 +8,9 @@ CLOCK = datetime(2026,10,13,17,0,tzinfo=timezone.utc)
 def row(ticker="MSFT",p=70,price=100,when="2026-10-13",valid=True):
     return {"Ativo":ticker,"Mercado":"Ações","Último fecho":price,
             "Prob. subir (estimada)":p,"Brier":.16 if valid else .25,
-            "Brier referência":.20,"Amostras teste":100,"Data":when}
+            "Brier referência":.20,"Amostras teste":100,"Data":when,
+            "Aprovado para virtual":valid,
+            "Vantagem líquida conservadora %":0.8 if valid else -0.4}
 
 def test_buy_exactly_70_and_hold_above_50():
     p=create_portfolio()
@@ -147,3 +149,45 @@ def test_lifetime_drawdown_prevents_new_entries_but_not_exits():
     result=evaluate_cycle(p,[row("MSFT",p=85,when="2026-10-14")],now=next_day)
     assert result["risk_gate_open"] is False
     assert "MSFT" not in p["positions"]
+
+def test_missing_model_approval_or_net_edge_fails_closed():
+    p=create_portfolio()
+    missing_approval=row("NO_GATE",p=98)
+    del missing_approval["Aprovado para virtual"]
+    missing_edge=row("NO_EDGE",p=98)
+    del missing_edge["Vantagem líquida conservadora %"]
+    bad_edge=dict(row("LOSS",p=99),**{"Vantagem líquida conservadora %":-.2})
+    cycle=evaluate_cycle(p,[missing_approval,missing_edge,bad_edge],now=CLOCK)
+    assert cycle["actions"]==[]
+    assert not p["positions"]
+
+
+def test_risk_adjusted_ranking_not_just_probability():
+    p=create_portfolio()
+    rows=[
+        dict(row("FOMO",p=96),**{"Vantagem líquida conservadora %":.1,"ATR 14 %":6.0}),
+        dict(row("BETTER",p=75),**{"Vantagem líquida conservadora %":1.2,"ATR 14 %":3.0}),
+    ]
+    result=evaluate_cycle(p,rows,now=CLOCK)
+    assert result["actions"][0]["ativo"]=="BETTER"
+
+
+def test_slippage_is_charged_both_sides():
+    p=create_portfolio()
+    buy=evaluate_cycle(p,[row("MSFT",p=80,price=100)],now=CLOCK)["actions"][0]
+    assert buy["preço_simulado"]>buy["preço"]
+    later=evaluate_cycle(p,[row("MSFT",p=50,price=100,when="2026-10-14")],
+                         now=CLOCK+timedelta(days=1))["actions"][0]
+    assert later["preço_simulado"]<later["preço"]
+    assert later["lucro_realizado"] < 0
+    assert p["reserved"]==0
+
+
+def test_recent_exit_cooldown_blocks_next_day_reentry():
+    p=create_portfolio()
+    evaluate_cycle(p,[row(p=82)],now=CLOCK)
+    evaluate_cycle(p,[row(p=50,price=110,when="2026-10-14")],now=CLOCK+timedelta(days=1))
+    again=evaluate_cycle(p,[row(p=90,price=110,when="2026-10-15")],now=CLOCK+timedelta(days=2))
+    assert not any(x["ação"]=="COMPRAR" for x in again["actions"])
+    later=evaluate_cycle(p,[row(p=90,price=110,when="2026-10-16")],now=CLOCK+timedelta(days=3))
+    assert any(x["ação"]=="COMPRAR" for x in later["actions"])
