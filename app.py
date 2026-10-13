@@ -52,7 +52,23 @@ with tab1:
                 top=valid.head(5).copy()
                 top.insert(0,"Posição",range(1,len(top)+1))
                 st.dataframe(top[["Posição","Ativo","Mercado","Prob. subir (estimada)","Prob. descer (estimada)","Sinal da IA 70/50","Erro calibração %","Aprovado para virtual","Acerto teste %","Data"]],hide_index=True,use_container_width=True)
-                st.caption("Top 5 de estudo histórico. Uma previsão pode estar calibrada em dados passados e AINDA NÃO estar aprovada para trading virtual. O ranking não garante retornos; a seleção entre muitos ativos aumenta falsos positivos.")
+                st.caption("Top 5 por probabilidade histórica. Um ativo pode aparecer aqui e NÃO passar o filtro de vantagem líquida. A seleção entre muitos ativos aumenta os falsos positivos.")
+            st.markdown("#### Entradas virtuais com melhor relação vantagem / volatilidade")
+            approved = df[(df["Aprovado para virtual"] == True) &
+                          (df["Prob. subir (estimada)"] >= 70) &
+                          (df["Vantagem líquida conservadora %"] > 0)].copy()
+            if approved.empty:
+                st.info("Nenhum ativo passou simultaneamente os filtros históricos e a vantagem líquida conservadora. A decisão correta é NÃO COMPRAR.")
+            else:
+                approved["Prioridade (investigação)"] = (
+                    approved["Vantagem líquida conservadora %"] /
+                    approved["ATR 14 %"].fillna(5).clip(lower=2))
+                approved = approved.sort_values("Prioridade (investigação)",ascending=False).head(5)
+                st.dataframe(approved[["Ativo","Mercado","Prob. subir (estimada)",
+                    "Vantagem líquida estimada %","Vantagem líquida conservadora %",
+                    "ATR 14 %","Limite inferior de acerto (sinais ≥70%) %"]],
+                    hide_index=True,use_container_width=True)
+                st.caption("Prioridade experimental: vantagem após custos dividida pela volatilidade ATR. Não é uma previsão de lucro nem uma recomendação de compra.")
             with st.expander("Ver a tabela completa de todos os ativos analisados"):
                 st.dataframe(df.sort_values("Prob. subir (estimada)",ascending=False),hide_index=True,use_container_width=True)
                 st.download_button("Exportar CSV",df.to_csv(index=False).encode("utf-8-sig"),"analise_mercados.csv","text/csv")
@@ -127,7 +143,13 @@ with tab2:
         st.caption(f"Período de {previous['bars_tested']} velas; comissões virtuais: {previous['total_fees_usd']:.2f} USD; exposição em {previous['invested_days_pct']:.1f}% dos dias; lucro reservado: {previous['reserved_usd']:.2f} USD.")
         if previous["annualized_pct"] is not None:
             st.caption(f"Retorno anualizado hipotético da amostra: {previous['annualized_pct']:+.2f}%. É matemática sobre dados passados, não expectativa de ganho futuro.")
-        st.warning("Um backtest isolado não prova capacidade futura; pode ter poucas ou zero operações. O benchmark assume 100% do capital investido, enquanto o robô limita a exposição, pelo que os riscos são diferentes. Exclui impostos, dividendos, conversão de moeda e falhas de execução. Não houve ordens reais.")
+        from strategy_scorecard import audit_backtest
+        audit=audit_backtest(previous)
+        st.markdown("#### Avaliação independente de risco e amostra")
+        st.metric("Resultado da auditoria do backtest",audit["result"])
+        for warning in audit["reasons"]:
+            st.caption("• "+warning)
+        st.warning("O resultado não valida uma meta de +400% nem autoriza trading real. O benchmark assume 100% de capital investido, mas o robô limita a exposição. Exclui impostos, dividendos, câmbio e falhas de execução.")
 with tab3:
     st.subheader("Carteira de demonstração")
     st.caption("Cada visitante tem uma carteira virtual própria, temporária e separada por ativo. Sem negociação contínua.")
@@ -378,11 +400,11 @@ with tab_auto:
     st.subheader("Piloto automático · Ações")
     st.caption("O modelo escolhe empresas para comprar e vender em carteira virtual. Nenhuma ordem é enviada à Trading 212 ou a qualquer corretora.")
     m1,m2,m3,m4=st.columns(4)
-    m1.metric("COMPRAR", "Subida ≥70%", help="Estimativa de subida para 5 dias; não calibrada.")
+    m1.metric("COMPRAR", "Subida ≥70%", help="Estimativa calibrada em histórico, sujeita a filtros de confiança, custo e risco; não é probabilidade comprovada de lucro.")
     m2.metric("VENDER", "Descida ≥70%", help="Só vende posições existentes; não abre short.")
     m3.metric("FECHAR", "Subida ≤50%", help="Fecha a posição mesmo que a descida ainda não tenha atingido 70%.")
     m4.metric("Proteção lucro", "−3% do pico", help="Stop móvel virtual quando houve valorização observada de 4%; também existe stop de perda de 5%.")
-    st.info("O motor usa a mesma previsão da tabela das empresas. Compra a partir de 70% de subida apenas se o modelo superar a referência; vende se a descida atingir 70%, se a subida cair até 50% ou se disparar uma proteção de risco. Reserva 30% dos lucros líquidos realizados.")
+    st.info("O motor usa o mesmo estudo da tabela. Compra só com ≥70% de subida, aprovação histórica, limite inferior de confiança e vantagem conservadora POSITIVA após custos. Prefere a melhor relação vantagem/ATR, não a maior percentagem isolada. Sai por sinais de queda, stop ou proteção do lucro; reserva 30% dos lucros líquidos.")
     if "autobot_wallet" not in st.session_state:
         st.session_state["autobot_wallet"] = create_portfolio()
     st.warning("Somente simulação: preços históricos de fecho, sem execução real. As percentagens NÃO são probabilidades calibradas de lucro. O modo automático funciona apenas enquanto a sessão do site estiver conectada.")
@@ -439,7 +461,7 @@ with tab_auto:
             if table_rows:
                 table=pd.DataFrame(table_rows)
                 st.dataframe(table,use_container_width=True,hide_index=True)
-                st.caption("70% SUBIDA = candidato a compra; 70% DESCIDA = vender se detido; 50% ou menos SUBIDA = fechar se detido. Sinais são previsões não calibradas.")
+                st.caption("70% SUBIDA + vantagem líquida positiva e teste aprovado = candidato; 70% DESCIDA = vender se detido; ≤50% SUBIDA = fechar se detido. Nenhum sinal garante lucro.")
             else:
                 st.caption("Nenhum sinal recente de ações.")
         if portfolio["positions"]:
@@ -465,7 +487,7 @@ with tab_auto:
                 for key in ("autobot_last_cycle","autobot_coverage","autobot_last_analysis","autobot_checked_epoch"):
                     st.session_state.pop(key,None)
                 st.rerun()
-        st.caption("Máx. 20% do saldo investível por compra, 3 posições, 1 nova compra por ciclo, stop virtual de 5%, trailing stop de 3% após +4% observado e bloqueio de novas compras após queda diária de 5%. Cada ativo só é negociado uma vez por vela diária. Enquanto esta página estiver aberta, o site reavalia aproximadamente de hora a hora; Render/Codespaces podem suspender e interromper a execução.")
+        st.caption("Máx. 20% do saldo investível por compra, 3 posições e 1 nova compra por ciclo. Stop por volatilidade, slippage virtual de 0,1% por lado, espera de 2 dias após venda e bloqueios de perdas diárias/acumuladas. Uma decisão por nova vela diária; Render/Codespaces podem suspender e impedir a avaliação de saídas.")
     automatic_paper_dashboard()
 
 with tab_monitor:
@@ -520,6 +542,19 @@ with tab_goal:
         st.warning("Ainda há poucas operações virtuais fechadas para avaliar a consistência. Não estimamos a probabilidade de atingir 400% nem o rendimento anual a partir de poucos trades.")
     else:
         st.info("Estas estatísticas descrevem as operações já fechadas, mas não provam um retorno futuro. Verifica também a perda máxima e os custos no backtest.")
+    st.markdown("#### Verificação do objetivo sem aumentar o risco")
+    st.write("Para procurar +400% não vamos aumentar automaticamente posições, usar margem ou compensar perdas com apostas maiores. O sistema prefere **nenhuma operação** a um sinal sem margem líquida depois das comissões.")
+    last_test=st.session_state.get("wf_backtest")
+    if last_test:
+        from strategy_scorecard import audit_backtest
+        audit=audit_backtest(last_test)
+        st.metric("Estado do último backtest",audit["result"])
+        st.caption("Ativo: "+str(last_test.get("symbol","—"))+
+                   " · Resultado histórico "+str(last_test.get("return_pct","—"))+
+                   "% · Maior queda "+str(last_test.get("max_drawdown_pct","—"))+"%")
+        st.warning("Nem um backtest aprovado dá uma probabilidade fiável de alcançar 400% anuais.")
+    else:
+        st.info("Ainda não há um backtest carregado nesta sessão. Executa um em Explorar ativo para veres retorno e maior perda sem promessas de +400%.")
     st.markdown("#### Plano da estratégia")
     st.write("Mantemos compra apenas quando a previsão de subida é ≥70% e os testes de calibração, referência e custos aprovam o modelo. Vendemos se a previsão deteriorar ou se disparar uma proteção de risco.")
     st.write("Não vamos ligar alavancagem, aumentar o risco para recuperar perdas, nem usar dinheiro real para perseguir a meta. Com maior exposição poderias multiplicar tanto os ganhos como os prejuízos.")
