@@ -69,6 +69,7 @@ def research_direction(close, horizon=HORIZON):
     raw_forward = (c.shift(-horizon) / c) - 1
     labeled = X.iloc[:-horizon].copy()
     labeled["target"] = (raw_forward.iloc[:-horizon] > 0).astype(int)
+    labeled["forward_return"] = raw_forward.iloc[:-horizon]
     labeled = labeled.dropna(subset=[*FEATURES, "target"])
     n = len(labeled)
     if n < 250:
@@ -96,11 +97,15 @@ def research_direction(close, horizon=HORIZON):
     bull_count = int(bullish.sum())
     bear_count = int(bearish.sum())
     bull_win = float(y[bullish].mean()) if bull_count else None
+    # Deduct both sides of simulated commissions + slippage: 0.6% round trip.
+    # This is not a quote of real brokerage costs.
+    avg_net = float((test.forward_return.to_numpy()[bullish] - .006).mean()) if bull_count else None
     bear_win = float((1 - y[bearish]).mean()) if bear_count else None
     # Conservative entry gate: accuracy of predictions above 70% must also
     # have *some* evidence on held-out data. Not proof of future accuracy.
     gate = bool(brier + .005 < baseline and ece <= .12 and
-                bull_count >= 8 and bull_win is not None and bull_win >= .60)
+                 bull_count >= 8 and bull_win is not None and bull_win >= .60 and
+                avg_net is not None and avg_net > 0)
 
     # Final inference refit: label overlap purged between fit/calibration.
     refit_end = int(n * .70)
@@ -126,6 +131,7 @@ def research_direction(close, horizon=HORIZON):
         "holdout_count": len(test),
         "bullish_signals": bull_count,
         "bullish_hit_rate": round(bull_win, 4) if bull_win is not None else None,
+        "bullish_avg_net_pct": round(avg_net * 100, 3) if avg_net is not None else None,
         "bearish_signals": bear_count,
         "bearish_hit_rate": round(bear_win, 4) if bear_win is not None else None,
         "approved_for_paper": gate,
