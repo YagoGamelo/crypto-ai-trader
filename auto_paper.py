@@ -133,6 +133,9 @@ def evaluate_cycle(portfolio, rows, *, now=None):
     if now.tzinfo is None:
         raise ValueError("O instante de avaliação requer fuso horário")
     today=now.astimezone(timezone.utc).date()
+    # Session migration for browsers that created a paper wallet on an older version.
+    portfolio.setdefault("last_exit_date", {})
+    portfolio.setdefault("peak_equity", float(portfolio.get("initial_cash", STARTING_CASH_USD)))
     if portfolio["daily_reference_date"] != today.isoformat():
         portfolio["daily_reference"]=portfolio_equity(portfolio)
         portfolio["daily_reference_date"]=today.isoformat()
