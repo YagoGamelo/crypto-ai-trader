@@ -124,3 +124,13 @@ def test_insufficient_validation_blocks_buy():
     wallet=new_wallet()
     assert decision(wallet,create_study(up=98,eligible=False),execute=True).startswith("ESPERAR")
     assert not wallet["trades"]
+
+def test_exchange_minimum_larger_than_wallet_blocks_virtual_entry(monkeypatch):
+    monkeypatch.setattr("crypto_lab.research_direction",fake_model)
+    fake=FakeKraken()
+    fake.markets["BTC/USD"]["limits"]={"cost":{"min":25},"amount":{"min":0}}
+    result=study_crypto("BTC",now=NOW,exchange=fake)
+    assert not result["paper_buy_eligible"]
+    assert not result["minimum_order_ok"]
+    assert "Mínimo de ordem superior ao orçamento virtual" in result["risk_notes"]
+
