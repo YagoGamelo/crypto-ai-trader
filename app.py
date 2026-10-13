@@ -53,12 +53,13 @@ with tab1:
                 top.insert(0,"Posição",range(1,len(top)+1))
                 st.dataframe(top[["Posição","Ativo","Mercado","Prob. subir (estimada)","Prob. descer (estimada)","Sinal da IA 70/50","Erro calibração %","Aprovado para virtual","Acerto teste %","Data"]],hide_index=True,use_container_width=True)
                 st.caption("Top 5 por probabilidade histórica. Um ativo pode aparecer aqui e NÃO passar o filtro de vantagem líquida. A seleção entre muitos ativos aumenta os falsos positivos.")
-            st.markdown("#### Entradas virtuais com melhor relação vantagem / volatilidade")
-            approved = df[(df["Aprovado para virtual"] == True) &
+            st.markdown("#### Ações candidatas com melhor relação vantagem / volatilidade")
+            approved = df[(df["Mercado"] == "Ações") &
+                          (df["Aprovado para virtual"] == True) &
                           (df["Prob. subir (estimada)"] >= 70) &
                           (df["Vantagem líquida conservadora %"] > 0)].copy()
             if approved.empty:
-                st.info("Nenhum ativo passou simultaneamente os filtros históricos e a vantagem líquida conservadora. A decisão correta é NÃO COMPRAR.")
+                st.info("Nenhuma ação passou simultaneamente os filtros históricos e a vantagem líquida conservadora. A decisão correta para o piloto de ações é NÃO COMPRAR.")
             else:
                 approved["Prioridade (investigação)"] = (
                     approved["Vantagem líquida conservadora %"] /
