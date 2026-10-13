@@ -21,6 +21,13 @@ def test_train_calibration_test_are_separate_and_bounded():
     assert 0 <= result["ece"] <= 1
     assert result["method"].startswith("purged")
     assert isinstance(result["approved_for_paper"],bool)
+    assert result["independent_bullish_signals"] <= result["bullish_signals"]
+    assert "conservative_net_pct" in result
+    assert "probability_haircut_pct" in result
+    if result["approved_for_paper"]:
+        assert result["conservative_net_pct"] > 0
+        assert result["independent_bullish_signals"] >= 8
+        assert result["bullish_wilson_lower"] > .50
 
 def test_no_incomplete_daily_candle(monkeypatch):
     import top5_research
