@@ -117,6 +117,8 @@ with tab2:
             with st.expander("Mostrar compras, vendas e custos simulados"):
                 st.dataframe(pd.DataFrame(previous["trades"]),use_container_width=True,hide_index=True)
         st.caption(f"Período de {previous['bars_tested']} velas; comissões virtuais: {previous['total_fees_usd']:.2f} USD; exposição em {previous['invested_days_pct']:.1f}% dos dias; lucro reservado: {previous['reserved_usd']:.2f} USD.")
+        if previous["annualized_pct"] is not None:
+            st.caption(f"Retorno anualizado hipotético da amostra: {previous['annualized_pct']:+.2f}%. É matemática sobre dados passados, não expectativa de ganho futuro.")
         st.warning("Um backtest isolado não prova capacidade futura; pode ter poucas ou zero operações. O resultado exclui impostos, dividendos e conversão de moeda. Não foram feitas ordens reais.")
 with tab3:
     st.subheader("Carteira de demonstração")
