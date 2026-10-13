@@ -68,13 +68,21 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
     history=[]
     trades=[]
     invested_days=0
+    peak_equity=float(initial_usd)
+    last_exit_index=-10_000
+    entry_rejected_by_risk=0
     for i in range(start_bars,len(data)):
         # Candles through yesterday only. Today is never in training/features.
         if last_signal is None or (i-start_bars)%retrain_every==0:
-            last_signal=research_direction(data.Close.iloc[:i],horizon=horizon)
+            last_signal=research_direction(
+                data.Close.iloc[:i],horizon=horizon,
+                round_trip_cost=2*(fee_rate+slippage_rate))
         model=last_signal
         close_before=float(data.Close.iloc[i-1])
         opening=float(data.Open.iloc[i])
+        equity_before=cash+reserved+units*close_before
+        peak_equity=max(peak_equity,equity_before)
+        safe_to_enter=equity_before>=peak_equity*.85
         current_atr_pct=None
         if "High" in data and "Low" in data and i>=25:
             h=data.High.iloc[i-15:i]
@@ -110,9 +118,13 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
                 units=entry_price=peak=cost=0.
                 position_atr_pct=None
                 action="SELL"
+                last_exit_index=i
         # No same-bar reversal from SELL to BUY.
-        if (units==0 and action is None and model and model["approved_for_paper"]
-                and model["up_pct"]>=BUY_THRESHOLD*100):
+        if (units==0 and action is None and model and
+                model.get("approved_for_paper") is True and
+                model.get("conservative_net_pct",float("-inf")) > 0 and
+                model["up_pct"]>=BUY_THRESHOLD*100 and
+                safe_to_enter and i-last_exit_index>=2):
             investible=cash
             budget=budget_for_entry(cash,investible,current_atr_pct)
             if budget>0:
@@ -127,6 +139,10 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
                 trades.append({"date":str(data.index[i]),"action":"BUY","price":round(fill,4),
                                "p_up":model["up_pct"],"net_pnl":0.,"reserved":0.,
                                "reason":"up >=70%, validated"})
+        if (model and model.get("approved_for_paper") is True and
+                model.get("up_pct",0)>=BUY_THRESHOLD*100 and
+                not safe_to_enter):
+            entry_rejected_by_risk+=1
         invested_days+=int(units>0)
         equity=cash+reserved+units*float(data.Close.iloc[i])
         history.append({"date":str(data.index[i]),"equity":round(equity,6),
@@ -153,6 +169,7 @@ def backtest_one_asset(frame, *, initial_usd=INITIAL_USD, horizon=5,
         "fee_rate_pct":round(fee_rate*100,3),
         "slippage_pct":round(slippage_rate*100,3),
         "bars_tested":days,
+        "entry_signals_blocked_by_drawdown":entry_rejected_by_risk,
         "trades":trades,
         "equity_curve":history,
         "notes":f"Simulated next open, {fee_rate*100:.2f}% fee/side and {slippage_rate*100:.2f}% slippage/side; long only; no dividends, taxes, FX or live quotes."
