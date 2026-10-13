@@ -71,7 +71,7 @@ def step(db, price, probability, threshold=0.70, enabled=True):
                 (s["cash"] + proceeds - reserve, s["reserved"] + reserve))
             reason += f"; lucro líquido {realized_net:.4f} USD; reserva {reserve:.4f} USD"
     elif probability >= threshold:
-        budget = min(s["cash"], s["equity"] * MAX_ALLOCATION)
+        budget = min(s["cash"], (s["equity"] - s["reserved"]) * MAX_ALLOCATION)
         if budget >= 2:
             action = "BUY"
             qty = budget / (price * (1 + FEE_RATE))
