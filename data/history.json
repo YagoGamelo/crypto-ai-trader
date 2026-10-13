@@ -1,4 +1,12 @@
 {
   "schema_version": 1,
-  "samples": []
+  "samples": [
+    {
+      "time_utc": "2026-10-13T10:15:02+00:00",
+      "model_coverage": 163,
+      "recent_30m_quotes": 44,
+      "buy_candidates": 4,
+      "sell_if_held": 80
+    }
+  ]
 }
