@@ -142,10 +142,11 @@ with tab5:
     st.markdown("### Qual poderá compensar?")
     st.write("**Para um bot de ações pequeno:** Trading 212 Invest (API beta + demo + 0 € de comissão própria). **Para automação avançada de ações:** Interactive Brokers (API robusta, mas mínimos por ordem). **Para cripto spot:** Kraken Pro, a comparar com Coinbase Advanced. XTB e DEGIRO são opções para negociar manualmente, sem API oficial.")
     st.caption("A classificação é editorial e depende dos produtos, montantes, país, impostos, spreads, conversão e condições da tua conta. Não é uma garantia de segurança nem recomendação personalizada.")
-    amount=st.number_input("Exemplo de custo: comprar e vender ações dos EUA, conta em EUR",min_value=10.0,max_value=100000.0,value=50.0,step=10.0,format="%.2f")
-    pairs=comparable_stock_costs(amount)
+    currency=st.selectbox("Moeda da ação/ETF (conta em EUR)",["USD","EUR"])
+    amount=st.number_input("Valor de cada compra/venda (EUR)",min_value=10.0,max_value=100000.0,value=50.0,step=10.0,format="%.2f")
+    pairs=comparable_stock_costs(amount,currency)
     st.dataframe(pd.DataFrame([{"Corretora":name,"Custo teórico total EUR":fee,"Peso do custo %":round(100*fee/amount,2)} for name,fee in pairs]),hide_index=True,use_container_width=True)
-    st.caption("Exemplo ilustrativo: compra + venda pelo mesmo preço em USD, duas conversões EUR↔USD. Exclui spread, impostos, diferenças de câmbio, comissões de terceiros e levantamentos. Não é uma cotação de custos. IBKR não entra nesta comparação porque tem preçários e mínimos distintos.")
+    st.caption("Exemplo ilustrativo: compra + venda pelo mesmo preço, com duas conversões EUR↔USD apenas quando o ativo é em USD. Exclui spread, impostos, diferenças de câmbio, comissões de terceiros e levantamentos. Não é uma cotação de custos. IBKR não entra nesta comparação porque tem preçários e mínimos distintos.")
     st.markdown("### Detalhes, regulamentação e tabelas oficiais")
     for p in candidates:
         with st.expander(p["name"]+"  ·  "+("API disponível" if p["api_ok"] else "Sem API para o bot")):
