@@ -64,13 +64,13 @@ def research_direction(close, horizon=HORIZON):
     if not isinstance(horizon, int) or not 1 <= horizon <= 20:
         raise ValueError("horizon must be 1..20 daily closes")
     c, X = _features(close)
-    if len(c) < 300:
+    if len(c) < 300 or (c <= 0).any():
         return None
     raw_forward = (c.shift(-horizon) / c) - 1
     labeled = X.iloc[:-horizon].copy()
     labeled["target"] = (raw_forward.iloc[:-horizon] > 0).astype(int)
     labeled["forward_return"] = raw_forward.iloc[:-horizon]
-    labeled = labeled.dropna(subset=[*FEATURES, "target"])
+    labeled = labeled.replace([np.inf, -np.inf], np.nan).dropna(subset=[*FEATURES, "target", "forward_return"])
     n = len(labeled)
     if n < 250:
         return None
