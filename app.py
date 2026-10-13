@@ -19,7 +19,7 @@ a,b,c=st.columns(3)
 a.metric("Universo monitorizado",len(WATCHLIST))
 b.metric("Empresas",len(STOCKS))
 c.metric("Cripto + ETFs",len(CRYPTO)+len(ETFS))
-tab1,tab2,tab3,tab4,tab5=st.tabs(["🏆 Top 5","📈 Explorar ativo","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs"])
+tab1,tab2,tab3,tab4,tab5,tab6=st.tabs(["🏆 Top 5","📈 Explorar ativo","🧪 Trading virtual","ℹ️ Metodologia","🏦 Corretoras & APIs","🔐 Trading 212 DEMO"])
 with tab1:
     st.subheader("As 5 maiores estimativas de subida")
     st.write("O modelo analisa todos os ativos disponíveis, testa o desempenho fora da amostra e compara previsões para os próximos **5 dias**.")
@@ -160,3 +160,165 @@ with tab5:
             st.markdown(f"[Site oficial]({p['website']}) · [Preçário]({p['fees']}) · [API / situação]({p['api_docs']}) · [Regulamentação]({p['regulator']})")
     st.warning("Uma taxa de levantamento não é uma percentagem dos lucros. Muitas plataformas cobram 0 € ou montante fixo em EUR; compras, vendas, câmbio, impostos e spreads são custos distintos. Em Portugal, o Regulamento CMVM 5/2019 proíbe em regra a comercialização de opções binárias a investidores não profissionais (com exceções específicas); por isso não incluímos plataformas binárias para integração. Consulte https://diariodarepublica.pt/dr/detalhe/regulamento-cmvm/5-2019-122754276")
     st.caption("Antes de qualquer integração real: confirmar licenças junto da CMVM/ESMA/regulador competente, testar em demo, autenticação segura, permissões de negociação sem levantamentos, limites de perdas e supervisão humana.")
+
+with tab6:
+    import hmac
+    import os
+    import time
+    from trading212_demo import DemoClient, Credentials, Trading212DemoError
+    st.subheader("Trading 212 · Conta de demonstração")
+    st.caption("Ligação oficial de teste, sem dinheiro real. O conector utiliza exclusivamente demo.trading212.com.")
+    st.info("Não introduzas API Keys neste site ou no chat. Configura apenas variáveis privadas no Render ou secrets no Codespaces.")
+    def _setting(name):
+        value = os.environ.get(name, "").strip()
+        if value:
+            return value
+        try:
+            return str(st.secrets.get(name, "")).strip()
+        except (FileNotFoundError, KeyError, AttributeError):
+            return ""
+
+    key = _setting("T212_DEMO_API_KEY")
+    secret = _setting("T212_DEMO_API_SECRET")
+    panel_password = _setting("T212_PANEL_PASSWORD")
+    can_order = _setting("T212_ENABLE_DEMO_ORDERS") == "YES_I_UNDERSTAND_DEMO_ONLY"
+    config_ready = bool(key and secret and len(panel_password) >= 16)
+    if not config_ready:
+        st.warning("A ligação aguarda configuração privada: T212_DEMO_API_KEY, T212_DEMO_API_SECRET e T212_PANEL_PASSWORD (mínimo 16 caracteres).")
+        st.markdown("[Gerar chaves na Trading 212]("+ "https://helpcentre.trading212.com/hc/en-us/articles/14584770928157-How-can-I-generate-an-API-key" + ")")
+        st.write("No Render: serviço → Environment → adiciona as variáveis privadas → guarda e publica novamente. Gera chaves da conta PRACTICE/DEMO, nunca da conta real.")
+    else:
+        if not st.session_state.get("t212_authenticated", False):
+            if st.session_state.get("t212_login_attempts", 0) >= 5:
+                st.error("Demasiadas tentativas nesta sessão. Fecha o separador e revê a configuração.")
+            else:
+                with st.form("t212_login_form"):
+                    password_input = st.text_input("Palavra-passe privada do painel", type="password")
+                    login = st.form_submit_button("Entrar no painel demo")
+                if login:
+                    if hmac.compare_digest(password_input.encode("utf-8"), panel_password.encode("utf-8")):
+                        st.session_state["t212_authenticated"] = True
+                        st.session_state["t212_login_attempts"] = 0
+                        st.rerun()
+                    else:
+                        st.session_state["t212_login_attempts"] = st.session_state.get("t212_login_attempts", 0) + 1
+                        st.error("Palavra-passe incorreta.")
+        else:
+            col_left, col_right = st.columns([3,1])
+            col_left.success("Painel demo desbloqueado para esta sessão do navegador.")
+            if col_right.button("Sair"):
+                for name in ("t212_authenticated", "t212_summary", "t212_positions", "t212_pending", "t212_instruments"):
+                    st.session_state.pop(name, None)
+                st.rerun()
+            try:
+                client = DemoClient(Credentials(key, secret))
+                st.markdown("#### Conta de demonstração")
+                a, b, c = st.columns(3)
+                get_balance = a.button("Consultar saldo", type="primary")
+                get_positions = b.button("Consultar posições")
+                get_pending = c.button("Ordens pendentes")
+                if get_balance:
+                    st.session_state["t212_summary"] = client.account_summary()
+                if get_positions:
+                    st.session_state["t212_positions"] = client.positions()
+                if get_pending:
+                    st.session_state["t212_pending"] = client.pending_orders()
+                summary = st.session_state.get("t212_summary")
+                if summary:
+                    cash = summary.get("cash", {})
+                    currency = str(summary.get("currency", "—"))
+                    p,q,r = st.columns(3)
+                    p.metric("Saldo disponível", f"{float(cash.get('availableToTrade', 0)):,.2f} {currency}")
+                    q.metric("Valor total da conta", f"{float(summary.get('totalValue', 0)):,.2f} {currency}")
+                    r.metric("Investimentos", f"{float(summary.get('investments', {}).get('currentValue', 0)):,.2f} {currency}")
+                if "t212_positions" in st.session_state:
+                    positions = st.session_state["t212_positions"]
+                    if positions:
+                        visible = [{
+                            "Nome": x.get("instrument", {}).get("name", ""),
+                            "Ticker": x.get("instrument", {}).get("ticker", ""),
+                            "Quantidade": x.get("quantity", 0),
+                            "Disponível para venda": x.get("quantityAvailableForTrading", 0),
+                            "Preço atual": x.get("currentPrice", 0),
+                        } for x in positions]
+                        st.dataframe(pd.DataFrame(visible), use_container_width=True, hide_index=True)
+                    else:
+                        st.caption("Sem posições abertas na conta de demonstração.")
+                if "t212_pending" in st.session_state:
+                    pending = st.session_state["t212_pending"]
+                    if pending:
+                        st.dataframe(pd.DataFrame([{
+                            "ID": x.get("id"), "Ticker": x.get("ticker", x.get("instrument", {}).get("ticker")),
+                            "Quantidade": x.get("quantity"), "Estado": x.get("status")
+                        } for x in pending]), use_container_width=True, hide_index=True)
+                    else:
+                        st.caption("Não existem ordens pendentes.")
+                st.divider()
+                st.markdown("#### Ordens limite de demonstração")
+                if not can_order:
+                    st.info("Ordens demo bloqueadas de origem. Para permitir ordens de teste, define no Render T212_ENABLE_DEMO_ORDERS=YES_I_UNDERSTAND_DEMO_ONLY. Não existe ligação à conta real.")
+                else:
+                    st.warning("Estas ordens são enviadas à conta DEMO da Trading 212, não são operações locais fictícias. Não repitas uma ordem após um erro de rede sem consultar as ordens existentes: a API não oferece idempotência neste endpoint.")
+                    if st.button("Carregar instrumentos oficiais"):
+                        st.session_state["t212_instruments"] = client.instruments()
+                    instruments = st.session_state.get("t212_instruments", [])
+                    if not summary:
+                        st.info("Consulta primeiro o saldo da conta.")
+                    elif not instruments:
+                        st.info("Carrega os instrumentos oficiais antes de criar uma ordem.")
+                    else:
+                        currency = str(summary.get("currency", ""))
+                        # Research watchlist uses Yahoo symbols; only official
+                        # Trading 212 ticker IDs returned by their API are allowed.
+                        query = st.text_input("Pesquisar ticker ou empresa na Trading 212", max_chars=40)
+                        cleaned_query = query.casefold().strip()
+                        matches = [x for x in instruments
+                                   if x.get("currencyCode") == currency
+                                   and (not cleaned_query or
+                                        cleaned_query in str(x.get("ticker", "")).casefold() or
+                                        cleaned_query in str(x.get("name", "")).casefold())]
+                        if not cleaned_query:
+                            st.caption("Pesquisa por nome ou ticker para reduzir a lista.")
+                        elif not matches:
+                            st.warning("Nenhum instrumento dessa moeda corresponde à pesquisa.")
+                        else:
+                            subset = matches[:50]
+                            choices = {str(x.get("ticker")) + " · " + str(x.get("name", "")): x for x in subset}
+                            selected = st.selectbox("Instrumento confirmado pela Trading 212", list(choices.keys()))
+                            instrument = choices[selected]
+                            side = st.radio("Operação", ["COMPRAR", "VENDER"], horizontal=True)
+                            qty = st.number_input("Quantidade de ações", min_value=0.000001, max_value=1000.0,
+                                                  value=0.01, step=0.01, format="%.6f")
+                            limit_price = st.number_input("Preço limite por ação na moeda da conta", min_value=0.000001,
+                                                          max_value=100000.0, value=10.0, step=0.5, format="%.4f")
+                            estimated_cost = qty * limit_price
+                            st.caption(f"Valor de referência {estimated_cost:.2f} {currency}. Máximo por ordem demo: 10 {currency}. Sem conversões cambiais neste protótipo.")
+                            typed = st.text_input("Para confirmar uma ordem DEMO, escreve CONFIRMAR DEMO", max_chars=24)
+                            if st.button("Enviar ordem limite para conta DEMO", type="primary"):
+                                if typed != "CONFIRMAR DEMO":
+                                    st.error("Escreve CONFIRMAR DEMO antes de enviar a ordem.")
+                                elif time.monotonic() - st.session_state.get("t212_last_attempt", -1e9) < 60:
+                                    st.error("Só é permitida uma tentativa por minuto nesta sessão.")
+                                else:
+                                    st.session_state["t212_last_attempt"] = time.monotonic()
+                                    # Fresh reads; never rely on stale values for risk limits.
+                                    live_summary = client.account_summary()
+                                    live_positions = client.positions()
+                                    account_currency = str(live_summary.get("currency", ""))
+                                    holdings = next((float(x.get("quantityAvailableForTrading", 0))
+                                                     for x in live_positions
+                                                     if x.get("instrument", {}).get("ticker") == instrument.get("ticker")), 0.0)
+                                    signed_qty = qty if side == "COMPRAR" else -qty
+                                    result = client.place_demo_limit(
+                                        instrument=instrument, quantity=signed_qty, limit_price=limit_price,
+                                        account_currency=account_currency,
+                                        available_to_trade=float(live_summary.get("cash", {}).get("availableToTrade", 0)),
+                                        quantity_available_to_sell=holdings, explicitly_confirmed=True)
+                                    st.success("Pedido de ordem DEMO enviado. Consulta as ordens e confirma o estado de execução na Trading 212.")
+                                    st.write("ID:", str(result.get("id", "por confirmar")))
+                                    st.write("Estado:", str(result.get("status", "por confirmar")))
+            except Trading212DemoError as exc:
+                st.error(str(exc))
+            except (TypeError, ValueError):
+                st.error("Resposta inesperada da conta demo. Não foi enviada uma nova ordem após este erro.")
+    st.caption("A conta demo Trading 212 é independente da carteira simulada de 50 USD do separador anterior. Sem negociação real, sem execução automática e sem API de levantamentos.")
