@@ -350,6 +350,13 @@
       "recent_30m_quotes": 53,
       "buy_candidates": 0,
       "sell_if_held": 83
+    },
+    {
+      "time_utc": "2026-10-21T13:12:16+00:00",
+      "model_coverage": 170,
+      "recent_30m_quotes": 53,
+      "buy_candidates": 0,
+      "sell_if_held": 89
     }
   ]
 }
