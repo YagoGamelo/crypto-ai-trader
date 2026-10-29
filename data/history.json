@@ -2,13 +2,6 @@
   "schema_version": 1,
   "samples": [
     {
-      "time_utc": "2026-10-13T10:15:02+00:00",
-      "model_coverage": 163,
-      "recent_30m_quotes": 44,
-      "buy_candidates": 4,
-      "sell_if_held": 80
-    },
-    {
       "time_utc": "2026-10-13T11:16:36+00:00",
       "model_coverage": 163,
       "recent_30m_quotes": 44,
@@ -670,6 +663,13 @@
       "time_utc": "2026-10-29T18:25:43+00:00",
       "model_coverage": 170,
       "recent_30m_quotes": 172,
+      "buy_candidates": 0,
+      "sell_if_held": 91
+    },
+    {
+      "time_utc": "2026-10-29T22:57:42+00:00",
+      "model_coverage": 170,
+      "recent_30m_quotes": 53,
       "buy_candidates": 0,
       "sell_if_held": 91
     }
