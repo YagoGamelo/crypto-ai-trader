@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-01T19:11:05+00:00",
-  "model_updated_at": "2026-10-31T21:27:40+00:00",
+  "generated_at_utc": "2026-11-01T22:47:49+00:00",
+  "model_updated_at": "2026-11-01T22:47:49+00:00",
   "forecast_horizon": "5 velas diárias; não representa previsão a 30 minutos",
   "quote_interval": "30 minutos (última vela completa; fonte com possíveis atrasos)",
   "universe_count": 185,
   "model_coverage": 170,
   "recent_30m_quotes": 53,
   "buy_candidates": 0,
-  "sell_if_held": 92,
+  "sell_if_held": 93,
   "top_up": [
     {
       "symbol": "T",
@@ -25,26 +25,7 @@
         "close": 21.43,
         "change_30m_pct": 0.304,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
-        "source": "Yahoo Finance intraday (30m, delayed possible)"
-      }
-    },
-    {
-      "symbol": "INJ-USD",
-      "market": "Cripto",
-      "prob_up_pct": 64.9,
-      "prob_down_pct": 35.1,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 6.2,
-      "forecast_asof_daily": "2026-10-30",
-      "forecast_horizon": "5 velas diárias",
-      "signal": "ESPERAR",
-      "quote": {
-        "close": 7.078,
-        "change_30m_pct": -0.701,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -63,7 +44,7 @@
         "close": 235.589996,
         "change_30m_pct": 0.332,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -82,7 +63,26 @@
         "close": 273.200012,
         "change_30m_pct": -0.205,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
+        "source": "Yahoo Finance intraday (30m, delayed possible)"
+      }
+    },
+    {
+      "symbol": "INJ-USD",
+      "market": "Cripto",
+      "prob_up_pct": 64.2,
+      "prob_down_pct": 35.8,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 6.2,
+      "forecast_asof_daily": "2026-10-31",
+      "forecast_horizon": "5 velas diárias",
+      "signal": "ESPERAR",
+      "quote": {
+        "close": 7.104,
+        "change_30m_pct": -0.56,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -101,7 +101,7 @@
         "close": 187.25,
         "change_30m_pct": 0.434,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     }
@@ -110,38 +110,38 @@
     {
       "symbol": "SHIB-USD",
       "market": "Cripto",
-      "prob_up_pct": 11.4,
-      "prob_down_pct": 88.6,
+      "prob_up_pct": 11.5,
+      "prob_down_pct": 88.5,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 1.8,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 1.1,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 5e-06,
-        "change_30m_pct": -0.214,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "change_30m_pct": -0.64,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "BONK-USD",
       "market": "Cripto",
-      "prob_up_pct": 15.5,
-      "prob_down_pct": 84.5,
+      "prob_up_pct": 15.7,
+      "prob_down_pct": 84.3,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 1.2,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 0.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 3e-06,
-        "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "change_30m_pct": -0.687,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -160,26 +160,26 @@
         "close": 155.339996,
         "change_30m_pct": -0.218,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "FLOKI-USD",
       "market": "Cripto",
-      "prob_up_pct": 31.1,
-      "prob_down_pct": 68.9,
+      "prob_up_pct": 31.2,
+      "prob_down_pct": 68.8,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.7,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 4.8,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
         "close": 2.3e-05,
-        "change_30m_pct": -0.391,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "change_30m_pct": -0.826,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -198,7 +198,7 @@
         "close": 171.529999,
         "change_30m_pct": 0.187,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     }
@@ -211,243 +211,243 @@
       "prob_down_pct": 55.5,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 12.0,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 11.2,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 77763.5625,
-        "change_30m_pct": -0.077,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 77577.0,
+        "change_30m_pct": -0.25,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ETH-USD",
       "market": "Cripto",
-      "prob_up_pct": 39.4,
-      "prob_down_pct": 60.6,
+      "prob_up_pct": 38.3,
+      "prob_down_pct": 61.7,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 1.2,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 1.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 2260.550049,
-        "change_30m_pct": -0.072,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 2253.129883,
+        "change_30m_pct": -0.365,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "SOL-USD",
       "market": "Cripto",
-      "prob_up_pct": 47.7,
-      "prob_down_pct": 52.3,
+      "prob_up_pct": 47.3,
+      "prob_down_pct": 52.7,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 3.2,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 1.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 94.169998,
-        "change_30m_pct": -0.254,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 93.449997,
+        "change_30m_pct": -0.859,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "XRP-USD",
       "market": "Cripto",
-      "prob_up_pct": 39.9,
-      "prob_down_pct": 60.1,
+      "prob_up_pct": 38.6,
+      "prob_down_pct": 61.4,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 11.1,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 10.0,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 1.2468,
-        "change_30m_pct": -0.056,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 1.2427,
+        "change_30m_pct": -0.496,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ADA-USD",
       "market": "Cripto",
-      "prob_up_pct": 44.3,
-      "prob_down_pct": 55.7,
+      "prob_up_pct": 43.8,
+      "prob_down_pct": 56.2,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 10.2,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 9.2,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.19171,
-        "change_30m_pct": -0.281,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.19083,
+        "change_30m_pct": -0.682,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "DOGE-USD",
       "market": "Cripto",
-      "prob_up_pct": 42.7,
-      "prob_down_pct": 57.3,
+      "prob_up_pct": 42.4,
+      "prob_down_pct": 57.6,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 17.9,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 17.7,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.0752,
-        "change_30m_pct": -0.159,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.07475,
+        "change_30m_pct": -0.625,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "AVAX-USD",
       "market": "Cripto",
-      "prob_up_pct": 42.3,
-      "prob_down_pct": 57.7,
+      "prob_up_pct": 42.9,
+      "prob_down_pct": 57.1,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 2.5,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 1.7,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 8.642,
-        "change_30m_pct": -0.392,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 8.585,
+        "change_30m_pct": -0.809,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "LINK-USD",
       "market": "Cripto",
-      "prob_up_pct": 45.5,
-      "prob_down_pct": 54.5,
+      "prob_up_pct": 46.0,
+      "prob_down_pct": 54.0,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 7.0,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 5.3,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 11.443,
-        "change_30m_pct": -0.409,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 11.244,
+        "change_30m_pct": -0.777,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "DOT-USD",
       "market": "Cripto",
-      "prob_up_pct": 41.5,
-      "prob_down_pct": 58.5,
+      "prob_up_pct": 39.6,
+      "prob_down_pct": 60.4,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.5,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 6.2,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.9486,
-        "change_30m_pct": -0.587,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.9433,
+        "change_30m_pct": -0.548,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "LTC-USD",
       "market": "Cripto",
-      "prob_up_pct": 44.4,
-      "prob_down_pct": 55.6,
+      "prob_up_pct": 43.9,
+      "prob_down_pct": 56.1,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 2.7,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 5.0,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 55.196999,
-        "change_30m_pct": -0.426,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 55.071999,
+        "change_30m_pct": -0.596,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "BCH-USD",
       "market": "Cripto",
-      "prob_up_pct": 44.0,
-      "prob_down_pct": 56.0,
+      "prob_up_pct": 43.0,
+      "prob_down_pct": 57.0,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 2.6,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 2.1,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 281.339996,
-        "change_30m_pct": -0.266,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 282.190002,
+        "change_30m_pct": -0.251,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "XLM-USD",
       "market": "Cripto",
-      "prob_up_pct": 39.5,
-      "prob_down_pct": 60.5,
+      "prob_up_pct": 38.3,
+      "prob_down_pct": 61.7,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.3,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 4.7,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.16766,
-        "change_30m_pct": -0.125,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.167176,
+        "change_30m_pct": -0.285,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ATOM-USD",
       "market": "Cripto",
-      "prob_up_pct": 51.4,
-      "prob_down_pct": 48.6,
+      "prob_up_pct": 51.0,
+      "prob_down_pct": 49.0,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.0,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 7.9,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 1.4673,
-        "change_30m_pct": 0.061,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 1.4579,
+        "change_30m_pct": -0.389,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -467,133 +467,133 @@
     {
       "symbol": "AAVE-USD",
       "market": "Cripto",
-      "prob_up_pct": 45.2,
-      "prob_down_pct": 54.8,
+      "prob_up_pct": 45.6,
+      "prob_down_pct": 54.4,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.5,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 6.2,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 133.679993,
-        "change_30m_pct": -1.146,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 133.399994,
+        "change_30m_pct": -0.737,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ETC-USD",
       "market": "Cripto",
-      "prob_up_pct": 37.8,
-      "prob_down_pct": 62.2,
+      "prob_up_pct": 38.5,
+      "prob_down_pct": 61.5,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 17.5,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 16.1,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 7.091,
-        "change_30m_pct": -0.183,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 7.086,
+        "change_30m_pct": -0.394,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "FIL-USD",
       "market": "Cripto",
-      "prob_up_pct": 48.0,
-      "prob_down_pct": 52.0,
+      "prob_up_pct": 46.9,
+      "prob_down_pct": 53.1,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.3,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 9.7,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.8707,
-        "change_30m_pct": -0.423,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.8708,
+        "change_30m_pct": -0.343,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "NEAR-USD",
       "market": "Cripto",
-      "prob_up_pct": 51.9,
-      "prob_down_pct": 48.1,
+      "prob_up_pct": 50.9,
+      "prob_down_pct": 49.1,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 0.8,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 1.8,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 4.2542,
-        "change_30m_pct": -0.642,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 4.2425,
+        "change_30m_pct": -1.047,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ICP-USD",
       "market": "Cripto",
-      "prob_up_pct": 51.6,
-      "prob_down_pct": 48.4,
+      "prob_up_pct": 52.4,
+      "prob_down_pct": 47.6,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 18.3,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 18.6,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 2.4962,
-        "change_30m_pct": -0.292,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 2.5027,
+        "change_30m_pct": -0.203,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ALGO-USD",
       "market": "Cripto",
-      "prob_up_pct": 50.3,
-      "prob_down_pct": 49.7,
+      "prob_up_pct": 49.1,
+      "prob_down_pct": 50.9,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.9,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 6.6,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
-      "signal": "ESPERAR",
+      "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.09351,
-        "change_30m_pct": -0.299,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.09272,
+        "change_30m_pct": -0.749,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "HBAR-USD",
       "market": "Cripto",
-      "prob_up_pct": 35.9,
-      "prob_down_pct": 64.1,
+      "prob_up_pct": 31.9,
+      "prob_down_pct": 68.1,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.9,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 8.1,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.07151,
-        "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.07089,
+        "change_30m_pct": -0.519,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -637,46 +637,46 @@
       "quote": {
         "close": 0.000629,
         "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "OP-USD",
       "market": "Cripto",
-      "prob_up_pct": 41.8,
-      "prob_down_pct": 58.2,
+      "prob_up_pct": 42.5,
+      "prob_down_pct": 57.5,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.7,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 4.3,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.11265,
-        "change_30m_pct": -0.521,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.11268,
+        "change_30m_pct": -0.512,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "INJ-USD",
       "market": "Cripto",
-      "prob_up_pct": 64.9,
-      "prob_down_pct": 35.1,
+      "prob_up_pct": 64.2,
+      "prob_down_pct": 35.8,
       "better_than_baseline": true,
       "approved_for_paper": false,
       "calibration_error_pct": 6.2,
-      "forecast_asof_daily": "2026-10-30",
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 7.078,
-        "change_30m_pct": -0.701,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 7.104,
+        "change_30m_pct": -0.56,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -687,15 +687,15 @@
       "prob_down_pct": 60.3,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.4,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 9.9,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 1.5728,
-        "change_30m_pct": -0.632,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 1.5697,
+        "change_30m_pct": -0.178,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -715,19 +715,19 @@
     {
       "symbol": "CRV-USD",
       "market": "Cripto",
-      "prob_up_pct": 48.1,
-      "prob_down_pct": 51.9,
+      "prob_up_pct": 47.5,
+      "prob_down_pct": 52.5,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.5,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 3.8,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.2762,
-        "change_30m_pct": -0.79,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.2758,
+        "change_30m_pct": -0.648,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -747,57 +747,57 @@
     {
       "symbol": "MKR-USD",
       "market": "Cripto",
-      "prob_up_pct": 53.6,
-      "prob_down_pct": 46.4,
+      "prob_up_pct": 55.5,
+      "prob_down_pct": 44.5,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 12.6,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 13.0,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 1547.605103,
-        "change_30m_pct": -0.171,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 1542.317505,
+        "change_30m_pct": -0.041,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "SNX-USD",
       "market": "Cripto",
-      "prob_up_pct": 41.9,
-      "prob_down_pct": 58.1,
+      "prob_up_pct": 41.4,
+      "prob_down_pct": 58.6,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 13.4,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 12.4,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.18068,
-        "change_30m_pct": 0.039,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.18032,
+        "change_30m_pct": -0.05,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "LDO-USD",
       "market": "Cripto",
-      "prob_up_pct": 47.9,
-      "prob_down_pct": 52.1,
+      "prob_up_pct": 47.7,
+      "prob_down_pct": 52.3,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.6,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 2.9,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.33895,
-        "change_30m_pct": -0.047,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.33867,
+        "change_30m_pct": -0.341,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -817,19 +817,19 @@
     {
       "symbol": "SAND-USD",
       "market": "Cripto",
-      "prob_up_pct": 42.6,
-      "prob_down_pct": 57.4,
+      "prob_up_pct": 42.5,
+      "prob_down_pct": 57.5,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 16.4,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 16.8,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.046,
-        "change_30m_pct": -0.217,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.0457,
+        "change_30m_pct": -1.082,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -840,300 +840,300 @@
       "prob_down_pct": 54.9,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.2,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 7.6,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.0737,
-        "change_30m_pct": -0.405,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.0735,
+        "change_30m_pct": -0.541,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "AXS-USD",
       "market": "Cripto",
-      "prob_up_pct": 43.0,
-      "prob_down_pct": 57.0,
+      "prob_up_pct": 42.5,
+      "prob_down_pct": 57.5,
       "better_than_baseline": false,
       "approved_for_paper": false,
       "calibration_error_pct": 5.5,
-      "forecast_asof_daily": "2026-10-30",
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.8568,
-        "change_30m_pct": -0.268,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.8505,
+        "change_30m_pct": -0.596,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "CHZ-USD",
       "market": "Cripto",
-      "prob_up_pct": 36.9,
-      "prob_down_pct": 63.1,
+      "prob_up_pct": 36.3,
+      "prob_down_pct": 63.7,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 22.9,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 22.7,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.012,
-        "change_30m_pct": -0.266,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.012003,
+        "change_30m_pct": -0.166,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ENJ-USD",
       "market": "Cripto",
-      "prob_up_pct": 32.7,
-      "prob_down_pct": 67.3,
+      "prob_up_pct": 32.5,
+      "prob_down_pct": 67.5,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.3,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 4.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.023771,
-        "change_30m_pct": -0.52,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.023608,
+        "change_30m_pct": -0.588,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "BAT-USD",
       "market": "Cripto",
-      "prob_up_pct": 62.6,
-      "prob_down_pct": 37.4,
+      "prob_up_pct": 55.0,
+      "prob_down_pct": 45.0,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 7.6,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 8.4,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 0.13716,
-        "change_30m_pct": 0.205,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.13491,
+        "change_30m_pct": -0.384,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ZEC-USD",
       "market": "Cripto",
-      "prob_up_pct": 54.9,
-      "prob_down_pct": 45.1,
+      "prob_up_pct": 55.4,
+      "prob_down_pct": 44.6,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 13.0,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 12.8,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 1224.660034,
-        "change_30m_pct": -0.227,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 1217.819946,
+        "change_30m_pct": -1.621,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "DASH-USD",
       "market": "Cripto",
-      "prob_up_pct": 42.6,
-      "prob_down_pct": 57.4,
+      "prob_up_pct": 43.1,
+      "prob_down_pct": 56.9,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.1,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 4.9,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 47.919998,
-        "change_30m_pct": -0.291,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 47.779999,
+        "change_30m_pct": -0.271,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "XTZ-USD",
       "market": "Cripto",
-      "prob_up_pct": 50.3,
-      "prob_down_pct": 49.7,
+      "prob_up_pct": 48.4,
+      "prob_down_pct": 51.6,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 10.4,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 9.6,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
-      "signal": "ESPERAR",
+      "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.2513,
-        "change_30m_pct": -0.238,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.2512,
+        "change_30m_pct": -0.278,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "EOS-USD",
       "market": "Cripto",
-      "prob_up_pct": 49.8,
-      "prob_down_pct": 50.2,
+      "prob_up_pct": 49.1,
+      "prob_down_pct": 50.9,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 3.5,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 2.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.081242,
-        "change_30m_pct": -0.115,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.080803,
+        "change_30m_pct": -0.458,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "KAVA-USD",
       "market": "Cripto",
-      "prob_up_pct": 57.0,
-      "prob_down_pct": 43.0,
+      "prob_up_pct": 55.6,
+      "prob_down_pct": 44.4,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 9.0,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 9.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 0.0683,
+        "close": 0.0685,
         "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "FLOW-USD",
       "market": "Cripto",
-      "prob_up_pct": 35.7,
-      "prob_down_pct": 64.3,
+      "prob_up_pct": 34.0,
+      "prob_down_pct": 66.0,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 9.0,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 8.3,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.0233,
-        "change_30m_pct": 0.215,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.023,
+        "change_30m_pct": 0.218,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "MINA-USD",
       "market": "Cripto",
-      "prob_up_pct": 30.4,
-      "prob_down_pct": 69.6,
+      "prob_up_pct": 30.0,
+      "prob_down_pct": 70.0,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.9,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 2.3,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
-      "signal": "FECHAR SE DETIDO",
+      "signal": "VENDER SE DETIDO",
       "quote": {
-        "close": 0.0582,
-        "change_30m_pct": -0.342,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.0576,
+        "change_30m_pct": -0.346,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "ZIL-USD",
       "market": "Cripto",
-      "prob_up_pct": 39.4,
-      "prob_down_pct": 60.6,
+      "prob_up_pct": 38.7,
+      "prob_down_pct": 61.3,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 21.2,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 20.4,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.001861,
-        "change_30m_pct": -0.155,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.001855,
+        "change_30m_pct": -0.293,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "1INCH-USD",
       "market": "Cripto",
-      "prob_up_pct": 44.8,
-      "prob_down_pct": 55.2,
+      "prob_up_pct": 44.2,
+      "prob_down_pct": 55.8,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 10.8,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 9.8,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.08176,
-        "change_30m_pct": -0.813,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.08138,
+        "change_30m_pct": -0.792,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "YFI-USD",
       "market": "Cripto",
-      "prob_up_pct": 44.0,
-      "prob_down_pct": 56.0,
+      "prob_up_pct": 43.1,
+      "prob_down_pct": 56.9,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 14.8,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 15.6,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 1985.780029,
-        "change_30m_pct": -0.547,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 1978.810059,
+        "change_30m_pct": -0.374,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "SHIB-USD",
       "market": "Cripto",
-      "prob_up_pct": 11.4,
-      "prob_down_pct": 88.6,
+      "prob_up_pct": 11.5,
+      "prob_down_pct": 88.5,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 1.8,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 1.1,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 5e-06,
-        "change_30m_pct": -0.214,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "change_30m_pct": -0.64,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1153,57 +1153,57 @@
     {
       "symbol": "BONK-USD",
       "market": "Cripto",
-      "prob_up_pct": 15.5,
-      "prob_down_pct": 84.5,
+      "prob_up_pct": 15.7,
+      "prob_down_pct": 84.3,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 1.2,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 0.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 3e-06,
-        "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "change_30m_pct": -0.687,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "WIF-USD",
       "market": "Cripto",
-      "prob_up_pct": 44.4,
-      "prob_down_pct": 55.6,
+      "prob_up_pct": 43.6,
+      "prob_down_pct": 56.4,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.7,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 3.5,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.17673,
-        "change_30m_pct": -0.141,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.17581,
+        "change_30m_pct": -0.363,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "FLOKI-USD",
       "market": "Cripto",
-      "prob_up_pct": 31.1,
-      "prob_down_pct": 68.9,
+      "prob_up_pct": 31.2,
+      "prob_down_pct": 68.8,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.7,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 4.8,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
         "close": 2.3e-05,
-        "change_30m_pct": -0.391,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "change_30m_pct": -0.826,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1223,19 +1223,19 @@
     {
       "symbol": "FARTCOIN-USD",
       "market": "Cripto",
-      "prob_up_pct": 41.1,
-      "prob_down_pct": 58.9,
+      "prob_up_pct": 40.3,
+      "prob_down_pct": 59.7,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 1.7,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 1.0,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.12055,
-        "change_30m_pct": -0.38,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.12076,
+        "change_30m_pct": -0.919,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1268,19 +1268,19 @@
     {
       "symbol": "TURBO-USD",
       "market": "Cripto",
-      "prob_up_pct": 42.5,
-      "prob_down_pct": 57.5,
-      "better_than_baseline": false,
+      "prob_up_pct": 41.9,
+      "prob_down_pct": 58.1,
+      "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 2.5,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 2.9,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.00078,
-        "change_30m_pct": -0.192,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.000773,
+        "change_30m_pct": -0.297,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1298,46 +1298,46 @@
       "quote": {
         "close": 0.0,
         "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "BOME-USD",
       "market": "Cripto",
-      "prob_up_pct": 49.7,
-      "prob_down_pct": 50.3,
+      "prob_up_pct": 50.5,
+      "prob_down_pct": 49.5,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.9,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 4.6,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
-      "signal": "FECHAR SE DETIDO",
+      "signal": "ESPERAR",
       "quote": {
-        "close": 0.000605,
-        "change_30m_pct": -0.192,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.0006,
+        "change_30m_pct": -0.789,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "PNUT-USD",
       "market": "Cripto",
-      "prob_up_pct": 40.0,
-      "prob_down_pct": 60.0,
+      "prob_up_pct": 39.8,
+      "prob_down_pct": 60.2,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.4,
-      "forecast_asof_daily": "2026-10-30",
+      "calibration_error_pct": 8.2,
+      "forecast_asof_daily": "2026-10-31",
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.03962,
-        "change_30m_pct": -0.627,
-        "close_candle_start_utc": "2026-11-01T18:30:00+00:00",
-        "age_minutes": 41.1,
+        "close": 0.03949,
+        "change_30m_pct": -0.704,
+        "close_candle_start_utc": "2026-11-01T22:00:00+00:00",
+        "age_minutes": 47.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1382,7 +1382,7 @@
         "close": 344.799988,
         "change_30m_pct": 0.373,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1401,7 +1401,7 @@
         "close": 521.900024,
         "change_30m_pct": -0.061,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1420,7 +1420,7 @@
         "close": 204.809998,
         "change_30m_pct": 1.004,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1439,7 +1439,7 @@
         "close": 240.410004,
         "change_30m_pct": 0.518,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1458,7 +1458,7 @@
         "close": 279.76001,
         "change_30m_pct": 0.706,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1477,7 +1477,7 @@
         "close": 614.97998,
         "change_30m_pct": 0.379,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1496,7 +1496,7 @@
         "close": 399.809998,
         "change_30m_pct": 0.454,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1515,7 +1515,7 @@
         "close": 505.179993,
         "change_30m_pct": 1.39,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1534,7 +1534,7 @@
         "close": 65.879997,
         "change_30m_pct": 3.139,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1553,7 +1553,7 @@
         "close": 62.080002,
         "change_30m_pct": 0.461,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1572,7 +1572,7 @@
         "close": 130.690002,
         "change_30m_pct": 0.763,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1591,7 +1591,7 @@
         "close": 229.085007,
         "change_30m_pct": 0.256,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1610,7 +1610,7 @@
         "close": 250.100006,
         "change_30m_pct": -0.287,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1629,7 +1629,7 @@
         "close": 257.859985,
         "change_30m_pct": 0.452,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1648,7 +1648,7 @@
         "close": 104.510002,
         "change_30m_pct": 0.548,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1667,7 +1667,7 @@
         "close": 164.970001,
         "change_30m_pct": 0.751,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1686,7 +1686,7 @@
         "close": 300.959991,
         "change_30m_pct": 0.77,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1705,7 +1705,7 @@
         "close": 326.170013,
         "change_30m_pct": 0.928,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1724,7 +1724,7 @@
         "close": 884.890015,
         "change_30m_pct": 1.827,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1743,7 +1743,7 @@
         "close": 390.269989,
         "change_30m_pct": 0.647,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1762,7 +1762,7 @@
         "close": 239.25,
         "change_30m_pct": 0.277,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1781,7 +1781,7 @@
         "close": 157.940002,
         "change_30m_pct": -0.032,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1800,7 +1800,7 @@
         "close": 1565.22998,
         "change_30m_pct": 0.399,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1819,7 +1819,7 @@
         "close": 405.98999,
         "change_30m_pct": 0.55,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1838,7 +1838,7 @@
         "close": 157.389999,
         "change_30m_pct": 0.749,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1857,7 +1857,7 @@
         "close": 65.239998,
         "change_30m_pct": 0.307,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1876,7 +1876,7 @@
         "close": 164.360001,
         "change_30m_pct": -0.128,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1895,7 +1895,7 @@
         "close": 57.009998,
         "change_30m_pct": -0.228,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1927,7 +1927,7 @@
         "close": 143.509995,
         "change_30m_pct": 2.179,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1946,7 +1946,7 @@
         "close": 84.900002,
         "change_30m_pct": 1.75,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1965,7 +1965,7 @@
         "close": 337.100006,
         "change_30m_pct": 0.363,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1984,7 +1984,7 @@
         "close": 50.009998,
         "change_30m_pct": 0.2,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2003,7 +2003,7 @@
         "close": 83.419998,
         "change_30m_pct": 0.36,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2022,7 +2022,7 @@
         "close": 894.090027,
         "change_30m_pct": 0.544,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2041,7 +2041,7 @@
         "close": 184.279999,
         "change_30m_pct": 0.417,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2060,7 +2060,7 @@
         "close": 413.625,
         "change_30m_pct": -0.192,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2079,7 +2079,7 @@
         "close": 638.01001,
         "change_30m_pct": -0.1,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2098,7 +2098,7 @@
         "close": 319.019989,
         "change_30m_pct": 0.229,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2117,7 +2117,7 @@
         "close": 122.620003,
         "change_30m_pct": 0.874,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2136,7 +2136,7 @@
         "close": 543.169983,
         "change_30m_pct": -0.031,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2155,7 +2155,7 @@
         "close": 273.200012,
         "change_30m_pct": -0.205,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2174,7 +2174,7 @@
         "close": 30.504999,
         "change_30m_pct": 0.279,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2193,7 +2193,7 @@
         "close": 149.539993,
         "change_30m_pct": 0.161,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2212,7 +2212,7 @@
         "close": 294.880005,
         "change_30m_pct": 0.439,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2231,7 +2231,7 @@
         "close": 1416.300049,
         "change_30m_pct": 0.502,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2250,7 +2250,7 @@
         "close": 406.959991,
         "change_30m_pct": 0.121,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2269,7 +2269,7 @@
         "close": 90.239998,
         "change_30m_pct": 0.289,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2288,7 +2288,7 @@
         "close": 466.049988,
         "change_30m_pct": 0.082,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2307,7 +2307,7 @@
         "close": 170.800003,
         "change_30m_pct": -0.073,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2326,7 +2326,7 @@
         "close": 927.859985,
         "change_30m_pct": 0.479,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2345,7 +2345,7 @@
         "close": 431.880005,
         "change_30m_pct": -0.171,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2364,7 +2364,7 @@
         "close": 96.550003,
         "change_30m_pct": -0.196,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2383,7 +2383,7 @@
         "close": 696.98999,
         "change_30m_pct": 0.555,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2402,7 +2402,7 @@
         "close": 232.300003,
         "change_30m_pct": 0.151,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2421,7 +2421,7 @@
         "close": 106.25,
         "change_30m_pct": 0.245,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2440,7 +2440,7 @@
         "close": 161.539993,
         "change_30m_pct": -0.241,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2459,7 +2459,7 @@
         "close": 94.120003,
         "change_30m_pct": 0.064,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2478,7 +2478,7 @@
         "close": 137.360001,
         "change_30m_pct": -0.348,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2497,7 +2497,7 @@
         "close": 1012.419983,
         "change_30m_pct": -0.191,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2516,7 +2516,7 @@
         "close": 123.519997,
         "change_30m_pct": 0.04,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2535,7 +2535,7 @@
         "close": 154.240005,
         "change_30m_pct": 0.909,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2554,18 +2554,18 @@
         "close": 329.25,
         "change_30m_pct": -0.097,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
     {
       "symbol": "LOW",
       "market": "Ações",
-      "prob_up_pct": 58.1,
-      "prob_down_pct": 41.9,
+      "prob_up_pct": 58.6,
+      "prob_down_pct": 41.4,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 6.9,
+      "calibration_error_pct": 12.4,
       "forecast_asof_daily": "2026-10-30",
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
@@ -2573,7 +2573,7 @@
         "close": 209.119995,
         "change_30m_pct": 0.158,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2592,7 +2592,7 @@
         "close": 258.179993,
         "change_30m_pct": 0.004,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2611,7 +2611,7 @@
         "close": 103.580002,
         "change_30m_pct": -0.709,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2630,7 +2630,7 @@
         "close": 38.689999,
         "change_30m_pct": -0.09,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2649,7 +2649,7 @@
         "close": 110.970001,
         "change_30m_pct": 0.018,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2668,7 +2668,7 @@
         "close": 23.245001,
         "change_30m_pct": 0.78,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2687,7 +2687,7 @@
         "close": 44.740002,
         "change_30m_pct": -0.412,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2706,7 +2706,7 @@
         "close": 21.43,
         "change_30m_pct": 0.304,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2725,7 +2725,7 @@
         "close": 187.25,
         "change_30m_pct": 0.434,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2744,7 +2744,7 @@
         "close": 235.589996,
         "change_30m_pct": 0.332,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2763,7 +2763,7 @@
         "close": 154.050003,
         "change_30m_pct": 0.542,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2782,7 +2782,7 @@
         "close": 53.740002,
         "change_30m_pct": 0.355,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2801,7 +2801,7 @@
         "close": 622.684998,
         "change_30m_pct": 0.155,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2820,7 +2820,7 @@
         "close": 675.284973,
         "change_30m_pct": 0.313,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2839,7 +2839,7 @@
         "close": 301.785004,
         "change_30m_pct": 0.297,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2858,7 +2858,7 @@
         "close": 171.529999,
         "change_30m_pct": 0.187,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2877,7 +2877,7 @@
         "close": 637.059998,
         "change_30m_pct": -0.179,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2896,7 +2896,7 @@
         "close": 56.939999,
         "change_30m_pct": -0.237,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2915,7 +2915,7 @@
         "close": 16.754999,
         "change_30m_pct": 0.42,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2934,7 +2934,7 @@
         "close": 184.100006,
         "change_30m_pct": -0.824,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2953,7 +2953,7 @@
         "close": 42.98,
         "change_30m_pct": -0.348,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2972,7 +2972,7 @@
         "close": 306.049988,
         "change_30m_pct": 1.316,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2991,7 +2991,7 @@
         "close": 235.350006,
         "change_30m_pct": 0.315,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3010,7 +3010,7 @@
         "close": 280.429993,
         "change_30m_pct": 0.513,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3029,7 +3029,7 @@
         "close": 250.380005,
         "change_30m_pct": 0.457,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3048,7 +3048,7 @@
         "close": 365.799988,
         "change_30m_pct": 0.678,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3067,7 +3067,7 @@
         "close": 105.135002,
         "change_30m_pct": 0.67,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3086,7 +3086,7 @@
         "close": 341.160004,
         "change_30m_pct": -0.33,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3105,7 +3105,7 @@
         "close": 148.210007,
         "change_30m_pct": 0.372,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3124,7 +3124,7 @@
         "close": 399.660004,
         "change_30m_pct": -0.053,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3143,7 +3143,7 @@
         "close": 31.870001,
         "change_30m_pct": -0.125,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3162,7 +3162,7 @@
         "close": 155.339996,
         "change_30m_pct": -0.218,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3181,7 +3181,7 @@
         "close": 313.720001,
         "change_30m_pct": 0.105,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3200,7 +3200,7 @@
         "close": 40.005001,
         "change_30m_pct": 0.578,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3219,7 +3219,7 @@
         "close": 106.610001,
         "change_30m_pct": 1.263,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3238,7 +3238,7 @@
         "close": 12.22,
         "change_30m_pct": -0.164,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3257,7 +3257,7 @@
         "close": 87.410004,
         "change_30m_pct": -0.057,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3276,7 +3276,7 @@
         "close": 755.710022,
         "change_30m_pct": 0.379,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3295,7 +3295,7 @@
         "close": 690.559998,
         "change_30m_pct": 0.475,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3314,7 +3314,7 @@
         "close": 371.570007,
         "change_30m_pct": 0.378,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3333,7 +3333,7 @@
         "close": 694.700012,
         "change_30m_pct": 0.386,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3352,7 +3352,7 @@
         "close": 279.390015,
         "change_30m_pct": 0.352,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3371,7 +3371,7 @@
         "close": 517.049988,
         "change_30m_pct": 0.196,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3390,7 +3390,7 @@
         "close": 103.360001,
         "change_30m_pct": 0.418,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3409,7 +3409,7 @@
         "close": 61.029999,
         "change_30m_pct": 0.469,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3428,7 +3428,7 @@
         "close": 69.420097,
         "change_30m_pct": 0.412,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3447,7 +3447,7 @@
         "close": 55.509998,
         "change_30m_pct": 0.316,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3466,7 +3466,7 @@
         "close": 179.550003,
         "change_30m_pct": 0.645,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3485,7 +3485,7 @@
         "close": 56.529999,
         "change_30m_pct": 0.168,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3504,7 +3504,7 @@
         "close": 70.0,
         "change_30m_pct": 0.539,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3523,7 +3523,7 @@
         "close": 184.899994,
         "change_30m_pct": 0.195,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3542,7 +3542,7 @@
         "close": 167.419998,
         "change_30m_pct": 0.215,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3561,7 +3561,7 @@
         "close": 89.419998,
         "change_30m_pct": 0.017,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3580,7 +3580,7 @@
         "close": 115.389999,
         "change_30m_pct": 0.104,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3599,7 +3599,7 @@
         "close": 43.450001,
         "change_30m_pct": -0.126,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3618,7 +3618,7 @@
         "close": 355.959991,
         "change_30m_pct": 0.217,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3637,7 +3637,7 @@
         "close": 44.57,
         "change_30m_pct": 0.564,
         "close_candle_start_utc": "2026-10-30T19:30:00+00:00",
-        "age_minutes": 2861.1,
+        "age_minutes": 3077.8,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     }
@@ -3646,614 +3646,614 @@
     "BTC-USD": {
       "up_pct": 44.5,
       "down_pct": 55.5,
-      "brier": 0.2599,
+      "brier": 0.2579,
       "baseline_brier": 0.2533,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 12.0,
+      "calibration_error_pct": 11.2,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "ETH-USD": {
-      "up_pct": 39.4,
-      "down_pct": 60.6,
-      "brier": 0.2428,
+      "up_pct": 38.3,
+      "down_pct": 61.7,
+      "brier": 0.2423,
       "baseline_brier": 0.248,
       "out_of_sample_count": 164,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 1.2,
+      "calibration_error_pct": 1.5,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "SOL-USD": {
-      "up_pct": 47.7,
-      "down_pct": 52.3,
-      "brier": 0.2511,
+      "up_pct": 47.3,
+      "down_pct": 52.7,
+      "brier": 0.2509,
       "baseline_brier": 0.2491,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 3.2,
+      "calibration_error_pct": 1.5,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "XRP-USD": {
-      "up_pct": 39.9,
-      "down_pct": 60.1,
-      "brier": 0.226,
+      "up_pct": 38.6,
+      "down_pct": 61.4,
+      "brier": 0.2228,
       "baseline_brier": 0.2357,
       "out_of_sample_count": 164,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 11.1,
+      "calibration_error_pct": 10.0,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "ADA-USD": {
-      "up_pct": 44.3,
-      "down_pct": 55.7,
-      "brier": 0.2438,
+      "up_pct": 43.8,
+      "down_pct": 56.2,
+      "brier": 0.2422,
       "baseline_brier": 0.2352,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 10.2,
+      "calibration_error_pct": 9.2,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "DOGE-USD": {
-      "up_pct": 42.7,
-      "down_pct": 57.3,
-      "brier": 0.2556,
-      "baseline_brier": 0.2282,
+      "up_pct": 42.4,
+      "down_pct": 57.6,
+      "brier": 0.2566,
+      "baseline_brier": 0.2279,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 17.9,
+      "calibration_error_pct": 17.7,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "AVAX-USD": {
-      "up_pct": 42.3,
-      "down_pct": 57.7,
-      "brier": 0.2453,
+      "up_pct": 42.9,
+      "down_pct": 57.1,
+      "brier": 0.245,
       "baseline_brier": 0.2437,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 2.5,
+      "calibration_error_pct": 1.7,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "LINK-USD": {
-      "up_pct": 45.5,
-      "down_pct": 54.5,
-      "brier": 0.2511,
-      "baseline_brier": 0.2472,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 7.0,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "DOT-USD": {
-      "up_pct": 41.5,
-      "down_pct": 58.5,
-      "brier": 0.2541,
-      "baseline_brier": 0.2447,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 5.5,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "LTC-USD": {
-      "up_pct": 44.4,
-      "down_pct": 55.6,
-      "brier": 0.247,
-      "baseline_brier": 0.2484,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 2.7,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "BCH-USD": {
-      "up_pct": 44.0,
-      "down_pct": 56.0,
-      "brier": 0.2464,
-      "baseline_brier": 0.2534,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 2.6,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "XLM-USD": {
-      "up_pct": 39.5,
-      "down_pct": 60.5,
-      "brier": 0.2421,
-      "baseline_brier": 0.2405,
+      "up_pct": 46.0,
+      "down_pct": 54.0,
+      "brier": 0.25,
+      "baseline_brier": 0.2477,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
       "calibration_error_pct": 5.3,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
-    "ATOM-USD": {
-      "up_pct": 51.4,
-      "down_pct": 48.6,
-      "brier": 0.2547,
-      "baseline_brier": 0.2479,
+    "DOT-USD": {
+      "up_pct": 39.6,
+      "down_pct": 60.4,
+      "brier": 0.2554,
+      "baseline_brier": 0.2447,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.0,
+      "calibration_error_pct": 6.2,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
+    },
+    "LTC-USD": {
+      "up_pct": 43.9,
+      "down_pct": 56.1,
+      "brier": 0.2472,
+      "baseline_brier": 0.2484,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 5.0,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "BCH-USD": {
+      "up_pct": 43.0,
+      "down_pct": 57.0,
+      "brier": 0.247,
+      "baseline_brier": 0.2531,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 2.1,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "XLM-USD": {
+      "up_pct": 38.3,
+      "down_pct": 61.7,
+      "brier": 0.2425,
+      "baseline_brier": 0.2417,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 4.7,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "ATOM-USD": {
+      "up_pct": 51.0,
+      "down_pct": 49.0,
+      "brier": 0.2526,
+      "baseline_brier": 0.2467,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 7.9,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
     },
     "AAVE-USD": {
-      "up_pct": 45.2,
-      "down_pct": 54.8,
-      "brier": 0.2565,
+      "up_pct": 45.6,
+      "down_pct": 54.4,
+      "brier": 0.2588,
       "baseline_brier": 0.2491,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.5,
+      "calibration_error_pct": 6.2,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "ETC-USD": {
-      "up_pct": 37.8,
-      "down_pct": 62.2,
-      "brier": 0.2469,
+      "up_pct": 38.5,
+      "down_pct": 61.5,
+      "brier": 0.2459,
       "baseline_brier": 0.224,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 17.5,
+      "calibration_error_pct": 16.1,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "FIL-USD": {
-      "up_pct": 48.0,
-      "down_pct": 52.0,
-      "brier": 0.2516,
+      "up_pct": 46.9,
+      "down_pct": 53.1,
+      "brier": 0.2539,
       "baseline_brier": 0.2495,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.3,
+      "calibration_error_pct": 9.7,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "NEAR-USD": {
-      "up_pct": 51.9,
-      "down_pct": 48.1,
-      "brier": 0.2551,
-      "baseline_brier": 0.2564,
+      "up_pct": 50.9,
+      "down_pct": 49.1,
+      "brier": 0.2539,
+      "baseline_brier": 0.2556,
       "out_of_sample_count": 164,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 0.8,
+      "calibration_error_pct": 1.8,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "ICP-USD": {
-      "up_pct": 51.6,
-      "down_pct": 48.4,
-      "brier": 0.2985,
-      "baseline_brier": 0.2666,
+      "up_pct": 52.4,
+      "down_pct": 47.6,
+      "brier": 0.3016,
+      "baseline_brier": 0.2673,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 18.3,
+      "calibration_error_pct": 18.6,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "ALGO-USD": {
-      "up_pct": 50.3,
-      "down_pct": 49.7,
-      "brier": 0.2495,
-      "baseline_brier": 0.2483,
+      "up_pct": 49.1,
+      "down_pct": 50.9,
+      "brier": 0.2489,
+      "baseline_brier": 0.247,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.9,
+      "calibration_error_pct": 6.6,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "HBAR-USD": {
-      "up_pct": 35.9,
-      "down_pct": 64.1,
-      "brier": 0.2431,
+      "up_pct": 31.9,
+      "down_pct": 68.1,
+      "brier": 0.2418,
       "baseline_brier": 0.2328,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.9,
+      "calibration_error_pct": 8.1,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "OP-USD": {
-      "up_pct": 41.8,
-      "down_pct": 58.2,
-      "brier": 0.2437,
-      "baseline_brier": 0.2406,
+      "up_pct": 42.5,
+      "down_pct": 57.5,
+      "brier": 0.2435,
+      "baseline_brier": 0.2417,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.7,
+      "calibration_error_pct": 4.3,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "INJ-USD": {
-      "up_pct": 64.9,
-      "down_pct": 35.1,
-      "brier": 0.2497,
+      "up_pct": 64.2,
+      "down_pct": 35.8,
+      "brier": 0.2499,
       "baseline_brier": 0.2583,
       "out_of_sample_count": 164,
       "better_than_baseline": true,
       "approved_for_paper": false,
       "calibration_error_pct": 6.2,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "RENDER-USD": {
       "up_pct": 39.7,
       "down_pct": 60.3,
-      "brier": 0.2472,
-      "baseline_brier": 0.2397,
+      "brier": 0.2446,
+      "baseline_brier": 0.2387,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 8.4,
+      "calibration_error_pct": 9.9,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "CRV-USD": {
-      "up_pct": 48.1,
-      "down_pct": 51.9,
-      "brier": 0.2459,
-      "baseline_brier": 0.2444,
+      "up_pct": 47.5,
+      "down_pct": 52.5,
+      "brier": 0.2448,
+      "baseline_brier": 0.2443,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.5,
+      "calibration_error_pct": 3.8,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "MKR-USD": {
-      "up_pct": 53.6,
-      "down_pct": 46.4,
-      "brier": 0.2486,
-      "baseline_brier": 0.2499,
+      "up_pct": 55.5,
+      "down_pct": 44.5,
+      "brier": 0.2484,
+      "baseline_brier": 0.2497,
       "out_of_sample_count": 164,
       "better_than_baseline": true,
       "approved_for_paper": false,
-      "calibration_error_pct": 12.6,
-      "high_confidence_test_samples": 13,
-      "daily_close_date": "2026-10-30"
+      "calibration_error_pct": 13.0,
+      "high_confidence_test_samples": 7,
+      "daily_close_date": "2026-10-31"
     },
     "SNX-USD": {
-      "up_pct": 41.9,
-      "down_pct": 58.1,
-      "brier": 0.2539,
-      "baseline_brier": 0.2358,
+      "up_pct": 41.4,
+      "down_pct": 58.6,
+      "brier": 0.2511,
+      "baseline_brier": 0.2357,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 13.4,
+      "calibration_error_pct": 12.4,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "LDO-USD": {
-      "up_pct": 47.9,
-      "down_pct": 52.1,
-      "brier": 0.2517,
+      "up_pct": 47.7,
+      "down_pct": 52.3,
+      "brier": 0.251,
       "baseline_brier": 0.2471,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 4.6,
+      "calibration_error_pct": 2.9,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "SAND-USD": {
-      "up_pct": 42.6,
-      "down_pct": 57.4,
-      "brier": 0.2648,
+      "up_pct": 42.5,
+      "down_pct": 57.5,
+      "brier": 0.269,
       "baseline_brier": 0.2353,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 16.4,
+      "calibration_error_pct": 16.8,
       "high_confidence_test_samples": 1,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
     "MANA-USD": {
       "up_pct": 45.1,
       "down_pct": 54.9,
-      "brier": 0.2443,
+      "brier": 0.2439,
       "baseline_brier": 0.2428,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 8.2,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "AXS-USD": {
-      "up_pct": 43.0,
-      "down_pct": 57.0,
-      "brier": 0.2462,
-      "baseline_brier": 0.245,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 5.5,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "CHZ-USD": {
-      "up_pct": 36.9,
-      "down_pct": 63.1,
-      "brier": 0.2656,
-      "baseline_brier": 0.2253,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 22.9,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "ENJ-USD": {
-      "up_pct": 32.7,
-      "down_pct": 67.3,
-      "brier": 0.2308,
-      "baseline_brier": 0.227,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 4.3,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "BAT-USD": {
-      "up_pct": 62.6,
-      "down_pct": 37.4,
-      "brier": 0.254,
-      "baseline_brier": 0.2482,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
       "calibration_error_pct": 7.6,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
-    "ZEC-USD": {
-      "up_pct": 54.9,
-      "down_pct": 45.1,
-      "brier": 0.2627,
-      "baseline_brier": 0.2475,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 13.0,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "DASH-USD": {
-      "up_pct": 42.6,
-      "down_pct": 57.4,
-      "brier": 0.2453,
-      "baseline_brier": 0.2475,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 5.1,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "XTZ-USD": {
-      "up_pct": 50.3,
-      "down_pct": 49.7,
-      "brier": 0.2592,
-      "baseline_brier": 0.2363,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 10.4,
-      "high_confidence_test_samples": 2,
-      "daily_close_date": "2026-10-30"
-    },
-    "EOS-USD": {
-      "up_pct": 49.8,
-      "down_pct": 50.2,
-      "brier": 0.2522,
-      "baseline_brier": 0.2591,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 3.5,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "KAVA-USD": {
-      "up_pct": 57.0,
-      "down_pct": 43.0,
-      "brier": 0.2533,
-      "baseline_brier": 0.2741,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 9.0,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "FLOW-USD": {
-      "up_pct": 35.7,
-      "down_pct": 64.3,
-      "brier": 0.2447,
-      "baseline_brier": 0.2371,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 9.0,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "MINA-USD": {
-      "up_pct": 30.4,
-      "down_pct": 69.6,
-      "brier": 0.2503,
-      "baseline_brier": 0.247,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 4.9,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "ZIL-USD": {
-      "up_pct": 39.4,
-      "down_pct": 60.6,
-      "brier": 0.284,
-      "baseline_brier": 0.2291,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 21.2,
-      "high_confidence_test_samples": 16,
-      "daily_close_date": "2026-10-30"
-    },
-    "1INCH-USD": {
-      "up_pct": 44.8,
-      "down_pct": 55.2,
-      "brier": 0.2482,
-      "baseline_brier": 0.243,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 10.8,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "YFI-USD": {
-      "up_pct": 44.0,
-      "down_pct": 56.0,
-      "brier": 0.2643,
-      "baseline_brier": 0.2381,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 14.8,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "SHIB-USD": {
-      "up_pct": 11.4,
-      "down_pct": 88.6,
-      "brier": 0.0871,
-      "baseline_brier": 0.1099,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 1.8,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "BONK-USD": {
-      "up_pct": 15.5,
-      "down_pct": 84.5,
-      "brier": 0.1017,
-      "baseline_brier": 0.1422,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 1.2,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "WIF-USD": {
-      "up_pct": 44.4,
-      "down_pct": 55.6,
-      "brier": 0.2479,
-      "baseline_brier": 0.2455,
-      "out_of_sample_count": 164,
-      "better_than_baseline": false,
-      "approved_for_paper": false,
-      "calibration_error_pct": 4.7,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "FLOKI-USD": {
-      "up_pct": 31.1,
-      "down_pct": 68.9,
-      "brier": 0.2116,
-      "baseline_brier": 0.2146,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 5.7,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "FARTCOIN-USD": {
-      "up_pct": 41.1,
-      "down_pct": 58.9,
-      "brier": 0.2408,
-      "baseline_brier": 0.2465,
-      "out_of_sample_count": 164,
-      "better_than_baseline": true,
-      "approved_for_paper": false,
-      "calibration_error_pct": 1.7,
-      "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
-    },
-    "TURBO-USD": {
+    "AXS-USD": {
       "up_pct": 42.5,
       "down_pct": 57.5,
-      "brier": 0.2353,
-      "baseline_brier": 0.2352,
+      "brier": 0.2452,
+      "baseline_brier": 0.2436,
       "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 2.5,
+      "calibration_error_pct": 5.5,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
-    "BOME-USD": {
-      "up_pct": 49.7,
-      "down_pct": 50.3,
-      "brier": 0.253,
-      "baseline_brier": 0.2639,
+    "CHZ-USD": {
+      "up_pct": 36.3,
+      "down_pct": 63.7,
+      "brier": 0.265,
+      "baseline_brier": 0.2253,
       "out_of_sample_count": 164,
-      "better_than_baseline": true,
+      "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 5.9,
+      "calibration_error_pct": 22.7,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
     },
-    "PNUT-USD": {
-      "up_pct": 40.0,
-      "down_pct": 60.0,
-      "brier": 0.2404,
-      "baseline_brier": 0.2329,
-      "out_of_sample_count": 163,
+    "ENJ-USD": {
+      "up_pct": 32.5,
+      "down_pct": 67.5,
+      "brier": 0.2288,
+      "baseline_brier": 0.2253,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 4.5,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "BAT-USD": {
+      "up_pct": 55.0,
+      "down_pct": 45.0,
+      "brier": 0.2556,
+      "baseline_brier": 0.2482,
+      "out_of_sample_count": 164,
       "better_than_baseline": false,
       "approved_for_paper": false,
       "calibration_error_pct": 8.4,
       "high_confidence_test_samples": 0,
-      "daily_close_date": "2026-10-30"
+      "daily_close_date": "2026-10-31"
+    },
+    "ZEC-USD": {
+      "up_pct": 55.4,
+      "down_pct": 44.6,
+      "brier": 0.2625,
+      "baseline_brier": 0.2475,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 12.8,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "DASH-USD": {
+      "up_pct": 43.1,
+      "down_pct": 56.9,
+      "brier": 0.2441,
+      "baseline_brier": 0.2473,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 4.9,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "XTZ-USD": {
+      "up_pct": 48.4,
+      "down_pct": 51.6,
+      "brier": 0.2557,
+      "baseline_brier": 0.2363,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 9.6,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "EOS-USD": {
+      "up_pct": 49.1,
+      "down_pct": 50.9,
+      "brier": 0.252,
+      "baseline_brier": 0.2591,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 2.5,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "KAVA-USD": {
+      "up_pct": 55.6,
+      "down_pct": 44.4,
+      "brier": 0.2549,
+      "baseline_brier": 0.2741,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 9.5,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "FLOW-USD": {
+      "up_pct": 34.0,
+      "down_pct": 66.0,
+      "brier": 0.2436,
+      "baseline_brier": 0.2372,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 8.3,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "MINA-USD": {
+      "up_pct": 30.0,
+      "down_pct": 70.0,
+      "brier": 0.2477,
+      "baseline_brier": 0.247,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 2.3,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "ZIL-USD": {
+      "up_pct": 38.7,
+      "down_pct": 61.3,
+      "brier": 0.2817,
+      "baseline_brier": 0.2291,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 20.4,
+      "high_confidence_test_samples": 16,
+      "daily_close_date": "2026-10-31"
+    },
+    "1INCH-USD": {
+      "up_pct": 44.2,
+      "down_pct": 55.8,
+      "brier": 0.2467,
+      "baseline_brier": 0.243,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 9.8,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "YFI-USD": {
+      "up_pct": 43.1,
+      "down_pct": 56.9,
+      "brier": 0.2641,
+      "baseline_brier": 0.2381,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 15.6,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "SHIB-USD": {
+      "up_pct": 11.5,
+      "down_pct": 88.5,
+      "brier": 0.0872,
+      "baseline_brier": 0.1091,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 1.1,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "BONK-USD": {
+      "up_pct": 15.7,
+      "down_pct": 84.3,
+      "brier": 0.1014,
+      "baseline_brier": 0.1412,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 0.5,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "WIF-USD": {
+      "up_pct": 43.6,
+      "down_pct": 56.4,
+      "brier": 0.2465,
+      "baseline_brier": 0.2455,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 3.5,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "FLOKI-USD": {
+      "up_pct": 31.2,
+      "down_pct": 68.8,
+      "brier": 0.2098,
+      "baseline_brier": 0.2146,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 4.8,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "FARTCOIN-USD": {
+      "up_pct": 40.3,
+      "down_pct": 59.7,
+      "brier": 0.2408,
+      "baseline_brier": 0.246,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 1.0,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "TURBO-USD": {
+      "up_pct": 41.9,
+      "down_pct": 58.1,
+      "brier": 0.2351,
+      "baseline_brier": 0.2352,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 2.9,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "BOME-USD": {
+      "up_pct": 50.5,
+      "down_pct": 49.5,
+      "brier": 0.2533,
+      "baseline_brier": 0.2633,
+      "out_of_sample_count": 164,
+      "better_than_baseline": true,
+      "approved_for_paper": false,
+      "calibration_error_pct": 4.6,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
+    },
+    "PNUT-USD": {
+      "up_pct": 39.8,
+      "down_pct": 60.2,
+      "brier": 0.2395,
+      "baseline_brier": 0.2324,
+      "out_of_sample_count": 164,
+      "better_than_baseline": false,
+      "approved_for_paper": false,
+      "calibration_error_pct": 8.2,
+      "high_confidence_test_samples": 0,
+      "daily_close_date": "2026-10-31"
     },
     "AAPL": {
       "up_pct": 65.3,
@@ -5000,14 +5000,14 @@
       "daily_close_date": "2026-10-30"
     },
     "LOW": {
-      "up_pct": 58.1,
-      "down_pct": 41.9,
-      "brier": 0.2569,
-      "baseline_brier": 0.2504,
+      "up_pct": 58.6,
+      "down_pct": 41.4,
+      "brier": 0.2578,
+      "baseline_brier": 0.2508,
       "out_of_sample_count": 107,
       "better_than_baseline": false,
       "approved_for_paper": false,
-      "calibration_error_pct": 6.9,
+      "calibration_error_pct": 12.4,
       "high_confidence_test_samples": 0,
       "daily_close_date": "2026-10-30"
     },
