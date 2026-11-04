@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-04T11:32:08+00:00",
+  "generated_at_utc": "2026-11-04T18:51:33+00:00",
   "model_updated_at": "2026-11-04T03:13:06+00:00",
   "forecast_horizon": "5 velas diárias; não representa previsão a 30 minutos",
   "quote_interval": "30 minutos (última vela completa; fonte com possíveis atrasos)",
   "universe_count": 185,
   "model_coverage": 170,
-  "recent_30m_quotes": 53,
+  "recent_30m_quotes": 172,
   "buy_candidates": 0,
   "sell_if_held": 91,
   "top_up": [
@@ -22,10 +22,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 21.4,
-        "change_30m_pct": 0.73,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 21.764999,
+        "change_30m_pct": -0.571,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -41,10 +41,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 350.100006,
-        "change_30m_pct": -0.031,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 350.075012,
+        "change_30m_pct": 0.297,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -60,10 +60,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 7.686,
-        "change_30m_pct": 0.182,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 7.85,
+        "change_30m_pct": 0.089,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -79,10 +79,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 225.294998,
-        "change_30m_pct": -0.219,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 216.134995,
+        "change_30m_pct": 0.42,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -98,10 +98,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 266.190002,
-        "change_30m_pct": -0.096,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 273.904999,
+        "change_30m_pct": -0.029,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     }
@@ -120,9 +120,9 @@
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 5e-06,
-        "change_30m_pct": 0.213,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "change_30m_pct": 0.211,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -139,9 +139,9 @@
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 3e-06,
-        "change_30m_pct": 0.98,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "change_30m_pct": -0.326,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -157,10 +157,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
-        "close": 0.0585,
-        "change_30m_pct": 1.036,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.0582,
+        "change_30m_pct": 0.0,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -176,10 +176,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
-        "close": 137.220001,
-        "change_30m_pct": -0.178,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 143.110001,
+        "change_30m_pct": -0.042,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -195,10 +195,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
-        "close": 157.080002,
-        "change_30m_pct": -0.456,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 165.875,
+        "change_30m_pct": 0.048,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     }
@@ -216,10 +216,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 78563.296875,
-        "change_30m_pct": 0.097,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 80506.65625,
+        "change_30m_pct": 0.195,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -235,10 +235,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 2331.649902,
-        "change_30m_pct": 0.288,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 2430.169922,
+        "change_30m_pct": 0.308,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -254,10 +254,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 93.82,
-        "change_30m_pct": 0.374,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 95.699997,
+        "change_30m_pct": 0.042,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -273,10 +273,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 1.2909,
-        "change_30m_pct": 0.101,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 1.314,
+        "change_30m_pct": 0.305,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -292,10 +292,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.19184,
-        "change_30m_pct": 0.209,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.19719,
+        "change_30m_pct": 0.438,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -311,10 +311,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.07533,
-        "change_30m_pct": 0.28,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.07702,
+        "change_30m_pct": 0.443,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -330,10 +330,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 8.709,
-        "change_30m_pct": 0.334,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 8.82,
+        "change_30m_pct": -0.113,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -349,10 +349,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 11.177,
-        "change_30m_pct": 0.072,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 11.552,
+        "change_30m_pct": 0.199,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -368,10 +368,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.9685,
-        "change_30m_pct": -0.113,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.9626,
+        "change_30m_pct": 0.021,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -387,10 +387,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 54.999001,
-        "change_30m_pct": 0.21,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 56.237999,
+        "change_30m_pct": 0.377,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -406,10 +406,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 276.690002,
-        "change_30m_pct": 0.297,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 281.440002,
+        "change_30m_pct": -0.336,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -425,10 +425,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.164564,
-        "change_30m_pct": 0.053,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.16723,
+        "change_30m_pct": 0.323,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -444,10 +444,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 1.4387,
-        "change_30m_pct": 0.216,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 1.4564,
+        "change_30m_pct": -0.444,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -476,10 +476,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 131.830002,
-        "change_30m_pct": 0.32,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 132.490005,
+        "change_30m_pct": 0.076,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -495,10 +495,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 7.159,
-        "change_30m_pct": 0.042,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 7.334,
+        "change_30m_pct": 0.26,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -514,10 +514,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.868,
-        "change_30m_pct": -0.092,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.8689,
+        "change_30m_pct": -0.23,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -533,10 +533,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 4.103,
-        "change_30m_pct": 0.212,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 4.1128,
+        "change_30m_pct": -0.104,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -552,10 +552,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 2.5503,
-        "change_30m_pct": 0.346,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 2.5894,
+        "change_30m_pct": -0.027,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -571,10 +571,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.09642,
-        "change_30m_pct": 0.239,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.10027,
+        "change_30m_pct": 0.19,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -590,10 +590,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.07133,
-        "change_30m_pct": 0.465,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.0723,
+        "change_30m_pct": 0.0,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -637,8 +637,8 @@
       "quote": {
         "close": 0.000629,
         "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -654,10 +654,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.11299,
-        "change_30m_pct": -0.088,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.11156,
+        "change_30m_pct": -0.116,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -673,10 +673,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 7.686,
-        "change_30m_pct": 0.182,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 7.85,
+        "change_30m_pct": 0.089,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -692,10 +692,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 1.5589,
-        "change_30m_pct": 0.763,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 1.5797,
+        "change_30m_pct": -0.038,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -724,10 +724,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.269,
-        "change_30m_pct": 0.074,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.2749,
+        "change_30m_pct": -1.293,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -756,10 +756,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 1521.647827,
-        "change_30m_pct": 0.533,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 1552.047607,
+        "change_30m_pct": -0.07,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -775,10 +775,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.17942,
-        "change_30m_pct": -0.267,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.18024,
+        "change_30m_pct": 0.401,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -794,10 +794,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.34208,
-        "change_30m_pct": 0.167,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.34385,
+        "change_30m_pct": -0.081,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -826,10 +826,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.0454,
-        "change_30m_pct": 0.221,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.0457,
+        "change_30m_pct": 0.219,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -845,10 +845,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.0741,
-        "change_30m_pct": 0.407,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.0745,
+        "change_30m_pct": 0.404,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -864,10 +864,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.8675,
-        "change_30m_pct": 0.162,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.8708,
+        "change_30m_pct": -0.069,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -883,10 +883,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.011858,
-        "change_30m_pct": 0.101,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.011863,
+        "change_30m_pct": 0.034,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -902,10 +902,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.024335,
-        "change_30m_pct": 0.182,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.024556,
+        "change_30m_pct": -0.082,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -921,10 +921,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.13884,
-        "change_30m_pct": 1.328,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.13665,
+        "change_30m_pct": -0.806,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -940,10 +940,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 1309.890015,
-        "change_30m_pct": 0.144,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 1305.189941,
+        "change_30m_pct": 0.22,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -959,10 +959,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 47.490002,
-        "change_30m_pct": 0.423,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 48.869999,
+        "change_30m_pct": 0.473,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -978,10 +978,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.2527,
-        "change_30m_pct": 0.517,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.252,
+        "change_30m_pct": 0.04,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -997,10 +997,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.082476,
-        "change_30m_pct": 0.08,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.083707,
+        "change_30m_pct": -0.316,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1016,10 +1016,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 0.0682,
-        "change_30m_pct": 0.147,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.0686,
+        "change_30m_pct": 0.0,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1035,10 +1035,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.02244,
-        "change_30m_pct": 0.673,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.02246,
+        "change_30m_pct": 0.268,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1054,10 +1054,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
-        "close": 0.0585,
-        "change_30m_pct": 1.036,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.0582,
+        "change_30m_pct": 0.0,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1073,10 +1073,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.001809,
-        "change_30m_pct": -0.237,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.001822,
+        "change_30m_pct": 0.108,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1092,10 +1092,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.08277,
-        "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.08378,
+        "change_30m_pct": -0.274,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1111,10 +1111,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 2022.5,
-        "change_30m_pct": 0.015,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 2044.22998,
+        "change_30m_pct": -0.118,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1131,9 +1131,9 @@
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 5e-06,
-        "change_30m_pct": 0.213,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "change_30m_pct": 0.211,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1163,9 +1163,9 @@
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 3e-06,
-        "change_30m_pct": 0.98,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "change_30m_pct": -0.326,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1181,10 +1181,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.17753,
-        "change_30m_pct": 0.51,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.17585,
+        "change_30m_pct": -0.963,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1201,9 +1201,9 @@
       "signal": "VENDER SE DETIDO",
       "quote": {
         "close": 2.3e-05,
-        "change_30m_pct": -0.044,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "change_30m_pct": 0.349,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1232,10 +1232,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.12361,
-        "change_30m_pct": 0.496,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.1257,
+        "change_30m_pct": -0.992,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1277,10 +1277,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.00077,
-        "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.000772,
+        "change_30m_pct": 0.928,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1297,9 +1297,9 @@
       "signal": "SEM MODELO",
       "quote": {
         "close": 0.0,
-        "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "change_30m_pct": -10.0,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1315,10 +1315,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 0.000628,
-        "change_30m_pct": 0.256,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.000649,
+        "change_30m_pct": -0.089,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1334,10 +1334,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 0.03842,
-        "change_30m_pct": -1.005,
-        "close_candle_start_utc": "2026-11-04T11:00:00+00:00",
-        "age_minutes": 32.1,
+        "close": 0.03856,
+        "change_30m_pct": 0.653,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1379,10 +1379,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 331.73999,
-        "change_30m_pct": 0.136,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 352.755005,
+        "change_30m_pct": -0.353,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1398,10 +1398,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 520.77002,
-        "change_30m_pct": -0.301,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 555.380005,
+        "change_30m_pct": 0.478,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1417,10 +1417,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 206.570007,
-        "change_30m_pct": -0.159,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 204.070007,
+        "change_30m_pct": 0.253,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1436,10 +1436,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 250.740005,
-        "change_30m_pct": -0.5,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 269.30011,
+        "change_30m_pct": 0.086,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1455,10 +1455,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 279.910004,
-        "change_30m_pct": 0.305,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 291.670013,
+        "change_30m_pct": -0.12,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1474,10 +1474,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 620.950012,
-        "change_30m_pct": 0.224,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 634.805115,
+        "change_30m_pct": -0.736,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1493,10 +1493,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 398.220001,
-        "change_30m_pct": 0.166,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 388.519989,
+        "change_30m_pct": -0.646,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1512,10 +1512,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 484.470001,
-        "change_30m_pct": -0.569,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 483.605011,
+        "change_30m_pct": -0.855,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1531,10 +1531,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 60.5,
-        "change_30m_pct": 0.041,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 58.497501,
+        "change_30m_pct": -0.961,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1550,10 +1550,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 63.380001,
-        "change_30m_pct": 0.635,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 65.940002,
+        "change_30m_pct": -0.325,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1569,10 +1569,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 126.205002,
-        "change_30m_pct": 0.706,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 125.669998,
+        "change_30m_pct": -0.515,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1588,10 +1588,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 222.199997,
-        "change_30m_pct": -0.072,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 225.490005,
+        "change_30m_pct": -0.287,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1607,10 +1607,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 246.020004,
-        "change_30m_pct": -0.197,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 247.940002,
+        "change_30m_pct": -0.601,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1626,10 +1626,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 249.899994,
-        "change_30m_pct": 0.347,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 255.002502,
+        "change_30m_pct": 0.077,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1645,10 +1645,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 102.889999,
-        "change_30m_pct": -0.126,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 102.815002,
+        "change_30m_pct": -0.01,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1664,10 +1664,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 164.5,
-        "change_30m_pct": 0.232,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 168.434998,
+        "change_30m_pct": -0.281,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1683,10 +1683,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 312.579987,
-        "change_30m_pct": 0.234,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 310.545013,
+        "change_30m_pct": -0.398,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1702,10 +1702,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 332.089996,
-        "change_30m_pct": -0.087,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 328.190002,
+        "change_30m_pct": -0.449,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1721,10 +1721,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 854.969971,
-        "change_30m_pct": 0.438,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 809.039978,
+        "change_30m_pct": -0.379,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1740,10 +1740,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 382.160004,
-        "change_30m_pct": 0.479,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 367.054993,
+        "change_30m_pct": -0.879,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1759,10 +1759,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 230.75,
-        "change_30m_pct": 0.435,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 222.470001,
+        "change_30m_pct": -0.966,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1778,10 +1778,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 156.220001,
-        "change_30m_pct": 0.618,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 150.169998,
+        "change_30m_pct": -0.812,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1797,10 +1797,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 1551.98999,
-        "change_30m_pct": -0.069,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 1502.400024,
+        "change_30m_pct": -0.343,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1816,10 +1816,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 404.660004,
-        "change_30m_pct": -0.243,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 396.940002,
+        "change_30m_pct": -0.349,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1835,10 +1835,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 142.660004,
-        "change_30m_pct": -0.847,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 151.809998,
+        "change_30m_pct": -0.191,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1854,10 +1854,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 66.610001,
-        "change_30m_pct": -0.299,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 71.550003,
+        "change_30m_pct": 0.626,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1873,10 +1873,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 166.899994,
-        "change_30m_pct": -0.569,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 179.145004,
+        "change_30m_pct": -0.264,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1892,10 +1892,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 58.195,
-        "change_30m_pct": -0.504,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 60.43,
+        "change_30m_pct": -0.05,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1924,10 +1924,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 145.559998,
-        "change_30m_pct": 0.213,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 152.479996,
+        "change_30m_pct": 0.052,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1943,10 +1943,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 85.669998,
-        "change_30m_pct": 0.682,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 88.059998,
+        "change_30m_pct": -0.475,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1962,10 +1962,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 338.0,
-        "change_30m_pct": 0.159,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 351.079987,
+        "change_30m_pct": -0.176,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -1981,10 +1981,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 49.66,
-        "change_30m_pct": 0.212,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 51.200001,
+        "change_30m_pct": -0.01,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2000,10 +2000,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 85.535004,
-        "change_30m_pct": 0.094,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 86.875,
+        "change_30m_pct": 0.023,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2019,10 +2019,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 895.840027,
-        "change_30m_pct": -0.061,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 928.130005,
+        "change_30m_pct": -0.284,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2038,10 +2038,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 186.100006,
-        "change_30m_pct": -0.081,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 192.929993,
+        "change_30m_pct": 0.062,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2057,10 +2057,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 420.380005,
-        "change_30m_pct": -0.209,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 432.214996,
+        "change_30m_pct": 0.063,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2076,10 +2076,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 647.309998,
-        "change_30m_pct": -0.057,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 667.320007,
+        "change_30m_pct": -0.073,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2095,10 +2095,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 325.410004,
-        "change_30m_pct": 0.065,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 331.649994,
+        "change_30m_pct": -0.096,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2114,10 +2114,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 122.705002,
-        "change_30m_pct": 0.389,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 124.379997,
+        "change_30m_pct": -0.309,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2133,10 +2133,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 557.13501,
-        "change_30m_pct": 0.016,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 573.98999,
+        "change_30m_pct": 0.166,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2152,10 +2152,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 266.190002,
-        "change_30m_pct": -0.096,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 273.904999,
+        "change_30m_pct": -0.029,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2171,10 +2171,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 29.98,
-        "change_30m_pct": 0.0,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 30.735001,
+        "change_30m_pct": 0.474,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2190,10 +2190,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 144.690002,
-        "change_30m_pct": 0.717,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 148.949997,
+        "change_30m_pct": 0.155,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2209,10 +2209,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 285.959991,
-        "change_30m_pct": 0.019,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 291.246399,
+        "change_30m_pct": 0.092,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2228,10 +2228,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 1409.390015,
-        "change_30m_pct": -0.016,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 1420.079956,
+        "change_30m_pct": -0.05,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2247,10 +2247,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 403.970001,
-        "change_30m_pct": 0.468,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 410.190002,
+        "change_30m_pct": 0.415,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2266,10 +2266,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 91.470001,
-        "change_30m_pct": -0.196,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 80.029999,
+        "change_30m_pct": 0.069,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2285,10 +2285,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 460.790009,
-        "change_30m_pct": -0.14,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 478.51001,
+        "change_30m_pct": -0.24,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2304,10 +2304,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 167.5,
-        "change_30m_pct": -0.676,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 174.339996,
+        "change_30m_pct": -0.017,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2323,10 +2323,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 974.25,
-        "change_30m_pct": 0.333,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 942.320007,
+        "change_30m_pct": 0.141,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2342,10 +2342,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 440.700012,
-        "change_30m_pct": -0.243,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 484.059998,
+        "change_30m_pct": -0.083,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2361,10 +2361,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 98.879997,
-        "change_30m_pct": -0.091,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 104.995003,
+        "change_30m_pct": -0.285,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2380,10 +2380,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 698.369995,
-        "change_30m_pct": -0.148,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 707.440002,
+        "change_30m_pct": 0.159,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2399,10 +2399,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 230.100006,
-        "change_30m_pct": -0.171,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 234.335007,
+        "change_30m_pct": 0.152,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2418,10 +2418,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 109.410004,
-        "change_30m_pct": 0.192,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 115.555,
+        "change_30m_pct": 0.143,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2437,10 +2437,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 162.059998,
-        "change_30m_pct": 0.028,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 167.289993,
+        "change_30m_pct": -0.024,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2456,10 +2456,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 94.779999,
-        "change_30m_pct": -0.137,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 96.025002,
+        "change_30m_pct": 0.334,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2475,10 +2475,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
-        "close": 137.220001,
-        "change_30m_pct": -0.178,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 143.110001,
+        "change_30m_pct": -0.042,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2494,10 +2494,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 1019.210022,
-        "change_30m_pct": -0.329,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 1048.5,
+        "change_30m_pct": 0.124,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2513,10 +2513,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 124.809998,
-        "change_30m_pct": 0.064,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 130.229996,
+        "change_30m_pct": 0.162,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2532,10 +2532,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 154.410004,
-        "change_30m_pct": 0.645,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 161.279999,
+        "change_30m_pct": -0.015,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2551,10 +2551,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 333.579987,
-        "change_30m_pct": 0.555,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 351.945007,
+        "change_30m_pct": 0.384,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2570,10 +2570,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 213.229996,
-        "change_30m_pct": 0.181,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 227.955002,
+        "change_30m_pct": 0.154,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2589,10 +2589,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 263.089996,
-        "change_30m_pct": 0.118,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 278.130005,
+        "change_30m_pct": 0.119,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2608,10 +2608,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 104.739998,
-        "change_30m_pct": 0.417,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 108.400002,
+        "change_30m_pct": -0.404,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2627,10 +2627,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 38.48,
-        "change_30m_pct": 0.601,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 40.505001,
+        "change_30m_pct": -0.491,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2646,10 +2646,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 114.239998,
-        "change_30m_pct": 0.031,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 119.510002,
+        "change_30m_pct": 0.0,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2665,10 +2665,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 23.684999,
-        "change_30m_pct": 0.233,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 24.655001,
+        "change_30m_pct": -0.162,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2684,10 +2684,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 45.240002,
-        "change_30m_pct": 0.422,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 46.07,
+        "change_30m_pct": -0.432,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2703,10 +2703,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 21.4,
-        "change_30m_pct": 0.73,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 21.764999,
+        "change_30m_pct": -0.571,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2722,10 +2722,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 177.5,
-        "change_30m_pct": -0.23,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 169.024994,
+        "change_30m_pct": 0.712,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2741,10 +2741,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 225.294998,
-        "change_30m_pct": -0.219,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 216.134995,
+        "change_30m_pct": 0.42,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2760,10 +2760,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 144.434998,
-        "change_30m_pct": -0.162,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 136.320007,
+        "change_30m_pct": 0.353,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2779,10 +2779,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 52.139999,
-        "change_30m_pct": -0.582,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 50.764999,
+        "change_30m_pct": 1.378,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2798,10 +2798,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 623.820007,
-        "change_30m_pct": 0.185,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 583.940002,
+        "change_30m_pct": -0.582,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2817,10 +2817,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 665.820007,
-        "change_30m_pct": -0.422,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 675.719971,
+        "change_30m_pct": 0.036,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2836,10 +2836,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 320.660004,
-        "change_30m_pct": -0.037,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 331.899994,
+        "change_30m_pct": -0.351,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2855,10 +2855,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 173.300003,
-        "change_30m_pct": -0.293,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 176.505005,
+        "change_30m_pct": -0.223,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2874,10 +2874,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 639.200012,
-        "change_30m_pct": -0.383,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 596.280029,
+        "change_30m_pct": 0.094,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2893,10 +2893,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 57.490002,
-        "change_30m_pct": 0.192,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 58.930099,
+        "change_30m_pct": -0.034,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2912,10 +2912,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 16.785,
-        "change_30m_pct": 0.359,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 17.5201,
+        "change_30m_pct": -0.341,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2931,10 +2931,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 175.410004,
-        "change_30m_pct": -0.431,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 171.085007,
+        "change_30m_pct": 0.12,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2950,10 +2950,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 45.470001,
-        "change_30m_pct": 0.865,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 47.988998,
+        "change_30m_pct": -0.582,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2969,10 +2969,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 295.040009,
-        "change_30m_pct": -0.025,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 289.140015,
+        "change_30m_pct": -0.028,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -2988,10 +2988,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 220.179993,
-        "change_30m_pct": -0.011,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 188.705002,
+        "change_30m_pct": -0.32,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3007,10 +3007,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 273.5,
-        "change_30m_pct": -0.042,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 264.424988,
+        "change_30m_pct": -0.693,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3026,10 +3026,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 244.610001,
-        "change_30m_pct": 0.32,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 243.75,
+        "change_30m_pct": 0.259,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3045,10 +3045,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 350.100006,
-        "change_30m_pct": -0.031,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 350.075012,
+        "change_30m_pct": 0.297,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3064,10 +3064,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 109.160004,
-        "change_30m_pct": 0.631,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 108.864998,
+        "change_30m_pct": -0.29,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3083,10 +3083,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 344.730011,
-        "change_30m_pct": -0.731,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 356.109985,
+        "change_30m_pct": -0.392,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3102,10 +3102,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 157.240005,
-        "change_30m_pct": 2.637,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 172.080002,
+        "change_30m_pct": -0.414,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3121,10 +3121,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 416.244995,
-        "change_30m_pct": 0.264,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 424.075012,
+        "change_30m_pct": 0.246,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3140,10 +3140,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 33.259998,
-        "change_30m_pct": 0.773,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 34.509998,
+        "change_30m_pct": -0.072,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3159,10 +3159,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "VENDER SE DETIDO",
       "quote": {
-        "close": 157.080002,
-        "change_30m_pct": -0.456,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 165.875,
+        "change_30m_pct": 0.048,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3178,10 +3178,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 323.095001,
-        "change_30m_pct": 0.546,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 340.834991,
+        "change_30m_pct": 0.387,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3197,10 +3197,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 40.219898,
-        "change_30m_pct": 0.362,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 42.705002,
+        "change_30m_pct": -0.605,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3216,10 +3216,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 107.449997,
-        "change_30m_pct": 0.154,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 117.25,
+        "change_30m_pct": 0.09,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3235,10 +3235,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 12.3,
-        "change_30m_pct": 0.655,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 12.795,
+        "change_30m_pct": -0.339,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3254,10 +3254,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 88.330002,
-        "change_30m_pct": 0.096,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 92.779999,
+        "change_30m_pct": -0.333,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3273,10 +3273,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 754.409973,
-        "change_30m_pct": -0.011,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 768.289978,
+        "change_30m_pct": -0.064,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3292,10 +3292,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 685.340027,
-        "change_30m_pct": -0.028,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 695.019897,
+        "change_30m_pct": -0.208,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3311,10 +3311,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 371.230011,
-        "change_30m_pct": -0.019,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 377.61499,
+        "change_30m_pct": -0.07,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3330,10 +3330,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 693.469971,
-        "change_30m_pct": -0.012,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 706.200012,
+        "change_30m_pct": -0.068,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3349,10 +3349,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 279.820007,
-        "change_30m_pct": -0.118,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 284.079987,
+        "change_30m_pct": -0.074,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3368,10 +3368,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 517.039978,
-        "change_30m_pct": 0.033,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 532.174988,
+        "change_30m_pct": -0.022,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3387,10 +3387,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 103.095001,
-        "change_30m_pct": 0.019,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 105.565002,
+        "change_30m_pct": -0.114,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3406,10 +3406,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 61.110001,
-        "change_30m_pct": 0.074,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 61.7743,
+        "change_30m_pct": -0.259,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3425,10 +3425,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 69.379997,
-        "change_30m_pct": 0.043,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 70.709999,
+        "change_30m_pct": -0.141,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3444,10 +3444,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 55.349998,
-        "change_30m_pct": -0.018,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 56.369701,
+        "change_30m_pct": -0.16,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3463,10 +3463,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 176.470001,
-        "change_30m_pct": -0.025,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 177.220001,
+        "change_30m_pct": -0.203,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3482,10 +3482,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 57.18,
-        "change_30m_pct": 0.026,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 58.865002,
+        "change_30m_pct": -0.017,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3501,10 +3501,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 66.699997,
-        "change_30m_pct": -0.336,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 63.264999,
+        "change_30m_pct": 0.516,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3520,10 +3520,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 184.020004,
-        "change_30m_pct": -0.016,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 189.0,
+        "change_30m_pct": 0.032,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3539,10 +3539,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 171.350006,
-        "change_30m_pct": -0.064,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 169.460007,
+        "change_30m_pct": -0.136,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3558,10 +3558,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "ESPERAR",
       "quote": {
-        "close": 88.959999,
-        "change_30m_pct": -0.174,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 92.125,
+        "change_30m_pct": 0.054,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3577,10 +3577,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 117.339996,
-        "change_30m_pct": 0.098,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 122.75,
+        "change_30m_pct": -0.09,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3596,10 +3596,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 43.43,
-        "change_30m_pct": -0.035,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 43.630001,
+        "change_30m_pct": -0.046,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3615,10 +3615,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 359.279999,
-        "change_30m_pct": -0.036,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 372.309998,
+        "change_30m_pct": -0.083,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     },
@@ -3634,10 +3634,10 @@
       "forecast_horizon": "5 velas diárias",
       "signal": "FECHAR SE DETIDO",
       "quote": {
-        "close": 44.84,
-        "change_30m_pct": 0.145,
-        "close_candle_start_utc": "2026-11-03T20:30:00+00:00",
-        "age_minutes": 902.1,
+        "close": 47.095001,
+        "change_30m_pct": -0.37,
+        "close_candle_start_utc": "2026-11-04T18:00:00+00:00",
+        "age_minutes": 51.6,
         "source": "Yahoo Finance intraday (30m, delayed possible)"
       }
     }
